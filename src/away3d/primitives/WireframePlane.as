@@ -2,6 +2,9 @@
 {
 	import flash.geom.Vector3D;
 
+	/**
+	 * Generates a wireframd plane primitive.
+	 */
 	public class WireframePlane extends WireframePrimitiveBase
 	{
 		public static const ORIENTATION_YZ:String = "yz";
@@ -14,7 +17,17 @@
 		private var _segmentsH : int;
 		private var _orientation : String;
 
-		public function WireframePlane(width : Number, height : Number, segmentsH : int = 10, segmentsW : int = 10, color:uint = 0xFFFFFF, thickness:Number = 1, orientation : String = "yz") {
+		/**
+		 * Generated wireframe plane
+		 * @param	width		The width of the plane.
+		 * @param	height		The height of the plane.
+		 * @param 	segmentsW 	The number of segments that make up the plane along the X-axis. Defaults to 1.
+		 * @param 	segmentsH 	The number of segments that make up the plane along the Y or Z-axis. Defaults to 1.
+		 * @param	color		The color of the wireframe lines.
+		 * @param	thickness	The thickness of the wireframe lines
+		 * @param	orientation Defines plain oreantation axes. Can be "yz", "xy" or "xz"
+		 */
+		public function WireframePlane(width : Number = 100, height : Number = 100, segmentsH : int = 10, segmentsW : int = 10, color:uint = 0xFFFFFF, thickness:Number = 1, orientation : String = "xz") {
 			super(color, thickness);
 
 			_width = width;

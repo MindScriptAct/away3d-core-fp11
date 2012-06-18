@@ -5,21 +5,23 @@
 	import flash.geom.Vector3D;
 
 	/**
-	* Class WireframeAxesGrid generates a grid of lines on a given plane<code>WireframeAxesGrid</code>
-	* @param	subDivision		[optional] uint . Default is 10;
-	* @param	gridSize				[optional] uint . Default is 100;
-	* @param	thickness			[optional] Number . Default is 1;
-	* @param	colorXY				[optional] uint. Default is 0x0000FF.
-	* @param	colorZY				[optional] uint. Default is 0xFF0000. 
-	* @param	colorXZ				[optional] uint. Default is 0x00FF00.
-	*/
-
+	 * Generates a 3 wireframd grids for x,y,z axes.
+	 */
 	public class WireframeAxesGrid extends SegmentSet
 	{
 		private static const PLANE_ZY:String = "zy";
 		private static const PLANE_XY:String = "xy";
 		private static const PLANE_XZ:String = "xz";
 
+		/**
+		 * Generated 3 wireframe grids for x,y and z axes.
+		 * @param	subDivision	Amount of segments grid is divided to.
+		 * @param	gridSize	Size of grids.
+		 * @param	thickness	The thickness of the wireframe lines
+		 * @param	colorXY		Color for xy plane grid.
+		 * @param	colorZY		Color for zy plane grid.
+		 * @param	colorXZ		Color for xz plane grid.
+		 */
 		public function WireframeAxesGrid(subDivision:uint = 10, gridSize:uint = 100, thickness:Number = 1, colorXY : uint = 0x0000FF, colorZY : uint = 0xFF0000, colorXZ : uint = 0x00FF00) {
 			super();
 

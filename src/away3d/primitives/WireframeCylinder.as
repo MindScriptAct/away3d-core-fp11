@@ -17,13 +17,13 @@ package away3d.primitives
 
 		/**
 		 * Creates a new WireframeCylinder instance
-		 * @param topRadius Top radius of the cylinder
-		 * @param bottomRadius Bottom radius of the cylinder
-		 * @param height The height of the cylinder
-		 * @param segmentsW Number of radial segments
-		 * @param segmentsH Number of vertical segments
-		 * @param color The color of the wireframe lines
-		 * @param thickness The thickness of the wireframe lines
+		 * @param	topRadius	Top radius of the cylinder
+		 * @param	bottomRadius	Bottom radius of the cylinder
+		 * @param	height		he height of the cylinder
+		 * @param	segmentsW	Number of radial segments
+		 * @param	segmentsH	Number of vertical segments
+		 * @param	color		The color of the wireframe lines.
+		 * @param	thickness	The thickness of the wireframe lines
 		 */
 		public function WireframeCylinder(topRadius:Number = 50, bottomRadius:Number = 50, height:Number = 100, segmentsW:uint = 16, segmentsH:uint = 1, color:uint = 0xFFFFFF, thickness:Number = 1)
 		{
