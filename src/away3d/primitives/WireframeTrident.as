@@ -8,9 +8,6 @@
 	 */
 	public class WireframeTrident extends SegmentSet
 	{
-		private static const PLANE_ZY : String = "zy";
-		private static const PLANE_XY : String = "xy";
-		private static const PLANE_XZ : String = "xz";
 		
 		/**
 		 * Generated wireframe trident with arrows pointing x,y and z axes.
