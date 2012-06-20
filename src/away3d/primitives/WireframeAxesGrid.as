@@ -5,7 +5,7 @@
 	import flash.geom.Vector3D;
 
 	/**
-	 * Generates a 3 wireframd grids for x,y,z axes.
+	 * Generates a 3 wireframe grids for x,y,z axes.
 	 */
 	public class WireframeAxesGrid extends SegmentSet
 	{

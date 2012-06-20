@@ -3,7 +3,7 @@
 	import flash.geom.Vector3D;
 
 	/**
-	 * Generates a wireframd cube primitive.
+	 * Generates a wireframe cube primitive.
 	 */
 	public class WireframeCube extends WireframePrimitiveBase
 	{

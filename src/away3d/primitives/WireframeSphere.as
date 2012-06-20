@@ -3,7 +3,7 @@
 	import flash.geom.Vector3D;
 
 	/**
-	 * Generates a wireframd sphere primitive.
+	 * Generates a wireframe sphere primitive.
 	 */
 	public class WireframeSphere extends WireframePrimitiveBase
 	{
