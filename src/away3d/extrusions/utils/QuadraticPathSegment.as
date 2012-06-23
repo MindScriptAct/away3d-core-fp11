@@ -5,7 +5,6 @@ package away3d.extrusions.utils
 	/**
     * Creates a curved line segment definition required for the Path class.
     */ 
-	
 	public class QuadraticPathSegment implements IPathSegment
 	{
 		/**

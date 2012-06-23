@@ -8,6 +8,9 @@ package away3d.textures
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Texture2DBase extends TextureProxyBase
 	{
 		public function Texture2DBase()

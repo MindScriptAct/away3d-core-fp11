@@ -3,6 +3,9 @@ package away3d.materials.utils
 	import flash.display.Sprite;
 	import flash.media.SoundTransform;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public interface IVideoPlayer
 	{
 		

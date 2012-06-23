@@ -5,6 +5,9 @@ package away3d.library.naming
 
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class NumSuffixConflictStrategy extends ConflictStrategyBase
 	{
 		private var _separator : String;

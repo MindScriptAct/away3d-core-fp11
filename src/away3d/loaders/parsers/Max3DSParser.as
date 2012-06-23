@@ -24,6 +24,9 @@ package away3d.loaders.parsers
 	
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Max3DSParser extends ParserBase
 	{
 		private var _byteData : ByteArray;

@@ -2,6 +2,9 @@ package away3d.library.naming
 {
 	import away3d.library.assets.IAsset;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class IgnoreConflictStrategy extends ConflictStrategyBase
 	{
 		public function IgnoreConflictStrategy()

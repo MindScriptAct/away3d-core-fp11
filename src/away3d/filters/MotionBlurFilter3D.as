@@ -5,6 +5,9 @@ package away3d.filters
 	import away3d.filters.tasks.Filter3DDoubleBufferCopyTask;
 	import away3d.filters.tasks.Filter3DXFadeCompositeTask;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class MotionBlurFilter3D extends Filter3DBase
 	{
 		private var _compositeTask : Filter3DXFadeCompositeTask;

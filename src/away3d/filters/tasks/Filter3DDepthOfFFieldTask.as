@@ -10,6 +10,9 @@ package away3d.filters.tasks
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Filter3DDepthOfFFieldTask extends Filter3DTaskBase
 	{
 		private static const MAX_BLUR : int = 6;

@@ -2,6 +2,9 @@ package away3d.filters
 {
 	import away3d.filters.tasks.Filter3DBlurTask;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class BlurFilter3D extends Filter3DBase
 	{
 		private var _blurTask : Filter3DBlurTask;

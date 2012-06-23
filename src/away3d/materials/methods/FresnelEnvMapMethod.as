@@ -10,6 +10,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class FresnelEnvMapMethod extends EffectMethodBase
 	{
 		private var _cubeTexture : CubeTextureBase;

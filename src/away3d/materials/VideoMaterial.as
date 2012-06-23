@@ -1,7 +1,5 @@
 package away3d.materials
 {
-
-
 	import away3d.errors.DeprecationError;
 	import away3d.materials.utils.IVideoPlayer;
 	import away3d.materials.utils.SimpleVideoPlayer;
@@ -11,6 +9,9 @@ package away3d.materials
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 
+	/**
+	 * COMMENT : todo
+	 */
 	[Deprecated(message="Use texture composition instead of inheritance", replacement="TextureMaterial", since="4.0a")]
 	public class VideoMaterial extends BitmapMaterial
 	{

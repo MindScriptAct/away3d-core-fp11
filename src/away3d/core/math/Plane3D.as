@@ -1,6 +1,3 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.core.math
 {
 	import away3d.arcane;
@@ -9,6 +6,11 @@ package away3d.core.math
 
 	use namespace arcane;
 
+	// Author: David Lenaerts
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class Plane3D
 	{
 		/**

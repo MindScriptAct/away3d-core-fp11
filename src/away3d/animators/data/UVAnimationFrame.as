@@ -1,5 +1,8 @@
 package away3d.animators.data
 {
+	/**
+	 * COMMENT : todo
+	 */
 	public class UVAnimationFrame
 	{
 		public var offsetU : Number;

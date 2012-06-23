@@ -4,6 +4,7 @@ package away3d.events {
 	import flash.events.Event;
 
 	/**
+	 * COMMENT : todo
 	 * @author Paul Tondeur
 	 */
 	public class Scene3DEvent extends Event {

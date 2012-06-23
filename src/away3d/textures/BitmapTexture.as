@@ -9,6 +9,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class BitmapTexture extends Texture2DBase
 	{
 		private static var _mipMaps : Array = [];

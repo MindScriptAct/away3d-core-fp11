@@ -10,6 +10,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class SimpleWaterNormalMethod extends BasicNormalMethod
 	{
 		private var _texture2 : Texture2DBase;

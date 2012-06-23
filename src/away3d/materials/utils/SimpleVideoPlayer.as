@@ -10,6 +10,11 @@ package away3d.materials.utils
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 
+	// Author: David Lenaerts
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class SimpleVideoPlayer implements IVideoPlayer
 	{
 		

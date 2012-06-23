@@ -14,6 +14,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class SegmentPass extends MaterialPassBase
 	{
 		protected static const ONE_VECTOR : Vector.<Number> = Vector.<Number>([ 1,1,1,1 ]);

@@ -6,6 +6,9 @@ package away3d.animators
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class SkeletonAnimatorBase extends AnimatorBase
 	{
 		private var _updateRootPosition : Boolean = true;

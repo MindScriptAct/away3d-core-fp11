@@ -11,6 +11,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class DitheredShadowMapMethod extends ShadowMapMethodBase
 	{
 		private static var _grainTexture : BitmapTexture;

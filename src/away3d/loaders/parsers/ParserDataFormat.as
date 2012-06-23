@@ -5,14 +5,10 @@ package away3d.loaders.parsers
 	 */
 	public class ParserDataFormat
 	{
-		/**
-		 * Describes the format of a binary file.
-		 */
+		/** Describes the format of a binary file. */
 		public static const BINARY : String = "binary";
 
-		/**
-		 * Describes the format of a plain text file.
-		 */
+		/** Describes the format of a plain text file. */
 		public static const PLAIN_TEXT : String = "plainText";
 	}
 }

@@ -10,7 +10,10 @@ package away3d.entities
 
 	use namespace arcane;
 
-	// tho this is technically not an entity, to the user it functions similarly, so it's in the same package
+	/**
+	 * COMMENT : todo
+	 */
+	 // tho this is technically not an entity, to the user it functions similarly, so it's in the same package
 	public class TextureProjector extends ObjectContainer3D
 	{
 		private var _lens : PerspectiveLens;

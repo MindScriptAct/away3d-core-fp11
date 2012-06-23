@@ -9,6 +9,9 @@ package away3d.filters
 
 	import flash.display3D.textures.Texture;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class BloomFilter3D extends Filter3DBase
 	{
 		private var _brightPassTask : Filter3DBrightPassTask;

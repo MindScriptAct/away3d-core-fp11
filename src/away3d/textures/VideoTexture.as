@@ -9,6 +9,9 @@ package away3d.textures
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class VideoTexture extends BitmapTexture
 	{
 		private var _broadcaster : Sprite;

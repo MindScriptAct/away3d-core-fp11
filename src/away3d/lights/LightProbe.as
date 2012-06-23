@@ -12,6 +12,9 @@ package away3d.lights
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class LightProbe extends LightBase
 	{
 		private var _diffuseMap : CubeTextureBase;

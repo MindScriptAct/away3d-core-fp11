@@ -7,6 +7,9 @@ package away3d.materials.lightpickers
 
 	import flash.events.Event;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class StaticLightPicker extends LightPickerBase
 	{
 		private var _lights : Array;

@@ -13,6 +13,9 @@ package away3d.core.managers
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class AGALProgram3DCache
 	{
 		private static var _instances : Vector.<AGALProgram3DCache>;

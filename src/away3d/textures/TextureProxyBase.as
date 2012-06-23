@@ -12,6 +12,9 @@ package away3d.textures
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class TextureProxyBase extends NamedAssetBase implements IAsset
 	{
 		protected var _textures : Vector.<TextureBase>;

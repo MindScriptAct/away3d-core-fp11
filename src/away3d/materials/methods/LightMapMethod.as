@@ -8,6 +8,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class LightMapMethod extends EffectMethodBase
 	{
 		public static const MULTIPLY : String = "multiply";

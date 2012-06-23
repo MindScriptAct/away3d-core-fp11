@@ -1,5 +1,8 @@
 package away3d.core.data
 {
+	/**
+	 * COMMENT : todo
+	 */
 	public class RenderableListItemPool
 	{
 		private var _pool : Vector.<RenderableListItem>;

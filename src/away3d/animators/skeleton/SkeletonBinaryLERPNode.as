@@ -3,6 +3,9 @@ package away3d.animators.skeleton
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class SkeletonBinaryLERPNode extends SkeletonTreeNode
 	{
 		public var inputA : SkeletonTreeNode;

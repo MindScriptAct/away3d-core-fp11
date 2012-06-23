@@ -12,7 +12,9 @@ package away3d.materials.methods
 	import flash.geom.Matrix3D;
 
 	use namespace arcane;
-
+	/**
+	 * COMMENT : todo
+	 */
 	public class ProjectiveTextureMethod extends EffectMethodBase
 	{
 		public static const MULTIPLY : String = "multiply";

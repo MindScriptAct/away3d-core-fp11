@@ -1,12 +1,12 @@
-/**
- *
- */
 package away3d.events
 {
 	import away3d.cameras.lenses.LensBase;
 
 	import flash.events.Event;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class LensEvent extends Event
 	{
 		public static const MATRIX_CHANGED : String = "matrixChanged";

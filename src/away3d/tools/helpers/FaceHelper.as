@@ -11,7 +11,6 @@ package away3d.tools.helpers
 	/**
 	* Helper Class for face manipulation<code>FaceHelper</code>
 	*/
-	 
 	public class FaceHelper {
 		
 		private static const LIMIT:uint = 196605;

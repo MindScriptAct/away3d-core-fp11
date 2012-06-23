@@ -10,7 +10,10 @@
 	import flash.display3D.textures.TextureBase;
 
 	use namespace arcane;
-
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class RenderCubeTexture extends CubeTextureBase
 	{
 		public function RenderCubeTexture(size : Number)

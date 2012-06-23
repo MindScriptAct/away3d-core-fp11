@@ -1,6 +1,9 @@
 package away3d.core.raycast
 {
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class MouseHitMethod
 	{
 		public static const BOUNDS_ONLY:uint = 0;

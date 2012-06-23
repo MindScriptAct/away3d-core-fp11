@@ -21,6 +21,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	// todo: provide filter method instead of subclasses, so cascade can use it too
 	public class ShadowMapMethodBase extends ShadingMethodBase
 	{

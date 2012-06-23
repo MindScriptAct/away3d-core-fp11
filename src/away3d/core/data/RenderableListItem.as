@@ -2,6 +2,9 @@ package away3d.core.data
 {
 	import away3d.core.base.IRenderable;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public final class RenderableListItem
 	{
 		public var next : RenderableListItem;

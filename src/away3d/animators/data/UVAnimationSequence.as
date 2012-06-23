@@ -4,6 +4,9 @@ package away3d.animators.data
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class UVAnimationSequence extends AnimationSequenceBase
 	{
 		arcane var _frames : Vector.<UVAnimationFrame>;

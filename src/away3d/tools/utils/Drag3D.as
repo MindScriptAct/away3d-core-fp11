@@ -8,6 +8,7 @@ package away3d.tools.utils{
 	import away3d.primitives.PlaneGeometry;
 	
 	import flash.geom.Vector3D;
+	
 	/**
 	* Class Drag3D allows free dragging of an ObjectContainer3D onto a given plane.
 	*
@@ -15,7 +16,6 @@ package away3d.tools.utils{
 	* locks on ObjectContainer3D planes
 	* locks on ObjectContainer3D rotations planes
 	*/
-	
 	public class Drag3D
 	{
 		public static const PLANE_XZ:String = "xz";

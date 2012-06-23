@@ -7,6 +7,9 @@ package away3d.filters.tasks
 
 	import flash.display3D.textures.Texture;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Filter3DBrightPassTask extends Filter3DTaskBase
 	{
 		private var _brightPassData : Vector.<Number>;

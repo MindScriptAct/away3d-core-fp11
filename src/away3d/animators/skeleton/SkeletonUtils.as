@@ -1,6 +1,3 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.animators.skeleton
 {
 	import away3d.animators.data.SkeletonAnimationSequence;
@@ -12,6 +9,11 @@ package away3d.animators.skeleton
 
 	use namespace arcane;
 
+	// Author: David Lenaerts
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class SkeletonUtils
 	{
 		public static function generateDifferenceClip(source : SkeletonAnimationSequence, referencePose : SkeletonPose) : SkeletonAnimationSequence

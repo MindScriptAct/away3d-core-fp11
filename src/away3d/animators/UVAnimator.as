@@ -9,6 +9,9 @@ package away3d.animators
 
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class UVAnimator extends AnimatorBase
 	{
 		private var _target : SubMesh;

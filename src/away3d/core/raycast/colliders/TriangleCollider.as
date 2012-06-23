@@ -8,6 +8,9 @@ package away3d.core.raycast.colliders
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class TriangleCollider extends ColliderBase
 	{
 		[Embed("/../pb/RayTriangleKernel.pbj", mimeType="application/octet-stream")]

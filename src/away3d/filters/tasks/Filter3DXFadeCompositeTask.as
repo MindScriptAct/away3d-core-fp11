@@ -8,6 +8,9 @@ package away3d.filters.tasks
 	import flash.display3D.textures.Texture;
 	import flash.display3D.textures.TextureBase;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Filter3DXFadeCompositeTask extends Filter3DTaskBase
 	{
 		private var _data : Vector.<Number>;

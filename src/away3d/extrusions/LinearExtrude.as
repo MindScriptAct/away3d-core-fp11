@@ -17,6 +17,9 @@
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class LinearExtrude extends Mesh
 	{
 		public static const X_AXIS:String = "x";

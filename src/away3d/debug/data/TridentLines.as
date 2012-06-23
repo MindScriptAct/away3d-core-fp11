@@ -5,6 +5,9 @@
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class TridentLines extends SegmentSet
 	{
 		public function TridentLines(vectors:Vector.<Vector.<Vector3D>>, colors:Vector.<uint>):void

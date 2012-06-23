@@ -4,6 +4,9 @@ package away3d.audio.drivers
 	import flash.geom.*;
 	import flash.media.*;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class AbstractSound3DDriver extends EventDispatcher
 	{
 		protected var _ref_v:Vector3D;

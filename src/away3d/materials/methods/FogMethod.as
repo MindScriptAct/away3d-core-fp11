@@ -9,6 +9,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class FogMethod extends EffectMethodBase
 	{
 		private var _minDistance : Number = 0;

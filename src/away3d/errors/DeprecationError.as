@@ -1,5 +1,8 @@
 package away3d.errors
 {
+	/**
+	 * COMMENT : todo
+	 */
 	public class DeprecationError extends Error
 	{
 		private var _since : String;

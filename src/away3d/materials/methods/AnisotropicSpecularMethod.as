@@ -1,6 +1,3 @@
-/**
- *
- */
 package away3d.materials.methods
 {
 	import away3d.arcane;
@@ -9,6 +6,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class AnisotropicSpecularMethod extends BasicSpecularMethod
 	{
 		public function AnisotropicSpecularMethod()

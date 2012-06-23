@@ -12,6 +12,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class DistanceMapPass extends MaterialPassBase
 	{
 		private var _fragmentData : Vector.<Number>;

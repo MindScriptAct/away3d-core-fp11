@@ -19,6 +19,9 @@ package away3d.extrusions{
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class PathExtrude extends Mesh
 	{
 		private var _varr:Vector.<Vertex>;

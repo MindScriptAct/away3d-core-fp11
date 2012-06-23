@@ -9,6 +9,9 @@ package away3d.animators
 	import flash.events.EventDispatcher;
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class PathAnimator extends EventDispatcher
 	{
 		private var _path:IPath;

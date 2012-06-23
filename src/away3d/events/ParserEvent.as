@@ -2,6 +2,9 @@ package away3d.events
 {
 	import flash.events.Event;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class ParserEvent extends Event
 	{
 		private var _message : String;

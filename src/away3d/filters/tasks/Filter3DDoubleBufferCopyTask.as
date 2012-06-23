@@ -12,6 +12,9 @@ package away3d.filters.tasks
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Filter3DDoubleBufferCopyTask extends Filter3DTaskBase
 	{
 		private var _secondaryInputTexture : Texture;

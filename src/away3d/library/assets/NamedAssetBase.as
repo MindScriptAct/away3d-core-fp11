@@ -7,6 +7,9 @@ package away3d.library.assets
 
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class NamedAssetBase extends EventDispatcher
 	{
 		private var _originalName : String;

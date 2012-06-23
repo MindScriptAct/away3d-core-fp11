@@ -12,7 +12,6 @@ package away3d.tools.utils
 	/**
 	* Helper Class to retrieve objects bounds <code>Bounds</code>
 	*/
-	 
 	public class Bounds {
 		 
 		private static var _minX:Number;

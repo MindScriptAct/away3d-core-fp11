@@ -1,6 +1,3 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.animators.skeleton
 {
 	import away3d.animators.data.SkeletonAnimationSequence;
@@ -10,6 +7,8 @@ package away3d.animators.skeleton
 
 	use namespace arcane;
 
+	// Author: David Lenaerts
+	
 	/**
 	 * SkeletonClipNodeBase provides an abstract base class for animation blend tree nodes containing a clip.
 	 */

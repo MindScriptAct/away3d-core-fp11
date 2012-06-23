@@ -2,6 +2,9 @@
 {
 	import away3d.materials.MaterialBase;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class MultipleMaterials
 	{
 		private var _left:MaterialBase;

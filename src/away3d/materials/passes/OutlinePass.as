@@ -18,6 +18,9 @@ package away3d.materials.passes
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class OutlinePass extends MaterialPassBase
 	{
 		private var _outlineColor : uint;

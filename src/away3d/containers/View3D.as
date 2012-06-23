@@ -31,6 +31,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class View3D extends Sprite
 	{
 		private var _width : Number = 0;

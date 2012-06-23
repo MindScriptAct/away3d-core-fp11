@@ -1,12 +1,14 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.animators.skeleton
 {
 	import away3d.core.math.Quaternion;
 
 	import flash.geom.Vector3D;
 
+	// Author: David Lenaerts
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class SkeletonNaryLERPNode extends SkeletonTreeNode
 	{
 		/**

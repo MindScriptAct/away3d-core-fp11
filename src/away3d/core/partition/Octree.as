@@ -4,6 +4,9 @@ package away3d.core.partition
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Octree extends Partition3D
 	{
 		public function Octree(maxDepth : int, size : Number)

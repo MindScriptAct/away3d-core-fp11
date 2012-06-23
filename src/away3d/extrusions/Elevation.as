@@ -7,6 +7,9 @@
 	
 	import flash.display.BitmapData;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Elevation extends Mesh
     {
         private var _segmentsW : uint;

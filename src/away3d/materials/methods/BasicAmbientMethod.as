@@ -14,8 +14,6 @@ package away3d.materials.methods
 	/**
 	 * BasicAmbientMethod provides the default shading method for uniform ambient lighting.
 	 */
-
-
 	public class BasicAmbientMethod extends ShadingMethodBase
 	{
 		protected var _useTexture : Boolean;

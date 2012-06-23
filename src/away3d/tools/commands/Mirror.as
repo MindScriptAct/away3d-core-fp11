@@ -12,6 +12,9 @@ package away3d.tools.commands
 	import flash.geom.Vector3D;
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class Mirror
 	{
 		public static const X_AXIS:String = "x";

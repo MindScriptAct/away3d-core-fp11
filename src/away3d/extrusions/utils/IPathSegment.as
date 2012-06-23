@@ -1,5 +1,8 @@
 package away3d.extrusions.utils
 {
+	/**
+	 * COMMENT : todo
+	 */
 	public interface IPathSegment
 	{
 		/**

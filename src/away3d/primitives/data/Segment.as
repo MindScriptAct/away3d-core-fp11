@@ -7,6 +7,9 @@
 
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class Segment
 	{
 		arcane var _segmentsBase:SegmentSet;

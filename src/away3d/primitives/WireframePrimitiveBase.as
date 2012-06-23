@@ -8,6 +8,9 @@ package away3d.primitives
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class WireframePrimitiveBase extends SegmentSet
 	{
 		private var _geomDirty : Boolean = true;

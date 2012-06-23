@@ -8,6 +8,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class FilteredShadowMapMethod extends ShadowMapMethodBase
 	{
 		/**

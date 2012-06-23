@@ -4,6 +4,9 @@ package away3d.core.partition
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class QuadTree extends Partition3D
 	{
 		public function QuadTree(maxDepth : int, size : Number, height : Number = 1000000)

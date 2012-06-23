@@ -1,6 +1,3 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.materials.methods
 {
 	import away3d.arcane;
@@ -12,6 +9,11 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	// Author: David Lenaerts
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class RimLightMethod extends EffectMethodBase
 	{
 		public static const ADD : String = "add";

@@ -4,6 +4,9 @@
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class LineSegment extends Segment {
 		
 		// TODO not used

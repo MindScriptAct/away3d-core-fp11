@@ -12,6 +12,9 @@ package away3d.extrusions
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class SkinExtrude extends Mesh
 	{
 		private const LIMIT:uint = 196605;

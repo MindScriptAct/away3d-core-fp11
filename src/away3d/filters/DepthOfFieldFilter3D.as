@@ -7,6 +7,9 @@ package away3d.filters
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class DepthOfFieldFilter3D extends Filter3DBase
 	{
 		private var _dofTask : Filter3DDepthOfFFieldTask;

@@ -14,6 +14,9 @@ package away3d.lights.shadowmaps
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class DirectionalShadowMapper extends ShadowMapperBase
 	{
 		protected var _depthCamera : Camera3D;

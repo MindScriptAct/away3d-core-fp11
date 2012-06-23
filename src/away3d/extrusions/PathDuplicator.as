@@ -9,6 +9,9 @@ package away3d.extrusions {
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class PathDuplicator{
 		 
 		private var _xAxis:Vector3D = new Vector3D();

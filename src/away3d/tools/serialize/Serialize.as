@@ -21,6 +21,9 @@ package away3d.tools.serialize
 
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class Serialize
 	{
 		public static var tabSize:uint = 2;

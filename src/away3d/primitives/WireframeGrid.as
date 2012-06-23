@@ -14,7 +14,6 @@
 	* @param	worldPlanes		[optional] Boolean . Default is false.
 	* If true, class displays the 3 world planes, at 0,0,0. with subDivision, thickness and gridSize. Overrides color and plane settings.
 	*/
-		
 	public class WireframeGrid extends SegmentSet
 	{
 		public static const PLANE_ZY:String = "zy";

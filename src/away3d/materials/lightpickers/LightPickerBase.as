@@ -13,6 +13,9 @@ package away3d.materials.lightpickers
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class LightPickerBase extends EventDispatcher
 	{
 		protected var _numPointLights : uint;

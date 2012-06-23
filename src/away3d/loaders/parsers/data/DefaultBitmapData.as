@@ -4,6 +4,9 @@
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class DefaultBitmapData {
 		
 		private static var _bitmapData:BitmapData;

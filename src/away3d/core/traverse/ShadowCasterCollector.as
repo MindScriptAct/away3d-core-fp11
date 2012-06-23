@@ -8,7 +8,6 @@ package away3d.core.traverse
 
 	use namespace arcane;
 
-
 	/**
 	 * The EntityCollector class is a traverser for scene partitions that collects all scene graph entities that are
 	 * considered potientially visible.

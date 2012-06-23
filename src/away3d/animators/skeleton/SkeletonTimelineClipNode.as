@@ -1,6 +1,3 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.animators.skeleton
 {
 	import away3d.arcane;
@@ -9,6 +6,8 @@ package away3d.animators.skeleton
 
 	use namespace arcane;
 
+	// Author: David Lenaerts
+	
 	/**
 	 * SkeletonTimelineClipNode represents a node in a skeleton tree containing a blending clip for which the keyframes
 	 * are laid out on a timeline. As such, the pose is determined by the time property.

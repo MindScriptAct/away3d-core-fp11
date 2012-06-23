@@ -11,7 +11,6 @@ package away3d.tools.helpers
 	* Helper Class for the LightBase objects <code>LightsHelper</code>
 	* A series of methods to ease work with LightBase objects 
 	*/
-	 
 	public class LightsHelper {
 		
 		private static var _lightsArray:Array;

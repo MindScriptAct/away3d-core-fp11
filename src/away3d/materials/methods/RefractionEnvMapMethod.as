@@ -10,6 +10,9 @@ package away3d.materials.methods
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class RefractionEnvMapMethod extends EffectMethodBase
 	{
 		private var _cubeMapIndex : int;

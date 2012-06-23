@@ -24,6 +24,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class SegmentSet extends Entity implements IRenderable
 	{
 		protected var _segments:Vector.<Segment>;

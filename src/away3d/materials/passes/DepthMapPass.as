@@ -12,6 +12,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class DepthMapPass extends MaterialPassBase
 	{
 		private var _data : Vector.<Number>;

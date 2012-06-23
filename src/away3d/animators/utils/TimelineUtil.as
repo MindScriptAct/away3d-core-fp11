@@ -5,6 +5,9 @@ package away3d.animators.utils
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class TimelineUtil
 	{
 		private var _frame0 : uint;

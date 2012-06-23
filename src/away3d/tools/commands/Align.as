@@ -25,8 +25,8 @@ package away3d.tools.commands
 		/**
 		* Aligns a series of meshes to their bounds along a given axis.
 		*
-		* @param	 meshes		Vector.<Mesh>. A Vector of Mesh objects
-		* @param	 axis			String. Represent the axis to align on.
+		* @param	 meshes		A Vector of Mesh objects
+		* @param	 axis		String. Represent the axis to align on.
 		* @param	 condition	[optional]. String. Can be POSITIVE ('+') or NEGATIVE ('+'), Default is POSITIVE ('+')
 		*/		
 		public static function alignMeshes(meshes:Vector.<Mesh>, axis:String, condition:String = POSITIVE):void
@@ -95,7 +95,7 @@ package away3d.tools.commands
 		* "av" align to average of all values on a given axis
 		*
 		* @param	 aObjs		Array. An array with elements with x,y and z public properties such as Mesh, Object3D, ObjectContainer3D,Vector3D or Vertex
-		* @param	 axis			String. Represent the axis to align on.
+		* @param	 axis		String. Represent the axis to align on.
 		* @param	 condition	[optional]. String. Can be '+", "-", "av" or "", Default is "", aligns to given axis at 0.
 		*/		
 		public static function align(aObjs:Array, axis:String, condition:String = ""):void
@@ -129,7 +129,7 @@ package away3d.tools.commands
 		* Applies to array elements a distributed alignment according to axis, x,y or z. In case elements are meshes only their positions is affected. Method doesn't take in account their respective bounds
 		* each element must have public x,y and z  properties
 		* @param	 aObjs		Array. An array with elements with x,y and z public properties such as Mesh, Object3D, ObjectContainer3D,Vector3D or Vertex
-		* @param	 axis			String. Represent the axis to align on.
+		* @param	 axis		String. Represent the axis to align on.
 		*/		
 		public static function distribute(aObjs:Array, axis:String):void
 		{

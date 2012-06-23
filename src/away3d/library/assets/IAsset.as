@@ -2,6 +2,9 @@ package away3d.library.assets
 {
 	import flash.events.IEventDispatcher;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public interface IAsset extends IEventDispatcher
 	{
 		function get name() : String;

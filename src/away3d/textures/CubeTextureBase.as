@@ -8,6 +8,9 @@ package away3d.textures
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class CubeTextureBase extends TextureProxyBase
 	{
 		public function CubeTextureBase()

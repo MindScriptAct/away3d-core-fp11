@@ -1,5 +1,9 @@
 package away3d.library.assets
 {
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class AssetType
 	{
 		public static const ENTITY : String = 'entity';

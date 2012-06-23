@@ -5,6 +5,9 @@ package away3d.controllers
 	
 	use namespace arcane;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class ControllerBase
 	{
 		protected var _autoUpdate:Boolean = true;

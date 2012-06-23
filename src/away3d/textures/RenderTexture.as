@@ -11,6 +11,9 @@
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class RenderTexture extends Texture2DBase
 	{
 		public function RenderTexture(width : Number, height : Number)

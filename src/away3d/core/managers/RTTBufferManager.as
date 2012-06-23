@@ -13,6 +13,9 @@ package away3d.core.managers
 
 	import flash.utils.Dictionary;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class RTTBufferManager extends EventDispatcher
 	{
 		private static var _instances : Dictionary;

@@ -7,6 +7,9 @@ package away3d.filters.tasks
 
 	import flash.display3D.textures.Texture;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Filter3DBlurTask extends Filter3DTaskBase
 	{
 		private static const MAX_BLUR : int = 6;

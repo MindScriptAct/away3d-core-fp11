@@ -8,6 +8,9 @@ package away3d.textures
 	import flash.media.Camera;
 	import flash.media.Video;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class WebcamTexture extends BitmapTexture
 	{
 		private var _materialSize : uint;

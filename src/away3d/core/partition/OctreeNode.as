@@ -6,6 +6,9 @@ package away3d.core.partition
 	import away3d.primitives.WireframeCube;
 	import away3d.primitives.WireframePrimitiveBase;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class OctreeNode extends NodeBase
 	{
 		private var _centerX : Number;

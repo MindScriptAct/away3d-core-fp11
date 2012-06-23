@@ -1,6 +1,8 @@
 package away3d.debug
 {
-    /** Class for emmiting debuging messages, warnings and errors */
+    /** 
+	 * Class for emmiting debuging messages, warnings and errors 
+	 */
     public class Debug
     {
         public static var active:Boolean = false;

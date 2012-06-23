@@ -6,6 +6,9 @@ package away3d.core.raycast.colliders
 
 	import flash.geom.Vector3D;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class ColliderBase
 	{
 		protected var _collisionExists:Boolean;

@@ -15,6 +15,9 @@ package away3d.lights.shadowmaps
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class CubeMapShadowMapper extends ShadowMapperBase
 	{
 		private var _depthCameras : Vector.<Camera3D>;

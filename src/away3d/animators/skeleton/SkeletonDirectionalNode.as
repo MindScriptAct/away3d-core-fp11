@@ -1,11 +1,13 @@
-/**
- * Author: David Lenaerts
- */
 package away3d.animators.skeleton
 {
 
 	import flash.geom.Vector3D;
 
+	// Author: David Lenaerts
+	
+	/**
+	 * COMMENT : todo
+	 */
 	public class SkeletonDirectionalNode extends SkeletonTreeNode
 	{
 		/**

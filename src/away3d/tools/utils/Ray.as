@@ -2,6 +2,9 @@ package away3d.tools.utils
 {
 	import flash.geom.Vector3D;
 	
+	/**
+	 * COMMENT : todo
+	 */
 	public class Ray{
 		
 		private var _orig:Vector3D = new Vector3D(0.0,0.0,0.0);

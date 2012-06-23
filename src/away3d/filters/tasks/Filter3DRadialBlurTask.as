@@ -12,6 +12,9 @@ package away3d.filters.tasks
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class Filter3DRadialBlurTask extends Filter3DTaskBase
 	{
 		private static const LAYERS : int = 15;

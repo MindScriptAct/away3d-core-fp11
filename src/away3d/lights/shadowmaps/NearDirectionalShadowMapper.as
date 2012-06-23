@@ -12,6 +12,9 @@ package away3d.lights.shadowmaps
 
 	use namespace arcane;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class NearDirectionalShadowMapper extends DirectionalShadowMapper
 	{
 		private var _depthLens : OrthographicOffCenterLens;
