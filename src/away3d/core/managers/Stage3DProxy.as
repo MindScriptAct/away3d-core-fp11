@@ -13,6 +13,7 @@ package away3d.core.managers
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.geom.Rectangle;
+	import flash.system.System;
 
 	use namespace arcane;
 
@@ -31,6 +32,7 @@ package away3d.core.managers
 		arcane var _context3D : Context3D;
 		arcane var _stage3DIndex : int = -1;
 
+		private var _usesSoftwareRendering : Boolean;
 		private var _stage3D : Stage3D;
 		private var _activeProgram3D : Program3D;
 		private var _stage3DManager : Stage3DManager;
@@ -179,6 +181,26 @@ package away3d.core.managers
 		{
 			return _context3D;
 		}
+		
+		/**
+		 * The driver information as reported by the Context3D object (if any)
+		*/
+		public function get driverInfo() : String
+		{
+			return _context3D? _context3D.driverInfo : null;
+		}
+		
+		
+		/**
+		 * Indicates whether the Stage3D managed by this proxy is running in software mode.
+		 * Remember to wait for the CONTEXT3D_CREATED event before checking this property,
+		 * as only then will it be guaranteed to be accurate.
+		*/
+		public function get usesSoftwareRendering() : Boolean
+		{
+			return _usesSoftwareRendering;
+		}
+		
 
 		/**
 		 * The x position of the Stage3D.
@@ -245,6 +267,8 @@ package away3d.core.managers
 				_context3D = _stage3D.context3D;
 				_context3D.enableErrorChecking = Debug.active;
 				
+				_usesSoftwareRendering = (_context3D.driverInfo.indexOf('Software')==0);
+				
 				// Only configure back buffer if width and height have been set,
 				// which they may not have been if View3D.render() has yet to be
 				// invoked for the first time.
@@ -265,6 +289,12 @@ package away3d.core.managers
 		 */
 		private function requestContext(forceSoftware : Boolean = false) : void
 		{
+			// If forcing software, we can be certain that the
+			// returned Context3D will be running software mode.
+			// If not, we can't be sure and should stick to the
+			// old value (will likely be same if re-requesting.)
+			_usesSoftwareRendering ||= forceSoftware;
+			
 			_stage3D.requestContext3D(forceSoftware? Context3DRenderMode.SOFTWARE : Context3DRenderMode.AUTO);
 			_contextRequested = true;
 		}

@@ -233,7 +233,7 @@ package away3d.loaders.misc
 			removeListeners(urlLoader);
 			
 			if(hasEventListener(LoaderEvent.LOAD_ERROR))
-				dispatchEvent(new LoaderEvent(LoaderEvent.LOAD_ERROR, _req.url, event.text));
+				dispatchEvent(new LoaderEvent(LoaderEvent.LOAD_ERROR, _req.url, true, event.text));
 			
 			// if flash.net.URLLoader failed to load requested asset, then attempt to parse whatever data we got back anyway.
 			// do not do this for jpg or png files
@@ -298,7 +298,7 @@ package away3d.loaders.misc
 			} else{
 				var msg:String = "No parser defined. To enable all parsers for auto-detection, use Parsers.enableAllBundled()";
 				if(hasEventListener(LoaderEvent.LOAD_ERROR)){
-					this.dispatchEvent(new LoaderEvent(LoaderEvent.LOAD_ERROR, "", msg) );
+					this.dispatchEvent(new LoaderEvent(LoaderEvent.LOAD_ERROR, "", true, msg) );
 				} else{
 					throw new Error(msg);
 				}

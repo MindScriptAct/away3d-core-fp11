@@ -354,7 +354,8 @@
 		}
 
 		/**
-		 * The width of the viewport
+		 * The width of the viewport. When software rendering is used, this is limited by the
+		 * platform to 2048 pixels.
 		 */
 		override public function get width() : Number
 		{
@@ -363,6 +364,10 @@
 
 		override public function set width(value : Number) : void
 		{
+			// Backbuffer limitation in software mode. See comment in updateBackBuffer()
+			if (_stage3DProxy && _stage3DProxy.usesSoftwareRendering && value > 2048)
+				value = 2048;
+				
 			if (_width == value)
 				return;
 
@@ -380,7 +385,8 @@
 		}
 
 		/**
-		 * The height of the viewport
+		 * The height of the viewport. When software rendering is used, this is limited by the
+		 * platform to 2048 pixels.
 		 */
 		override public function get height() : Number
 		{
@@ -389,6 +395,10 @@
 
 		override public function set height(value : Number) : void
 		{
+			// Backbuffer limitation in software mode. See comment in updateBackBuffer()
+			if (_stage3DProxy && _stage3DProxy.usesSoftwareRendering && value > 2048)
+				value = 2048;
+				
 			if (_height == value)
 				return;
 
@@ -465,12 +475,32 @@
 		 */
 		protected function updateBackBuffer() : void
 		{
-			if( _width && _height ){
-				_stage3DProxy.configureBackBuffer(_width, _height, _antiAlias, true);
-				_backBufferInvalid = false;
-			} else {
-				width = stage.stageWidth;
-				height = stage.stageHeight;
+			// No reason trying to configure back buffer if there is no context available.
+			// Doing this anyway (and relying on _stage3DProxy to cache width/height for 
+			// context does get available) means usesSoftwareRendering won't be reliable.
+			if (_stage3DProxy.context3D) {
+				if( _width && _height ){
+					// Backbuffers are limited to 2048x2048 in software mode and
+					// trying to configure the backbuffer to be bigger than that
+					// will throw an error. Capping the value is a graceful way of
+					// avoiding runtime exceptions for developers who are unable
+					// to test their Away3D implementation on screens that are 
+					// large enough for this error to ever occur.
+					if (_stage3DProxy.usesSoftwareRendering) {
+						// Even though these checks where already made in the width
+						// and height setters, at that point we couldn't be sure that
+						// the context had even been retrieved and the software flag
+						// thus be reliable. Make checks again.
+						if (_width > 2048) _width = 2048;
+						if (_height > 2048) _height = 2048;
+					}
+					
+					_stage3DProxy.configureBackBuffer(_width, _height, _antiAlias, true);
+					_backBufferInvalid = false;
+				} else {
+					width = stage.stageWidth;
+					height = stage.stageHeight;
+				}
 			}
 		}
 		

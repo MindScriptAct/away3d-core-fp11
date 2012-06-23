@@ -9,7 +9,7 @@ package away3d.loaders
 	import away3d.loaders.misc.ResourceDependency;
 	import away3d.loaders.misc.SingleFileLoader;
 	import away3d.loaders.parsers.ParserBase;
-
+	
 	import flash.events.EventDispatcher;
 	import flash.net.URLRequest;
 
@@ -30,7 +30,10 @@ package away3d.loaders
 	public class AssetLoader extends EventDispatcher
 	{
 		private var _context : AssetLoaderContext;
+		private var _token : AssetLoaderToken;
 		private var _uri : String;
+		
+		private var _errorHandlers : Vector.<Function>;
 		
 		private var _loaderStack : Vector.<SingleFileLoader>;
 		private var _dependencyStack : Vector.<Vector.<ResourceDependency>>;
@@ -49,6 +52,8 @@ package away3d.loaders
 			_loaderStack = new Vector.<SingleFileLoader>();
 			_dependencyStack = new Vector.<Vector.<ResourceDependency>>();
 			_dependencyIndexStack = new Vector.<uint>();
+			
+			_errorHandlers = new Vector.<Function>();
 		}
 		
 		
@@ -73,16 +78,21 @@ package away3d.loaders
 		 */
 		public function load(req : URLRequest, context : AssetLoaderContext = null, ns : String = null, parser : ParserBase = null) : AssetLoaderToken
 		{
-			var token : AssetLoaderToken = new AssetLoaderToken(this);
+			if (!_token) {
+				_token = new AssetLoaderToken(this);
+				
+				_uri = req.url = req.url.replace(/\\/g, "/");
+				_context = context;
+				_namespace = ns;
+				_currentDependencies = new Vector.<ResourceDependency>();
+				_currentDependencies.push(new ResourceDependency('', req, null, null));
+				retrieveNext(parser);
+				
+				return _token;
+			}
 			
-			_uri = req.url = req.url.replace(/\\/g, "/");
-			_context = context;
-			_namespace = ns;
-			_currentDependencies = new Vector.<ResourceDependency>();
-			_currentDependencies.push(new ResourceDependency('', req, null, null));
-			retrieveNext(parser);
-			
-			return token;
+			// TODO: Throw error (already loading)
+			return null;
 		}
 		
 		/**
@@ -95,16 +105,21 @@ package away3d.loaders
 		 */
 		public function loadData(data : *, id : String, context : AssetLoaderContext = null, ns : String = null, parser : ParserBase = null) : AssetLoaderToken
 		{
-			var token : AssetLoaderToken = new AssetLoaderToken(this);
+			if (!_token) {
+				_token = new AssetLoaderToken(this);
+				
+				_uri = id;
+				_context = context;
+				_namespace = ns;
+				_currentDependencies = new Vector.<ResourceDependency>();
+				_currentDependencies.push(new ResourceDependency(id, null, data, null));
+				retrieveNext(parser);
+				
+				return _token;
+			}
 			
-			_uri = id;
-			_context = context;
-			_namespace = ns;
-			_currentDependencies = new Vector.<ResourceDependency>();
-			_currentDependencies.push(new ResourceDependency(id, null, data, null));
-			retrieveNext(parser);
-			
-			return token;
+			// TODO: Throw error (already loading)
+			return null;
 		}
 		
 		
@@ -162,21 +177,11 @@ package away3d.loaders
 		private function retrieveDependency(dependency : ResourceDependency, parser : ParserBase = null) : void
 		{
 			var data : *;
-			var loader : SingleFileLoader = new SingleFileLoader();
-			loader.addEventListener(LoaderEvent.DATA_LOADED, onRetrievalComplete);
-			loader.addEventListener(LoaderEvent.LOAD_ERROR, onRetrievalFailed);
-			loader.addEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.ANIMATION_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.ANIMATOR_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.BITMAP_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.CONTAINER_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.GEOMETRY_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.MATERIAL_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.MESH_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.ENTITY_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.SKELETON_COMPLETE, onAssetComplete);
-			loader.addEventListener(AssetEvent.SKELETON_POSE_COMPLETE, onAssetComplete);
-			loader.addEventListener(ParserEvent.READY_FOR_DEPENDENCIES, onReadyForDependencies);
+			var loader : SingleFileLoader;
+			
+			loader = new SingleFileLoader();
+			addEventListeners(loader);
+			
 			_loadingDependency = dependency;
 			
 			// Get already loaded (or mapped) data if available
@@ -188,7 +193,7 @@ package away3d.loaders
 				if (_loadingDependency.retrieveAsRawData) {
 					// No need to parse. The parent parser is expecting this
 					// to be raw data so it can be passed directly.
-					dispatchEvent(new LoaderEvent(LoaderEvent.DEPENDENCY_COMPLETE, _loadingDependency.request.url));
+					dispatchEvent(new LoaderEvent(LoaderEvent.DEPENDENCY_COMPLETE, _loadingDependency.request.url, true));
 					_loadingDependency.setData(data);
 					_loadingDependency.resolve();
 					
@@ -287,33 +292,45 @@ package away3d.loaders
 		 */
 		private function onRetrievalFailed(event : LoaderEvent) : void
 		{
+			var handled : Boolean;
+			var isDependency : Boolean = (_dependencyStack.length > 0);
 			var loader : SingleFileLoader = SingleFileLoader(event.target);
-			loader.removeEventListener(ParserEvent.READY_FOR_DEPENDENCIES, onReadyForDependencies);
-			loader.removeEventListener(LoaderEvent.DATA_LOADED, onRetrievalComplete);
-			loader.removeEventListener(LoaderEvent.LOAD_ERROR, onRetrievalFailed);
-			loader.removeEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.ANIMATION_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.ANIMATOR_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.BITMAP_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.CONTAINER_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.GEOMETRY_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.MATERIAL_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.MESH_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.ENTITY_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.SKELETON_COMPLETE, onAssetComplete);
-			loader.removeEventListener(AssetEvent.SKELETON_POSE_COMPLETE, onAssetComplete);
 			
-			// TODO: Investigate this. Why is this done?
-			var ext:String = loader.url.substring(loader.url.length-4, loader.url.length).toLowerCase();
-			if(ext ==".jpg" || ext ==".png"){
-				_loadingDependency.resolveFailure();
-				prepareNextRetrieve(loader, event, false);
+			removeEventListeners(loader);
+			
+			event = new LoaderEvent(LoaderEvent.LOAD_ERROR, _uri, isDependency, event.message);
+			
+			if (hasEventListener(LoaderEvent.LOAD_ERROR)) {
+				dispatchEvent(event);
+				handled = true;
 			}
-
-			if(hasEventListener(LoaderEvent.LOAD_ERROR)){
-				dispatchEvent(new LoaderEvent(LoaderEvent.LOAD_ERROR, loader.url, event.message));
-			} else{
-				trace("Unable to load "+loader.url);
+			else {
+				// TODO: Consider not doing this even when AssetLoader does
+				// have it's own LOAD_ERROR listener
+				var i : uint, len : uint = _errorHandlers.length;
+				for (i=0; i<len; i++) {
+					var handlerFunction : Function = _errorHandlers[i];
+					handled ||= handlerFunction(event);
+				}
+			}
+			
+			if (handled) {
+				if (isDependency && !event.isDefaultPrevented()) {
+					_loadingDependency.resolveFailure();
+					prepareNextRetrieve(loader, event, false);
+				}
+				else {
+					// Either this was the base file (last left in the stack) or
+					// default behavior was prevented by the handlers, and hence
+					// there is nothing more to do than clean up and bail.
+					dispose();
+					return;
+				}
+			}
+			else {
+				// Error event was not handled by listeners directly on AssetLoader or
+				// on any of the subscribed loaders (in the list of error handlers.)
+				throw new Error(event.message);
 			}
 		}
 		
@@ -358,6 +375,50 @@ package away3d.loaders
 			var loader : SingleFileLoader = SingleFileLoader(event.target);
 			prepareNextRetrieve(loader, event); //prepare next in front of removing listeners to allow any remaining asset events to propagate
 			
+			removeEventListeners(loader);
+		}
+		
+		/**
+		 * Pushes further dependencies onto the stack.
+		 * @param event
+		 */
+		private function prepareNextRetrieve(loader:SingleFileLoader, event : LoaderEvent, resolve:Boolean = true) : void
+		{
+			// TODO: Don't dispatch this on failure
+			dispatchEvent(new LoaderEvent(LoaderEvent.DEPENDENCY_COMPLETE, event.url));
+			
+			_loadingDependency.setData(loader.data);
+			if(resolve) _loadingDependency.resolve();
+			
+			if (_context && !_context.includeDependencies){
+				dispatchEvent(new LoaderEvent(LoaderEvent.RESOURCE_COMPLETE, _uri));
+			} else{
+				retrieveLoaderDependencies(loader);
+			}
+		}
+		
+		
+		private function addEventListeners(loader : SingleFileLoader) : void
+		{
+			loader.addEventListener(LoaderEvent.DATA_LOADED, onRetrievalComplete);
+			loader.addEventListener(LoaderEvent.LOAD_ERROR, onRetrievalFailed);
+			loader.addEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.ANIMATION_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.ANIMATOR_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.BITMAP_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.CONTAINER_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.GEOMETRY_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.MATERIAL_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.MESH_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.ENTITY_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.SKELETON_COMPLETE, onAssetComplete);
+			loader.addEventListener(AssetEvent.SKELETON_POSE_COMPLETE, onAssetComplete);
+			loader.addEventListener(ParserEvent.READY_FOR_DEPENDENCIES, onReadyForDependencies);
+		}
+		
+		
+		private function removeEventListeners(loader : SingleFileLoader) : void
+		{
 			loader.removeEventListener(ParserEvent.READY_FOR_DEPENDENCIES, onReadyForDependencies);
 			loader.removeEventListener(LoaderEvent.DATA_LOADED, onRetrievalComplete);
 			loader.removeEventListener(LoaderEvent.LOAD_ERROR, onRetrievalFailed);
@@ -374,23 +435,40 @@ package away3d.loaders
 			loader.removeEventListener(AssetEvent.SKELETON_POSE_COMPLETE, onAssetComplete);
 		}
 		
-		/**
-		 * Pushes further dependencies onto the stack.
-		 * @param event
-		 */
-		private function prepareNextRetrieve(loader:SingleFileLoader, event : LoaderEvent, resolve:Boolean = true) : void
+		
+		private function dispose() : void
 		{
-			dispatchEvent(new LoaderEvent(LoaderEvent.DEPENDENCY_COMPLETE, event.url));
+			_currentDependencies = null;
+			_loadingDependency = null;
 			
-			_loadingDependency.setData(loader.data);
-			if(resolve) _loadingDependency.resolve();
+			_errorHandlers = null;
+			_loaderStack = null;
+			_context = null;
+			_token = null;
 			
-			if (_context && !_context.includeDependencies){
-				dispatchEvent(new LoaderEvent(LoaderEvent.RESOURCE_COMPLETE, _uri));
-			} else{
-				retrieveLoaderDependencies(loader);
+			if (_currentLoader) {
+				removeEventListeners(_currentLoader);
+				_currentLoader = null;
 			}
-			
+		}
+		
+		
+		/**
+		 * @private
+		 * This method is used by other loader classes (e.g. Loader3D and AssetLibraryBundle) to
+		 * add error event listeners to the AssetLoader instance. This system is used instead of
+		 * the regular EventDispatcher system so that the AssetLibrary error handler can be sure
+		 * that if hasEventListener() returns true, it's client code that's listening for the
+		 * event. Secondly, functions added as error handler through this custom method are 
+		 * expected to return a boolean value indicating whether the event was handled (i.e.
+		 * whether they in turn had any client code listening for the event.) If no handlers
+		 * return true, the AssetLoader knows that the event wasn't handled and will throw an RTE.
+		*/
+		arcane function addErrorHandler(handler : Function) : void
+		{
+			if (_errorHandlers.indexOf(handler)<0) {
+				_errorHandlers.push(handler);
+			}
 		}
 	}
 }

@@ -10,8 +10,9 @@ package away3d.materials.passes
 	import away3d.errors.AbstractMethodError;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.lightpickers.LightPickerBase;
-
+	
 	import flash.display3D.Context3D;
+	import flash.display3D.Context3DCompareMode;
 	import flash.display3D.Context3DProgramType;
 	import flash.display3D.Context3DTriangleFace;
 	import flash.display3D.Context3DVertexBufferFormat;
@@ -44,7 +45,8 @@ package away3d.materials.passes
 		protected var _smooth : Boolean = true;
 		protected var _repeat : Boolean = false;
 		protected var _mipmap : Boolean = true;
-
+		protected var _depthCompareMode:String = Context3DCompareMode.LESS;
+		
 		private var _bothSides : Boolean;
 
 		protected var _numPointLights : uint;
@@ -144,6 +146,16 @@ package away3d.materials.passes
 		{
 			_bothSides = value;
 		}
+		
+		public function get depthCompareMode() : String
+		{
+			return _depthCompareMode;
+		}
+		
+		public function set depthCompareMode(value : String) : void
+		{
+			_depthCompareMode = value;
+		}
 
 		/**
 		 * The animation used to add vertex code to the shader code.
@@ -158,6 +170,14 @@ package away3d.materials.passes
 			if (_animation == value) return;
 			_animation = value;
 			invalidateShaderProgram();
+		}
+
+		/**
+		 * Specifies whether this pass renders to texture
+		 */
+		public function get renderToTexture() : Boolean
+		{
+			return _renderToTexture;
 		}
 
 		/**
@@ -264,6 +284,8 @@ package away3d.materials.passes
 				_rttData[1] = textureRatioY;
 				stage3DProxy._context3D.setProgramConstantsFromVector(Context3DProgramType.VERTEX, 4, _rttData, 1);
 			}
+			
+			stage3DProxy._context3D.setDepthTest( true, _depthCompareMode );
 		}
 
 		/**
@@ -284,6 +306,8 @@ package away3d.materials.passes
 				stage3DProxy.setRenderTarget(_oldTarget, _oldDepthStencil, _oldSurface);
 				stage3DProxy.scissorRect = _oldRect;
 			}
+			
+			stage3DProxy._context3D.setDepthTest( true, Context3DCompareMode.LESS );
 		}
 
 		/**
