@@ -9,7 +9,9 @@ package away3d.events
 	{
 		/** COMMENT : todo */
 		public static const CONTEXT3D_CREATED : String = "Context3DCreated";
+		/** COMMENT : todo */
 		public static const CONTEXT3D_DISPOSED : String = "Context3DDisposed";
+		/** COMMENT : todo */
 		public static const CONTEXT3D_RECREATED : String = "Context3DRecreated";
 
 		public function Stage3DEvent(type : String, bubbles : Boolean = false, cancelable : Boolean = false)

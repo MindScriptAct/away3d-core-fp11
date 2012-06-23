@@ -7,7 +7,10 @@ package away3d.animators.data
 	 */
 	public class VertexAnimationMode
 	{
+		/** COMMENT : todo */
 		public static const ADDITIVE : String = "additive";
+		
+		/** COMMENT : todo */
 		public static const ABSOLUTE : String = "absolute";
 	}
 }
