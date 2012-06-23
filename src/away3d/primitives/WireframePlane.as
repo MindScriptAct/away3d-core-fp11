@@ -45,7 +45,7 @@
 		public function set orientation(value : String) : void
 		{
 			_orientation = value;
-				();
+			invalidateGeometry();
 		}
 
 		public function get width() : Number
