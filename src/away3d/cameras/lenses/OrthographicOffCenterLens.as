@@ -3,7 +3,7 @@ package away3d.cameras.lenses
 	import away3d.core.math.Matrix3DUtils;
 
 	/**
-	 * The PerspectiveLens object provides a projection matrix that projects 3D geometry isometrically. This entails
+	 * The OrthographicOffCenterLens object provides a projection matrix that projects 3D geometry isometrically. This entails
 	 * there is no perspective distortion, and lines that are parallel in the scene will remain parallel on the screen.
 	 */
 	public class OrthographicOffCenterLens extends LensBase
@@ -27,6 +27,9 @@ package away3d.cameras.lenses
 		}
 
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get minX() : Number
 		{
 			return _minX;
@@ -38,6 +41,9 @@ package away3d.cameras.lenses
 			invalidateMatrix();
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get maxX() : Number
 		{
 			return _maxX;
@@ -49,6 +55,9 @@ package away3d.cameras.lenses
 			invalidateMatrix();
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get minY() : Number
 		{
 			return _minY;
@@ -60,6 +69,9 @@ package away3d.cameras.lenses
 			invalidateMatrix();
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get maxY() : Number
 		{
 			return _maxY;

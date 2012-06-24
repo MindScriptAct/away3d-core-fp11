@@ -98,6 +98,11 @@ package away3d.cameras.lenses
 			invalidateMatrix();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	point3d
+		 * @return
+		 */
 		public function project(point3d : Vector3D) : Vector3D
 		{
 			var v : Vector3D = matrix.transformVector(point3d);
@@ -106,6 +111,9 @@ package away3d.cameras.lenses
 			return v;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get unprojectionMatrix() : Matrix3D
 		{
 			if (_unprojectionInvalid) {
@@ -118,6 +126,13 @@ package away3d.cameras.lenses
 			return _unprojection;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	mX
+		 * @param	mY
+		 * @param	mZ
+		 * @return
+		 */
 		public function unproject(mX:Number, mY:Number, mZ : Number):Vector3D
 		{
 			var v : Vector3D = new Vector3D(mX, -mY, mZ, 1.0);

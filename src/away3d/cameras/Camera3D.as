@@ -58,7 +58,7 @@ package away3d.cameras
 		}
 
 		/**
-		 * 
+		 * COMMENT : todo
 		 */
 		public function get frustumPlanes() : Vector.<Plane3D>
 		{
@@ -206,7 +206,7 @@ package away3d.cameras
 		}
 
 		/**
-		 *
+		 * COMMENT : todo
 		 */
 		public function unproject(mX : Number, mY : Number, useTranslation:Boolean = false):Vector3D
 		{
@@ -215,7 +215,7 @@ package away3d.cameras
 		}
 		
 		/**
-		 * 
+		 * COMMENT : todo
 		 */
 		public function project(point3d : Vector3D) : Vector3D
 		{
