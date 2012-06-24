@@ -293,6 +293,9 @@ package away3d.bounds
 			return distance <= _radius;
 		}
 
+		/**
+		 * Radius of bounding sphere
+		 */
 		public function get radius() : Number
 		{
 			return _radius;

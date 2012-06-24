@@ -279,18 +279,33 @@ package away3d.bounds
 			return clone;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get halfExtentsX():Number {
 			return _halfExtentsX;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get halfExtentsY():Number {
 			return _halfExtentsY;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get halfExtentsZ():Number {
 			return _halfExtentsZ;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	point
+		 * @param	target
+		 * @return
+		 */
 		public function closestPointToPoint(point : Vector3D, target : Vector3D = null) : Vector3D
 		{
 			var p : Number;
