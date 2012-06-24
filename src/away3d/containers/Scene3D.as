@@ -65,6 +65,11 @@ package away3d.containers
 			_sceneGraphRoot.partition = value;
 		}
 
+		/**
+		 * Tests if privided child object is in this scene
+		 * @param	child	object to test if it is in this scene
+		 * @return			true if child is in the scene.
+		 */
 		public function contains(child : ObjectContainer3D) : Boolean
 		{
 			return _sceneGraphRoot.contains(child);

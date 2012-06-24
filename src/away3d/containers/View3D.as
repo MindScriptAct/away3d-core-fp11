@@ -32,7 +32,9 @@
 	use namespace arcane;
 
 	/**
-	 * COMMENT : todo
+	 * Defines a 'window' to look at 3d world(Scene3d) through. Key framework class.
+	 * It is poses as a display object(Sprite) and can be added to display list, but in fact it is using the Stage3D API, which means that the 3D content is drawn behind the display list.
+	 * You can have more then one View3d objects created for single Scene3d object.
 	 */
 	public class View3D extends Sprite
 	{
@@ -122,7 +124,13 @@
 			contextMenu = _ViewContextMenu;
 		}
 		
-		
+		/**
+		 * Constructor.
+		 * @param	scene			3d scene view will be showing. Default Scene3D will be created if it is not provided.
+		 * @param	camera			camera that defines how 3d scene will be shown. Default Camera3D(with PerspectiveLens) will be created if it is not provided. 
+		 * @param	renderer		renderer used to render scene. DefaultRenderer will be created if it is not provided. 
+		 * @param	forceSoftware	if set to true - will force software rendering mode instead of hardware.
+		 */
 		public function View3D(scene : Scene3D = null, camera : Camera3D = null, renderer : RendererBase = null, forceSoftware:Boolean = false)
 		{
 			super();
@@ -147,6 +155,9 @@
 			initRightClickMenu();
 		}
 		
+		/**
+		 * Defines if Away3d menu items are added to mouse right clic menu.
+		 */
 		public function get rightClickMenuEnabled() : Boolean
 		{
 			return _rightClickMenuEnabled;
@@ -159,6 +170,9 @@
 			updateRightClickMenu();
 		}
 		
+		/**
+		 * Get Stage3DProxy. Stage2dProxy is used to work with flash Stage3d.
+		 */
 		public function get stage3DProxy() : Stage3DProxy
 		{
 			return _stage3DProxy;
@@ -178,6 +192,9 @@
 			_mouse3DManager.forceMouseMove = value;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get background() : Texture2DBase
 		{
 			return _background;
@@ -216,7 +233,9 @@
 			throw new Error("filters is not supported in View3D. Use filters3d instead.");
 		}
 
-
+		/**
+		 * COMMENT : todo
+		 */
 		public function get filters3d() : Array
 		{
 			return _filter3DRenderer? _filter3DRenderer.filters : null;
@@ -293,6 +312,9 @@
 			_renderer.backgroundB = (value & 0xff) / 0xff;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get backgroundAlpha() : Number
 		{
 			return _backgroundAlpha;
@@ -418,7 +440,9 @@
 			invalidateBackBuffer();
 		}
 
-
+		/**
+		 * Indicates the x coordinate of the DisplayObject instance relative to the local coordinates of the parent DisplayObjectContainer.
+		 */
 		override public function set x(value : Number) : void
 		{
 			super.x = value;
@@ -430,6 +454,9 @@
 				_stage3DProxy.x = _globalPos.x;
 		}
 
+		/**
+		 * Indicates the y coordinate of the DisplayObject instance relative to the local coordinates of the parent DisplayObjectContainer.
+		 */
 		override public function set y(value : Number) : void
 		{
 			super.y = value;
@@ -441,6 +468,9 @@
 				_stage3DProxy.y = _globalPos.y;
 		}
 		
+		/**
+		 * @inheritDoc
+		 */
 		override public function set visible(value : Boolean) : void
 		{
 			super.visible = value;
@@ -566,6 +596,9 @@
 			_mouse3DManager.fireMouseEvents();
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		protected function updateGlobalPos() : void
 		{
 			var globalPos : Point = parent.localToGlobal(_localPos);
@@ -574,6 +607,9 @@
 			_globalPos = globalPos;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		protected function updateTime() : void
 		{
 			var time : Number = getTimer();
@@ -597,6 +633,10 @@
 			}
 		}
 		
+		/**
+		 * COMMENT : todo
+		 * @param	entityCollector
+		 */
 		protected function renderSceneDepth(entityCollector : EntityCollector) : void
 		{
 			if (_depthTextureInvalid || !_depthRender) initDepthTexture(_stage3DProxy._context3D);
@@ -634,6 +674,11 @@
 			_entityCollector = null;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	point3d
+		 * @return
+		 */
 		public function project(point3d : Vector3D) : Vector3D
 		{
 			var v : Vector3D = _camera.project(point3d);
@@ -644,6 +689,13 @@
 			return v;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	mX
+		 * @param	mY
+		 * @param	useTranslation
+		 * @return
+		 */
 		public function unproject(mX : Number, mY : Number, useTranslation:Boolean = false) : Vector3D
 		{
 			return _camera.unproject((mX * 2 - _width)/_width, (mY * 2 - _height)/_height, useTranslation);
@@ -694,15 +746,24 @@
 			}
 		}
 
-		// dead ends:
+		// dead ends: Empty functions that does nothing.
+		/** @private */
 		override public function set z(value : Number) : void {}
+		/** @private */
 		override public function set scaleZ(value : Number) : void {}
+		/** @private */
 		override public function set rotation(value : Number) : void {}
+		/** @private */
 		override public function set rotationX(value : Number) : void {}
+		/** @private */
 		override public function set rotationY(value : Number) : void {}
+		/** @private */
 		override public function set rotationZ(value : Number) : void {}
+		/** @private */
 		override public function set transform(value : Transform) : void {}
+		/** @private */
 		override public function set scaleX(value : Number) : void {}
+		/** @private */
 		override public function set scaleY(value : Number) : void {}
 
 		// TODO: remove

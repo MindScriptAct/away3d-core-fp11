@@ -239,7 +239,7 @@ package away3d.containers
 		}
 		
 		/**
-		 * 
+		 * Determines whether or not the children of the object are mouse, or user input device, enabled.
 		 */
 		public function get mouseChildren() : Boolean
 		{
@@ -255,7 +255,7 @@ package away3d.containers
 				_children[i].updateMouseChildren();
 		}
 		/**
-		 * 
+		 * Whether or not the 3d object is visible.
 		 */
 		public function get visible() : Boolean
 		{
@@ -272,6 +272,9 @@ package away3d.containers
 				_children[i].updateImplicitVisibility();
 		}
 		
+		/**
+		 * Gives 3d asset type. (Defined in AssetType class constants.)
+		 */
 		public function get assetType() : String
 		{
 			return AssetType.CONTAINER;
@@ -501,6 +504,11 @@ package away3d.containers
 		}
 		
 
+		/**
+		 * Tests if privided child object is in this container
+		 * @param	child	object to test if it is in this container
+		 * @return			true if child is in the container.
+		 */
 		public function contains(child : ObjectContainer3D) : Boolean
 		{
 			return _children.indexOf(child) >= 0;
@@ -598,6 +606,9 @@ package away3d.containers
 			notifySceneTransformChange();
 		}
 		
+		/**
+		 * @inheritDoc
+		 */		
 		override public function translateLocal(axis : Vector3D, distance : Number) : void
 		{
 			super.translateLocal(axis, distance);
@@ -635,7 +646,9 @@ package away3d.containers
 			return clone;
 		}
 		
-
+		/**
+		 * @inheritDoc
+		 */
 		override public function rotate(axis : Vector3D, angle : Number) : void
 		{
 			super.rotate(axis, angle);
@@ -662,6 +675,9 @@ package away3d.containers
 			return ret;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function updateImplicitVisibility() : void
 		{
 			var len : uint = _children.length;
