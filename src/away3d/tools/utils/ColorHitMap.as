@@ -4,6 +4,9 @@ package away3d.tools.utils
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 
+	/**
+	 * COMMENT : todo
+	 */
 	public class ColorHitMap extends EventDispatcher {
 		
 		private var _colorMap:BitmapData;

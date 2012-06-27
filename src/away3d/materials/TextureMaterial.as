@@ -13,9 +13,13 @@
 	public class TextureMaterial extends DefaultMaterialBase
 	{
 		private var _alphaBlending : Boolean;
-
+		
 		/**
 		 * Creates a new TextureMaterial.
+		 * @param	texture		texture to use for material
+		 * @param	smooth		Wheateh or not smooth out the texture
+		 * @param	repeat		COMMENT : todo
+		 * @param	mipmap		COMMENT : todo
 		 */
 		public function TextureMaterial(texture : Texture2DBase = null, smooth : Boolean = true, repeat : Boolean = false, mipmap : Boolean = true)
 		{
@@ -26,6 +30,9 @@
 			this.mipmap = mipmap;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get animateUVs() : Boolean
 		{
 			return _screenPass.animateUVs;
@@ -85,6 +92,9 @@
 			_screenPass.ambientMethod.texture = value;
 		}
 		
+		/**
+		 * @inheritDoc
+		 */
 		override public function get requiresBlending() : Boolean
 		{
 			return super.requiresBlending || _alphaBlending;
