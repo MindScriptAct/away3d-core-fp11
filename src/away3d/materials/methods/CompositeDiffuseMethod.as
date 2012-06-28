@@ -2,6 +2,7 @@ package away3d.materials.methods
 {
 	import away3d.arcane;
 	import away3d.core.managers.Stage3DProxy;
+	import away3d.events.ShadingMethodEvent;
 	import away3d.materials.passes.MaterialPassBase;
 	import away3d.materials.utils.ShaderRegisterCache;
 	import away3d.materials.utils.ShaderRegisterElement;
@@ -26,6 +27,17 @@ package away3d.materials.methods
 		{
 			_baseDiffuseMethod = baseDiffuseMethod || new BasicDiffuseMethod();
 			_baseDiffuseMethod._modulateMethod = modulateMethod;
+			_baseDiffuseMethod.addEventListener(ShadingMethodEvent.SHADER_INVALIDATED, onShaderInvalidated);
+		}
+
+		override arcane function initVO(vo : MethodVO) : void
+		{
+			_baseDiffuseMethod.initVO(vo);
+		}
+
+		override arcane function initConstants(vo : MethodVO) : void
+		{
+			_baseDiffuseMethod.initConstants(vo);
 		}
 
 		/**
@@ -33,6 +45,7 @@ package away3d.materials.methods
 		 */
 		override public function dispose() : void
 		{
+			_baseDiffuseMethod.removeEventListener(ShadingMethodEvent.SHADER_INVALIDATED, onShaderInvalidated);
 			_baseDiffuseMethod.dispose();
 		}
 
@@ -100,26 +113,17 @@ package away3d.materials.methods
 		/**
 		 * @inheritDoc
 		 */
-		override arcane function set parentPass(value : MaterialPassBase) : void
+		override arcane function getFragmentAGALPreLightingCode(vo : MethodVO, regCache : ShaderRegisterCache) : String
 		{
-			super.parentPass = value;
-			_baseDiffuseMethod.parentPass = value;
+			return _baseDiffuseMethod.getFragmentAGALPreLightingCode(vo, regCache);
 		}
 
 		/**
 		 * @inheritDoc
 		 */
-		override arcane function getFragmentAGALPreLightingCode(regCache : ShaderRegisterCache) : String
+		override arcane function getFragmentCodePerLight(vo : MethodVO, lightIndex : int, lightDirReg : ShaderRegisterElement, lightColReg : ShaderRegisterElement, regCache : ShaderRegisterCache) : String
 		{
-			return _baseDiffuseMethod.getFragmentAGALPreLightingCode(regCache);
-		}
-
-		/**
-		 * @inheritDoc
-		 */
-		override arcane function getFragmentCodePerLight(lightIndex : int, lightDirReg : ShaderRegisterElement, lightColReg : ShaderRegisterElement, regCache : ShaderRegisterCache) : String
-		{
-			var code : String = _baseDiffuseMethod.getFragmentCodePerLight(lightIndex, lightDirReg, lightColReg, regCache);
+			var code : String = _baseDiffuseMethod.getFragmentCodePerLight(vo, lightIndex, lightDirReg, lightColReg, regCache);
 			_totalLightColorReg = _baseDiffuseMethod._totalLightColorReg;
 			return code;
 		}
@@ -128,9 +132,9 @@ package away3d.materials.methods
 		/**
 		 * @inheritDoc
 		 */
-		arcane override function getFragmentCodePerProbe(lightIndex : int, cubeMapReg : ShaderRegisterElement, weightRegister : String, regCache : ShaderRegisterCache) : String
+		arcane override function getFragmentCodePerProbe(vo : MethodVO, lightIndex : int, cubeMapReg : ShaderRegisterElement, weightRegister : String, regCache : ShaderRegisterCache) : String
 		{
-			var code : String = _baseDiffuseMethod.getFragmentCodePerProbe(lightIndex, cubeMapReg, weightRegister, regCache);
+			var code : String = _baseDiffuseMethod.getFragmentCodePerProbe(vo, lightIndex, cubeMapReg, weightRegister, regCache);
 			_totalLightColorReg = _baseDiffuseMethod._totalLightColorReg;
 			return code;
 		}
@@ -138,41 +142,33 @@ package away3d.materials.methods
 		/**
 		 * @inheritDoc
 		 */
-		override arcane function activate(stage3DProxy : Stage3DProxy) : void
+		override arcane function activate(vo : MethodVO, stage3DProxy : Stage3DProxy) : void
 		{
-			_baseDiffuseMethod.activate(stage3DProxy);
+			_baseDiffuseMethod.activate(vo, stage3DProxy);
 		}
 
 		/**
 		 * @inheritDoc 
 		 */
-		arcane override function deactivate(stage3DProxy : Stage3DProxy) : void
+		arcane override function deactivate(vo : MethodVO, stage3DProxy : Stage3DProxy) : void
 		{
-			_baseDiffuseMethod.deactivate(stage3DProxy);
+			_baseDiffuseMethod.deactivate(vo, stage3DProxy);
 		}
 
 		/**
 		 * @inheritDoc
 		 */
-		override arcane function get needsUV() : Boolean
+		override arcane function getVertexCode(vo : MethodVO, regCache : ShaderRegisterCache) : String
 		{
-			return _baseDiffuseMethod.needsUV;
+			return _baseDiffuseMethod.getVertexCode(vo, regCache);
 		}
 
 		/**
 		 * @inheritDoc
 		 */
-		override arcane function getVertexCode(regCache : ShaderRegisterCache) : String
+		override arcane function getFragmentPostLightingCode(vo : MethodVO, regCache : ShaderRegisterCache, targetReg : ShaderRegisterElement) : String
 		{
-			return _baseDiffuseMethod.getVertexCode(regCache);
-		}
-
-		/**
-		 * @inheritDoc
-		 */
-		override arcane function getFragmentPostLightingCode(regCache : ShaderRegisterCache, targetReg : ShaderRegisterElement) : String
-		{
-			return _baseDiffuseMethod.getFragmentPostLightingCode(regCache, targetReg);
+			return _baseDiffuseMethod.getFragmentPostLightingCode(vo, regCache, targetReg);
 		}
 
 		/**
@@ -363,29 +359,24 @@ package away3d.materials.methods
 		/**
 		 * @inheritDoc 
 		 */
-		override public function set shadowRegister(shadowReg : ShaderRegisterElement) : void
+		override arcane function set shadowRegister(value : ShaderRegisterElement) : void
 		{
-			super.shadowRegister = shadowReg;
-			_baseDiffuseMethod.shadowRegister = shadowReg;
+			super.shadowRegister = value;
+			_baseDiffuseMethod.shadowRegister = value;
 		}
 
 		/**
 		 * @inheritDoc 
 		 */
-		override public function set tangentVaryingReg(tangentVaryingReg : ShaderRegisterElement) : void
+		override arcane function set tangentVaryingReg(value : ShaderRegisterElement) : void
 		{
-			super.tangentVaryingReg = tangentVaryingReg;
-			_baseDiffuseMethod.shadowRegister = tangentVaryingReg;
+			super.tangentVaryingReg = value;
+			_baseDiffuseMethod.tangentVaryingReg = value;
 		}
 
-		arcane override function get needsSecondaryUV() : Boolean
+		private function onShaderInvalidated(event : ShadingMethodEvent) : void
 		{
-			return _needsSecondaryUV || _baseDiffuseMethod.needsSecondaryUV;
-		}
-
-		arcane override function get needsTangents() : Boolean
-		{
-			return _needsTangents || _baseDiffuseMethod.needsTangents;
+			invalidateShaderProgram();
 		}
 	}
 }

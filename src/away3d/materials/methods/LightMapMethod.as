@@ -17,9 +17,9 @@ package away3d.materials.methods
 		public static const ADD : String = "add";
 
 		private var _texture : Texture2DBase;
-		private var _lightMapIndex : int;
 
 		private var _blendMode : String;
+		private var _useSecondaryUV : Boolean;
 
 		/**
 		 * COMMENT : todo
@@ -29,12 +29,16 @@ package away3d.materials.methods
 		 */
 		public function LightMapMethod(texture : Texture2DBase, blendMode : String = "multiply", useSecondaryUV : Boolean = false)
 		{
-			super(false, !useSecondaryUV, false);
-
-			_needsSecondaryUV = useSecondaryUV;
-			this.blendMode = blendMode;
-
+			super();
+			_useSecondaryUV = useSecondaryUV;
 			_texture = texture;
+			this.blendMode = blendMode;
+		}
+
+		override arcane function initVO(vo : MethodVO) : void
+		{
+			vo.needsUV = !_useSecondaryUV;
+			vo.needsSecondaryUV = _useSecondaryUV;
 		}
 
 		/**
@@ -54,15 +58,6 @@ package away3d.materials.methods
 		}
 
 		/**
-		 * @inheritDoc 
-		 */
-		arcane override function reset() : void
-		{
-			super.reset();
-			_lightMapIndex = -1;
-		}
-
-		/**
 		 * COMMENT : todo 
 		 */
 		public function get texture() : Texture2DBase
@@ -75,26 +70,20 @@ package away3d.materials.methods
 			_texture = value;
 		}
 
-		/**
-		 * @inheritDoc 
-		 */
-		arcane override function activate(stage3DProxy : Stage3DProxy) : void
+		arcane override function activate(vo : MethodVO, stage3DProxy : Stage3DProxy) : void
 		{
-			stage3DProxy.setTextureAt(_lightMapIndex, _texture.getTextureForStage3D(stage3DProxy));
-			super.activate(stage3DProxy);
+			stage3DProxy.setTextureAt(vo.texturesIndex, _texture.getTextureForStage3D(stage3DProxy));
+			super.activate(vo, stage3DProxy);
 		}
 
-		/**
-		 * @inheritDoc 
-		 */
-		arcane override function getFragmentCode(regCache : ShaderRegisterCache, targetReg : ShaderRegisterElement) : String
+		arcane override function getFragmentCode(vo : MethodVO, regCache : ShaderRegisterCache, targetReg : ShaderRegisterElement) : String
 		{
 			var code : String;
 			var lightMapReg : ShaderRegisterElement = regCache.getFreeTextureReg();
 			var temp : ShaderRegisterElement = regCache.getFreeFragmentVectorTemp();
-			_lightMapIndex = lightMapReg.index;
+			vo.texturesIndex = lightMapReg.index;
 
-			code = getTexSampleCode(temp, lightMapReg, _needsSecondaryUV? _secondaryUVFragmentReg : _uvFragmentReg);
+			code = getTexSampleCode(vo, temp, lightMapReg, _useSecondaryUV? _secondaryUVFragmentReg : _uvFragmentReg);
 
 			switch (_blendMode) {
 				case MULTIPLY:
