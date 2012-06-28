@@ -37,6 +37,9 @@
 			_orientation = orientation;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get orientation() : String
 		{
 			return _orientation;
@@ -48,6 +51,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get width() : Number
 		{
 			return _width;
@@ -59,6 +65,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get height() : Number
 		{
 			return _height;
@@ -71,6 +80,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get segmentsW() : int
 		{
 			return _segmentsW;
@@ -83,6 +95,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get segmentsH() : int
 		{
 			return _segmentsH;

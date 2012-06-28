@@ -39,6 +39,11 @@ package away3d.loaders
 		private var _useAssetLib : Boolean;
 		private var _assetLibId : String;
 		
+		/**
+		 * COMMENT : todo
+		 * @param	useAssetLibrary	COMMENT : todo
+		 * @param	assetLibraryId	COMMENT : todo
+		 */
 		public function Loader3D(useAssetLibrary : Boolean = true, assetLibraryId : String = null)
 		{
 			super();

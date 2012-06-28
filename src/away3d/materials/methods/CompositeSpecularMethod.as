@@ -114,6 +114,9 @@ package away3d.materials.methods
 			_baseSpecularMethod.activate(stage3DProxy);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 			_baseSpecularMethod.deactivate(stage3DProxy);
@@ -143,6 +146,9 @@ package away3d.materials.methods
 			return _baseSpecularMethod.needsNormals;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function get needsProjection() : Boolean
 		{
 			return _baseSpecularMethod.needsProjection || _needsProjection;
@@ -333,6 +339,9 @@ package away3d.materials.methods
 			_baseSpecularMethod.cleanCompilationData();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set shadowRegister(shadowReg : ShaderRegisterElement) : void
 		{
 			super.shadowRegister = shadowReg;

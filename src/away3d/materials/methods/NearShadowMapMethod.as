@@ -27,6 +27,11 @@ package away3d.materials.methods
 		private var _shadowMapper : NearDirectionalShadowMapper;
 		private var _light : LightBase;
 
+		/**
+		 * COMMENT : todo
+		 * @param	baseMethod	COMMENT : todo
+		 * @param	fadeRatio	COMMENT : todo
+		 */
 		public function NearShadowMapMethod(baseMethod : ShadowMapMethodBase, fadeRatio : Number = .1)
 		{
 			super(baseMethod.castingLight);
@@ -42,6 +47,9 @@ package away3d.materials.methods
 				throw new Error("NearShadowMapMethod requires a light that has a NearDirectionalShadowMapper instance assigned to shadowMapper.");
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function get alpha() : Number
 		{
 			return _baseMethod.alpha;
@@ -52,6 +60,9 @@ package away3d.materials.methods
 			_baseMethod.alpha = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function get epsilon() : Number
 		{
 			return _baseMethod.epsilon;
@@ -62,6 +73,9 @@ package away3d.materials.methods
 			_baseMethod.epsilon = value;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get fadeRatio() : Number
 		{
 			return _fadeRatio;
@@ -81,7 +95,9 @@ package away3d.materials.methods
 			_baseMethod.parentPass = value;
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function getFragmentCode(regCache : ShaderRegisterCache, targetReg : ShaderRegisterElement) : String
 		{
 			var code : String = _baseMethod.getFragmentCode(regCache, targetReg);
@@ -109,11 +125,17 @@ package away3d.materials.methods
 			_baseMethod.activate(stage3DProxy);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 			_baseMethod.deactivate(stage3DProxy);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function setRenderState(renderable : IRenderable, stage3DProxy : Stage3DProxy, camera : Camera3D) : void
 		{
 			var near : Number = camera.lens.near;
@@ -155,7 +177,9 @@ package away3d.materials.methods
 			_baseMethod.reset();
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function cleanCompilationData() : void
 		{
 			super.cleanCompilationData();
@@ -250,6 +274,9 @@ package away3d.materials.methods
 			return _needsNormals || _baseMethod.needsNormals;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function get needsProjection() : Boolean
 		{
 			return _needsProjection || _baseMethod.needsProjection;
@@ -279,11 +306,17 @@ package away3d.materials.methods
 			_baseMethod.secondaryUVFragmentReg = _secondaryUVFragmentReg = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override arcane function set viewDirFragmentReg(value : ShaderRegisterElement) : void
 		{
 			_baseMethod.viewDirFragmentReg = _viewDirFragmentReg = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set viewDirVaryingReg(value : ShaderRegisterElement) : void
 		{
 			_viewDirVaryingReg = _baseMethod.viewDirVaryingReg = value;

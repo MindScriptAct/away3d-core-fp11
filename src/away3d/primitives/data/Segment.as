@@ -26,6 +26,15 @@
 		arcane var _endG : Number;
 		arcane var _endB : Number;
 
+		/**
+		 * COMMENT : todo
+		 * @param	start		COMMENT : todo
+		 * @param	end			COMMENT : todo
+		 * @param	anchor		COMMENT : todo
+		 * @param	colorStart	COMMENT : todo
+		 * @param	colorEnd	COMMENT : todo
+		 * @param	thickness	COMMENT : todo
+		 */
 		public function Segment(start:Vector3D, end:Vector3D, anchor:Vector3D, colorStart:uint = 0x333333, colorEnd:uint = 0x333333, thickness:Number = 1):void
 		{
 			// TODO: not yet used: for CurveSegment support
@@ -40,6 +49,15 @@
 			endColor 	= colorEnd;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	start		COMMENT : todo
+		 * @param	end			COMMENT : todo
+		 * @param	anchor		COMMENT : todo
+		 * @param	colorStart	COMMENT : todo
+		 * @param	colorEnd	COMMENT : todo
+		 * @param	thickness	COMMENT : todo
+		 */
 		public function updateSegment(start:Vector3D, end:Vector3D, anchor:Vector3D, colorStart:uint = 0x333333, colorEnd:uint = 0x333333, thickness:Number = 1) : void
 		{
 			// TODO: not yet used: for CurveSegment support

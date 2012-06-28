@@ -54,6 +54,9 @@ package away3d.materials.utils
 			for (i = 0; i < _vertexConstantOffset; ++i) getFreeVertexConstant();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose() : void
 		{
 			_fragmentTempCache.dispose();

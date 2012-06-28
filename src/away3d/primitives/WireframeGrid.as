@@ -5,21 +5,24 @@
 	import flash.geom.Vector3D;
 
 	/**
-	* Class WireframeGrid generates a grid of lines on a given plane<code>WireframeGrid</code>
-	* @param	subDivision		[optional] uint . Default is 10;
-	* @param	gridSize				[optional] uint . Default is 100;
-	* @param	color					[optional] uint . Default is 0xFFFFFF;
-	* @param	thickness			[optional] Number . Default is 1;
-	* @param	plane					[optional] String . Default is PLANE_XZ;
-	* @param	worldPlanes		[optional] Boolean . Default is false.
-	* If true, class displays the 3 world planes, at 0,0,0. with subDivision, thickness and gridSize. Overrides color and plane settings.
-	*/
+	 * WireframeGrid generates a grid of lines on a given plane
+	 */
 	public class WireframeGrid extends SegmentSet
 	{
 		public static const PLANE_ZY:String = "zy";
 		public static const PLANE_XY:String = "xy";
 		public static const PLANE_XZ:String = "xz";
 		
+		/**
+		* Class WireframeGrid generates a grid of lines on a given plane<code>WireframeGrid</code>
+		* @param	subDivision		[optional] uint . Default is 10;
+		* @param	gridSize				[optional] uint . Default is 100;
+		* @param	color					[optional] uint . Default is 0xFFFFFF;
+		* @param	thickness			[optional] Number . Default is 1;
+		* @param	plane					[optional] String . Default is PLANE_XZ;
+		* @param	worldPlanes		[optional] Boolean . Default is false.
+		* If true, class displays the 3 world planes, at 0,0,0. with subDivision, thickness and gridSize. Overrides color and plane settings.
+		*/		
 		public function WireframeGrid(subDivision:uint = 10, gridSize:uint = 100, thickness:Number = 1, color:uint = 0xFFFFFF,  plane:String = "xz", worldPlanes:Boolean = false ) {
 			super();
 			

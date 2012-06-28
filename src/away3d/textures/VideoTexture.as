@@ -22,6 +22,15 @@ package away3d.textures
 		private var _player : IVideoPlayer;
 		private var _clippingRect : Rectangle;
 
+		/**
+		 * COMMENT : todo
+		 * @param	source			COMMENT : todo
+		 * @param	materialWidth	COMMENT : todo
+		 * @param	materialHeight	COMMENT : todo
+		 * @param	loop			COMMENT : todo
+		 * @param	autoPlay		COMMENT : todo
+		 * @param	player			COMMENT : todo
+		 */
 		public function VideoTexture(source : String, materialWidth : uint = 256, materialHeight : uint = 256, loop : Boolean = true, autoPlay : Boolean = false, player : IVideoPlayer = null)
 		{
 			_broadcaster = new Sprite();
@@ -72,6 +81,9 @@ package away3d.textures
 
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function dispose() : void
 		{
 			super.dispose();
@@ -83,6 +95,10 @@ package away3d.textures
 			_clippingRect = null;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	event
+		 */
 		private function autoUpdateHandler(event : Event) : void
 		{
 			update();
@@ -102,6 +118,9 @@ package away3d.textures
 			return _autoPlay;
 		}
 
+	   /**
+		* COMMENT : todo
+		*/
 		public function get materialWidth():uint
 		{
 			return _materialWidth;
@@ -114,6 +133,9 @@ package away3d.textures
 			_clippingRect.width = _materialWidth;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get materialHeight() : uint
 		{
 			return _materialHeight;
@@ -157,6 +179,9 @@ package away3d.textures
 				_broadcaster.removeEventListener(Event.ENTER_FRAME, autoUpdateHandler);
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get player():IVideoPlayer
 		{
 			return _player;

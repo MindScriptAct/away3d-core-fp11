@@ -20,6 +20,13 @@ package away3d.materials.methods
 		private var _lightMapIndex : int;
 		private var _blendMode : String;
 
+		/**
+		 * COMMENT : todo
+		 * @param	lightMap		COMMENT : todo
+		 * @param	blendMode		COMMENT : todo
+		 * @param	useSecondaryUV	COMMENT : todo
+		 * @param	baseMethod		COMMENT : todo
+		 */
 		public function LightMapDiffuseMethod(lightMap : Texture2DBase, blendMode : String = "multiply", useSecondaryUV : Boolean = false, baseMethod : BasicDiffuseMethod = null)
 		{
 			super(null, baseMethod);
@@ -30,6 +37,9 @@ package away3d.materials.methods
 			_texture = lightMap;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blendMode() : String
 		{
 			return _blendMode;
@@ -43,12 +53,18 @@ package away3d.materials.methods
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function reset() : void
 		{
 			super.reset();
 			_lightMapIndex = -1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get lightMapTexture() : Texture2DBase
 		{
 			return _texture;

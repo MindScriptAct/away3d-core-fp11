@@ -18,6 +18,11 @@ package away3d.textures
 		private var _specularMap : BitmapData;
 		private var _glossMap : BitmapData;
 
+		/**
+		 * COMMENT : todo
+		 * @param	specularMap		COMMENT : todo
+		 * @param	glossMap		COMMENT : todo
+		 */
 		public function SpecularBitmapTexture(specularMap : BitmapData = null, glossMap : BitmapData = null)
 		{
 			var bmd : BitmapData;
@@ -32,6 +37,9 @@ package away3d.textures
 			this.glossMap = glossMap;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get specularMap() : BitmapData
 		{
 			return _specularMap;
@@ -45,6 +53,9 @@ package away3d.textures
 			testSize();
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get glossMap() : BitmapData
 		{
 			return _glossMap;
@@ -98,6 +109,9 @@ package away3d.textures
 			super.uploadContent(texture);
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function dispose() : void
 		{
 			bitmapData.dispose();

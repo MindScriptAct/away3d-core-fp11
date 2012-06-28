@@ -22,7 +22,7 @@ package away3d.materials.methods
 		/**
 		 * Creates a new FresnelSpecularMethod object.
 		 * @param basedOnSurface Defines whether the fresnel effect should be based on the view angle on the surface (if true), or on the angle between the light and the view.
-		 * @param baseSpecularMethod
+		 * @param baseSpecularMethod	COMMENT : todo
 		 */
 		public function FresnelSpecularMethod(basedOnSurface : Boolean = true, baseSpecularMethod : BasicSpecularMethod = null)
 		{
@@ -35,6 +35,9 @@ package away3d.materials.methods
             _incidentLight = !basedOnSurface;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get fresnelPower() : Number
 		{
 			return _data[1];

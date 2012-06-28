@@ -11,6 +11,7 @@ package away3d.materials.methods
 	 */
 	public class AnisotropicSpecularMethod extends BasicSpecularMethod
 	{
+		/** constructor */
 		public function AnisotropicSpecularMethod()
 		{
 			super();

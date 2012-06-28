@@ -16,6 +16,15 @@ package away3d.textures
 	{
 		private var _bitmapDatas : Vector.<BitmapData>;
 
+		/**
+		 * COMMENT : todo
+		 * @param	posX	COMMENT : todo
+		 * @param	negX	COMMENT : todo
+		 * @param	posY	COMMENT : todo
+		 * @param	negY	COMMENT : todo
+		 * @param	posZ	COMMENT : todo
+		 * @param	negZ	COMMENT : todo
+		 */
 		public function BitmapCubeTexture(posX : BitmapData, negX : BitmapData, posY : BitmapData, negY : BitmapData, posZ : BitmapData, negZ : BitmapData)
 		{
 			super();

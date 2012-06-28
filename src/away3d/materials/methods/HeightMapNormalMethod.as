@@ -18,6 +18,13 @@ package away3d.materials.methods
 		private var _dataRegIndex : int;
 		private var _data : Vector.<Number>;
 
+		/**
+		 * COMMENT : todo
+		 * @param	heightMap	COMMENT : todo
+		 * @param	worldWidth	COMMENT : todo
+		 * @param	worldHeight	COMMENT : todo
+		 * @param	worldDepth	COMMENT : todo
+		 */
 		public function HeightMapNormalMethod(heightMap : Texture2DBase, worldWidth : Number, worldHeight : Number, worldDepth : Number)
 		{
 			super();

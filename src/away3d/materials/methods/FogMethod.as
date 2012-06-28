@@ -20,6 +20,12 @@ package away3d.materials.methods
 		private var _fogDataIndex : int;
 		private var _fogData : Vector.<Number>;
 
+		/**
+		 * COMMENT : todo
+		 * @param	minDistance	COMMENT : todo
+		 * @param	maxDistance	COMMENT : todo
+		 * @param	fogColor	COMMENT : todo
+		 */
 		public function FogMethod(minDistance : Number, maxDistance : Number, fogColor : uint = 0x808080)
 		{
 			super(false, true, false);
@@ -36,6 +42,9 @@ package away3d.materials.methods
 			_fogDataIndex = -1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get minDistance() : Number
 		{
 			return _minDistance;
@@ -48,6 +57,9 @@ package away3d.materials.methods
 			_fogData[5] = 1/(_maxDistance-_minDistance);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get maxDistance() : Number
 		{
 			return _maxDistance;
@@ -59,6 +71,9 @@ package away3d.materials.methods
 			_fogData[5] = 1/(_maxDistance-_minDistance);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get fogColor() : uint
 		{
 			return _fogColor;

@@ -51,11 +51,17 @@ package away3d.loaders.parsers
 		protected var _frameLimit : Number;
 		protected var _lastFrameTime : Number;
 		
+		/**
+		 * @inheritDoc 
+		 */
 		protected function getTextData():String
 		{
 			return ParserUtil.toString(_data);
 		}
 		
+		/**
+		 * @inheritDoc 
+		 */
 		protected function getByteData():ByteArray
 		{
 			return ParserUtil.toByteArray(_data);
@@ -109,22 +115,30 @@ package away3d.loaders.parsers
 			return isValid;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function set parsingFailure(b:Boolean) : void
 		{
 			_parsingFailure = b;
 		}
+		
 		public function get parsingFailure() : Boolean
 		{
 			return _parsingFailure;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get parsingPaused() : Boolean
 		{
 			return _parsingPaused;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get parsingComplete() : Boolean
 		{
 			return _parsingComplete;

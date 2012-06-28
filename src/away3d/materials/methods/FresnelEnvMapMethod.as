@@ -20,6 +20,11 @@ package away3d.materials.methods
 		private var _data : Vector.<Number>;
 		private var _dataIndex : int;
 
+		/**
+		 * COMMENT : todo
+		 * @param	envMap	COMMENT : todo
+		 * @param	alpha	COMMENT : todo
+		 */
 		public function FresnelEnvMapMethod(envMap : CubeTextureBase, alpha : Number = 1)
 		{
 			super(true, true, false);
@@ -31,6 +36,9 @@ package away3d.materials.methods
             _data[3] = 1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get fresnelPower() : Number
 		{
 			return _data[2];
@@ -68,6 +76,9 @@ package away3d.materials.methods
 		{
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get alpha() : Number
 		{
 			return _data[0];

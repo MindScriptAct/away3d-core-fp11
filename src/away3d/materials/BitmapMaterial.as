@@ -40,6 +40,9 @@
 			return _diffuseBMD;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function set bitmapData(value : BitmapData) : void
 		{
 			if (value == _diffuseBMD) return;
@@ -47,12 +50,18 @@
 			texture = BitmapTextureCache.getInstance().getTexture(value);
 			_diffuseBMD = value;
 		}
-
+		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function updateBitmapData() : void
 		{
 			texture.invalidateContent();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function get requiresBlending() : Boolean
 		{
 			return super.requiresBlending || _alphaBlending;

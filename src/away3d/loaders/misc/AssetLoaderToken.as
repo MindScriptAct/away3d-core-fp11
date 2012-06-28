@@ -27,6 +27,10 @@ package away3d.loaders.misc
 	{
 		arcane var _loader : AssetLoader;
 		
+		/**
+		 * COMMENT : todo
+		 * @param	loader	COMMENT : todo
+		 */
 		public function AssetLoaderToken(loader : AssetLoader)
 		{
 			super();

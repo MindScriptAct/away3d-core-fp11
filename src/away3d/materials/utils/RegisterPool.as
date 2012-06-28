@@ -99,6 +99,9 @@ package away3d.materials.utils
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose() : void
 		{
 			_vectorRegisters = null;

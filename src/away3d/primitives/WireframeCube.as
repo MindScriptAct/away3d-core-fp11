@@ -27,6 +27,9 @@
 			_depth = depth;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get width() : Number
 		{
 			return _width;
@@ -38,6 +41,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get height() : Number
 		{
 			return _height;
@@ -50,6 +56,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get depth() : Number
 		{
 			return _depth;

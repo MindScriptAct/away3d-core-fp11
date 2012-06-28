@@ -41,6 +41,10 @@ package away3d.materials.methods
 		protected var _usePoint : Boolean;
 
 
+		/**
+		 * COMMENT : todo
+		 * @param	castingLight	COMMENT : todo
+		 */
 		public function ShadowMapMethodBase(castingLight : LightBase)
 		{
 			_usePoint = castingLight is PointLight;
@@ -52,6 +56,9 @@ package away3d.materials.methods
 			_fragmentData = Vector.<Number>([1.0, 1/255.0, 1/65025.0, 1/16581375.0, eps, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1]);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get alpha() : Number
 		{
 			return 1-_fragmentData[5];
@@ -75,11 +82,17 @@ package away3d.materials.methods
 			_depthMapCoordReg = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get castingLight() : LightBase
 		{
 			return _castingLight;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get epsilon() : Number
 		{
 			return -_fragmentData[4];

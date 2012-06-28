@@ -26,7 +26,7 @@ package away3d.materials.methods
 		private var _detailTextureIndex : int;
 
 		/**
-		 *
+		 *COMMENT : todo
 		 * @param splatTextures An array of Texture2DProxyBase containing the detailed textures to be tiled.
 		 * @param blendData The texture containing the blending data. The red, green, and blue channels contain the blending values for each of the textures in splatTextures, respectively.
 		 * @param tileData The amount of times each splat texture needs to be tiled. The first entry in the array applies to the base texture, the others to the splats. If omitted, the default value of 50 is assumed for each.
@@ -46,6 +46,12 @@ package away3d.materials.methods
 			if (_numSplattingLayers > 3) throw new Error("More than 3 splatting layers is not supported!");
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	detail			COMMENT : todo
+		 * @param	tileData		COMMENT : todo
+		 * @param	blendFactors	COMMENT : todo
+		 */
 		public function setDetailTexture(detail : Texture2DBase = null, tileData  : Array = null, blendFactors : Array = null) : void
 		{
 			if (Boolean(detail) != Boolean(_detailTexture)) invalidateShaderProgram();
@@ -166,6 +172,9 @@ package away3d.materials.methods
 			}
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set alphaThreshold(value : Number) : void
 		{
 			if (value > 0)

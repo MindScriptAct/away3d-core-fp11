@@ -21,6 +21,11 @@ package away3d.materials.methods
 		private var _data : Vector.<Number>;
 		private var _dataRegIndex : int;
 
+		/**
+		 * COMMENT : todo
+		 * @param	waveMap1	COMMENT : todo
+		 * @param	waveMap2	COMMENT : todo
+		 */
 		public function SimpleWaterNormalMethod(waveMap1 : Texture2DBase, waveMap2 : Texture2DBase)
 		{
 			super();
@@ -29,6 +34,9 @@ package away3d.materials.methods
 			_data = Vector.<Number>([.5, 0, 0, 1, 0, 0, 0, 0]);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get water1OffsetX() : Number
 		{
 			return _data[4];
@@ -39,6 +47,9 @@ package away3d.materials.methods
 			_data[4] = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get water1OffsetY() : Number
 		{
 			return _data[5];
@@ -49,6 +60,9 @@ package away3d.materials.methods
 			_data[5] = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get water2OffsetX() : Number
 		{
 			return _data[6];
@@ -59,6 +73,9 @@ package away3d.materials.methods
 			_data[6] = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get water2OffsetY() : Number
 		{
 			return _data[7];
@@ -69,12 +86,18 @@ package away3d.materials.methods
 			_data[7] = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set normalMap(value : Texture2DBase) : void
 		{
 			if (!value) return;
 			super.normalMap = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get secondaryNormalMap() : Texture2DBase
 		{
 			return _texture2;
@@ -97,6 +120,9 @@ package away3d.materials.methods
 			_normalMapIndex2 = -1;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function dispose() : void
 		{
 			super.dispose();

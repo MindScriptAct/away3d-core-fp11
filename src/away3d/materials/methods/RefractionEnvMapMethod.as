@@ -26,6 +26,14 @@ package away3d.materials.methods
 		private var _useDispersion : Boolean;
 
 		// example values for dispersion: dispersionR : Number = -0.03, dispersionG : Number = -0.01, dispersionB : Number = .0015
+		/**
+		 * COMMENT : todo
+		 * @param	envMap			COMMENT : todo
+		 * @param	refractionIndex	COMMENT : todo
+		 * @param	dispersionR		COMMENT : todo
+		 * @param	dispersionG		COMMENT : todo
+		 * @param	dispersionB		COMMENT : todo
+		 */
 		public function RefractionEnvMapMethod(envMap : CubeTextureBase, refractionIndex : Number = .9, dispersionR : Number = 0, dispersionG : Number = 0, dispersionB : Number = 0)
 		{
 			super(true, true, false);
@@ -42,6 +50,9 @@ package away3d.materials.methods
 			_data[7] = 1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get refractionIndex() : Number
 		{
 			return _data[3];
@@ -55,6 +66,9 @@ package away3d.materials.methods
 			_data[3] = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get dispersionR() : Number
 		{
 			return _dispersionR;
@@ -72,6 +86,9 @@ package away3d.materials.methods
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get dispersionG() : Number
 		{
 			return _dispersionG;
@@ -89,6 +106,9 @@ package away3d.materials.methods
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get dispersionB() : Number
 		{
 			return _dispersionB;
@@ -113,6 +133,9 @@ package away3d.materials.methods
 			_cubeMapIndex = -1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get alpha() : Number
 		{
 			return _data[6];

@@ -88,6 +88,9 @@ package away3d.materials
 //			invalidatePasses(null);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assetType() : String
 		{
 			return AssetType.MATERIAL;
@@ -152,6 +155,9 @@ package away3d.materials
 			for (var i : int = 0; i < _numPasses; ++i) _passes[i].smooth = value;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get depthCompareMode() : String
 		{
 			return _depthCompareMode;

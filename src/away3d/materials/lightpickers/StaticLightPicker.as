@@ -14,11 +14,18 @@ package away3d.materials.lightpickers
 	{
 		private var _lights : Array;
 
+		/**
+		 * COMMENT : todo
+		 * @param	lights	COMMENT : todo
+		 */
 		public function StaticLightPicker(lights : Array)
 		{
 			this.lights = lights;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get lights() : Array
 		{
 			return _lights;

@@ -135,6 +135,7 @@ package away3d.materials.passes
 
 		/**
 		 * Creates a new DefaultScreenPass objects.
+		 * @param	material	COMMENT : todo
 		 */
 		public function DefaultScreenPass(material : MaterialBase)
 		{
@@ -149,6 +150,9 @@ package away3d.materials.passes
 			_normalMethod.parentPass = _diffuseMethod.parentPass = _specularMethod.parentPass = _ambientMethod.parentPass = this;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get animateUVs() : Boolean
 		{
 			return _animateUVs;
@@ -170,6 +174,9 @@ package away3d.materials.passes
 			super.mipmap = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get specularLightSources() : uint
 		{
 			return _specularLightSources;
@@ -180,6 +187,9 @@ package away3d.materials.passes
 			_specularLightSources = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get diffuseLightSources() : uint
 		{
 			return _diffuseLightSources;
@@ -243,6 +253,9 @@ package away3d.materials.passes
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function hasMethod(method : EffectMethodBase) : Boolean
 		{
 			return _methods.indexOf(method) >= 0;
@@ -262,11 +275,17 @@ package away3d.materials.passes
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function getMethodAt(index : int) : EffectMethodBase
 		{
 			return _methods[index];
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get numMethods() : int
 		{
 			return _methods.length;
@@ -298,9 +317,8 @@ package away3d.materials.passes
 		}
 
 		/**
-		 * @inheritDoc
+		 * COMMENT : todo 
 		 */
-
 		public function get normalMethod() : BasicNormalMethod
 		{
 			return _normalMethod;
@@ -317,6 +335,9 @@ package away3d.materials.passes
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get ambientMethod() : BasicAmbientMethod
 		{
 			return _ambientMethod;
@@ -333,6 +354,9 @@ package away3d.materials.passes
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get shadowMethod() : ShadowMapMethodBase
 		{
 			return _shadowMethod;

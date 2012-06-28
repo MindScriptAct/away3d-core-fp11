@@ -25,6 +25,13 @@ package away3d.materials.methods
 		private var _dataIndex : int;
 		private var _blend : String;
 
+		/**
+		 * COMMENT : todo
+		 * @param	color		COMMENT : todo
+		 * @param	strength	COMMENT : todo
+		 * @param	power		COMMENT : todo
+		 * @param	blend		COMMENT : todo
+		 */
 		public function RimLightMethod(color : uint = 0xffffff, strength : Number = .4, power : Number = 2, blend : String = "mix")
 		{
 			super(true, true, false);
@@ -42,6 +49,9 @@ package away3d.materials.methods
 			_dataIndex = -1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get color() : uint
 		{
 			return _color;
@@ -55,6 +65,9 @@ package away3d.materials.methods
 			_data[2] = (value & 0xff)/0xff;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get strength() : Number
 		{
 			return _data[4];
@@ -65,6 +78,9 @@ package away3d.materials.methods
 			_data[4] = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get power() : Number
 		{
 			return _data[5];

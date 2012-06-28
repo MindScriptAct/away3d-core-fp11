@@ -33,6 +33,9 @@ package away3d.materials.methods
 		}
 
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get levels() : uint
 		{
 			return _levels;

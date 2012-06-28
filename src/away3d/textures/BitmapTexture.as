@@ -20,6 +20,10 @@
 		private var _bitmapData : BitmapData;
 		private var _mipMapHolder : BitmapData;
 
+		/**
+		 * COMMENT : todo
+		 * @param	bitmapData	COMMENT : todo
+		 */
 		public function BitmapTexture(bitmapData : BitmapData)
 		{
 			super();
@@ -27,6 +31,9 @@
 			this.bitmapData = bitmapData;
 		}
 
+	   /**
+		* COMMENT : todo
+		*/
 		public function get bitmapData() : BitmapData
 		{
 			return _bitmapData;

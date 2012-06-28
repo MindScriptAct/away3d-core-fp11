@@ -200,6 +200,11 @@ package away3d.tools.helpers
 			}
 		}
 		
+		/**
+		 * COMMENT : todo
+		 * @param	mesh	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function hasDebug(mesh:Mesh):Boolean
 		{
 			return isMeshDebug(mesh)? true : false;

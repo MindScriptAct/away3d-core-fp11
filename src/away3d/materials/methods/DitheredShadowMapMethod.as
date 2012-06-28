@@ -26,6 +26,8 @@ package away3d.materials.methods
 
 		/**
 		 * Creates a new DitheredShadowMapMethod object.
+		 * @param	castingLight	COMMENT : todo
+		 * @param	highRes			COMMENT : todo
 		 */
 		public function DitheredShadowMapMethod(castingLight : DirectionalLight, highRes : Boolean = false)
 		{
@@ -47,6 +49,9 @@ package away3d.materials.methods
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get range() : Number
 		{
 			return _range;

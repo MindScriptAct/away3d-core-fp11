@@ -23,28 +23,42 @@ package away3d.textures
 		protected var _width : int;
 		protected var _height : int;
 
+		/** constructor */
 		public function TextureProxyBase()
 		{
 			_textures = new Vector.<TextureBase>(8);
 			_dirty = new Vector.<Boolean>(8);
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 */
 		public function get assetType() : String
 		{
 			return AssetType.TEXTURE;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get width() : int
 		{
 			return _width;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get height() : int
 		{
 			return _height;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getTextureForStage3D(stage3DProxy : Stage3DProxy) : TextureBase
 		{
 			var contextIndex : int = stage3DProxy._stage3DIndex;
@@ -73,6 +87,9 @@ package away3d.textures
 			_height = height;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function invalidateContent() : void
 		{
 			for (var i : int = 0; i < 8; ++i) {

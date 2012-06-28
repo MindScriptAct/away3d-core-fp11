@@ -111,7 +111,7 @@ package away3d.loaders.parsers
 		}
 
 		/**
-		 *
+		 * COMMENT : todo
 		 */
 		public function get animation() : SkeletonAnimation
 		{

@@ -239,58 +239,94 @@ package away3d.primitives
 			target.updateIndexData(indices);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get castsShadows() : Boolean
 		{
 			return false;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get uvTransform() : Matrix
 		{
 			return _uvTransform;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function getSecondaryUVBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return null;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function getCustomBuffer(stage3DProxy : Stage3DProxy) : VertexBuffer3D
 		{
 			return null;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get vertexBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get normalBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get tangentBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get UVBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get secondaryUVBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get vertexData():Vector.<Number> {
 			return _geometry.vertexData;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get indexData():Vector.<uint> {
 			return _geometry.indexData;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get UVData():Vector.<Number> {
 			return _geometry.UVData;
 		}

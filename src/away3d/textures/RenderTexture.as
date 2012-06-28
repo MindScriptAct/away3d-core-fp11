@@ -22,6 +22,9 @@
 			setSize(width, height);
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function set width(value : int) : void
 		{
 			if (value == _width) return;
@@ -33,6 +36,9 @@
 			setSize(value, _height);
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function set height(value : int) : void
 		{
 			if (value == _height) return;

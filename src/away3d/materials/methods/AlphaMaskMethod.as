@@ -18,6 +18,11 @@ package away3d.materials.methods
 		private var _texture : Texture2DBase;
 		private var _useSecondaryUV : Boolean;
 
+		/**
+		 * COMMENT : todo
+		 * @param	texture			COMMENT : todo
+		 * @param	useSecondaryUV	COMMENT : todo
+		 */
 		public function AlphaMaskMethod(texture : Texture2DBase, useSecondaryUV : Boolean = false)
 		{
 			super(true, true, false);
@@ -26,6 +31,9 @@ package away3d.materials.methods
 			_needsUV = !useSecondaryUV;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get useSecondaryUV() : Boolean
 		{
 			return _useSecondaryUV;
@@ -39,6 +47,9 @@ package away3d.materials.methods
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get texture() : Texture2DBase
 		{
 			return _texture;

@@ -50,6 +50,9 @@ package away3d.textures
 			new ShaderJob(shader, bitmapData).start(true);
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function dispose() : void
 		{
 			super.dispose();

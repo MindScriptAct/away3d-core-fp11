@@ -24,6 +24,14 @@ package away3d.materials
 		private var _clippingRect:Rectangle;
 		
 		
+		/**
+		 * COMMENT : todo
+		 * @param	source			COMMENT : todo
+		 * @param	materialSize	COMMENT : todo
+		 * @param	loop			COMMENT : todo
+		 * @param	autoPlay		COMMENT : todo
+		 * @param	player			COMMENT : todo
+		 */
 		public function VideoMaterial(source:String, materialSize:int = 256, loop:Boolean = true, autoPlay:Boolean = false, player:IVideoPlayer = null)
 		{
 			// used to capture the onEnterFrame event
@@ -77,7 +85,9 @@ package away3d.materials
 			
 		}
 		
-		
+		/**
+		 * @inheritDoc 
+		 */
 		override public function dispose():void
 		{
 			
@@ -108,7 +118,6 @@ package away3d.materials
 		 * @return int A valid size.
 		 * 
 		 */		
-		
 		public static function validateMaterialSize( size:int ):int
 		{
 			
@@ -197,11 +206,17 @@ package away3d.materials
 			}
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get autoUpdate():Boolean
 		{
 			return _autoUpdate;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get player():IVideoPlayer
 		{
 			return _player;

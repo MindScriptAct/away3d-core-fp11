@@ -21,6 +21,12 @@ package away3d.materials.methods
 
 		private var _blendMode : String;
 
+		/**
+		 * COMMENT : todo
+		 * @param	texture			COMMENT : todo
+		 * @param	blendMode		COMMENT : todo
+		 * @param	useSecondaryUV	COMMENT : todo
+		 */
 		public function LightMapMethod(texture : Texture2DBase, blendMode : String = "multiply", useSecondaryUV : Boolean = false)
 		{
 			super(false, !useSecondaryUV, false);
@@ -31,6 +37,9 @@ package away3d.materials.methods
 			_texture = texture;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blendMode() : String
 		{
 			return _blendMode;
@@ -44,12 +53,18 @@ package away3d.materials.methods
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function reset() : void
 		{
 			super.reset();
 			_lightMapIndex = -1;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get texture() : Texture2DBase
 		{
 			return _texture;
@@ -60,12 +75,18 @@ package away3d.materials.methods
 			_texture = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function activate(stage3DProxy : Stage3DProxy) : void
 		{
 			stage3DProxy.setTextureAt(_lightMapIndex, _texture.getTextureForStage3D(stage3DProxy));
 			super.activate(stage3DProxy);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function getFragmentCode(regCache : ShaderRegisterCache, targetReg : ShaderRegisterElement) : String
 		{
 			var code : String;

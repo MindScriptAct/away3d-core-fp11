@@ -36,6 +36,9 @@ package away3d.materials.methods
 			_baseDiffuseMethod.dispose();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
         override public function get alphaThreshold() : Number
         {
             return _baseDiffuseMethod.alphaThreshold;
@@ -140,6 +143,9 @@ package away3d.materials.methods
 			_baseDiffuseMethod.activate(stage3DProxy);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 			_baseDiffuseMethod.deactivate(stage3DProxy);
@@ -177,7 +183,9 @@ package away3d.materials.methods
 			_baseDiffuseMethod.reset();
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function cleanCompilationData() : void
 		{
 			super.cleanCompilationData();
@@ -272,6 +280,9 @@ package away3d.materials.methods
 			return _baseDiffuseMethod.needsNormals || _needsNormals;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function get needsProjection() : Boolean
 		{
 			return _baseDiffuseMethod.needsProjection || _needsProjection;
@@ -309,17 +320,25 @@ package away3d.materials.methods
 			return _viewDirFragmentReg;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override arcane function set viewDirFragmentReg(value : ShaderRegisterElement) : void
 		{
 			_baseDiffuseMethod.viewDirFragmentReg = _viewDirFragmentReg = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set viewDirVaryingReg(value : ShaderRegisterElement) : void
 		{
 			_viewDirVaryingReg = _baseDiffuseMethod.viewDirVaryingReg = value;
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		arcane override function set projectionReg(value : ShaderRegisterElement) : void
 		{
 			_projectionReg = _baseDiffuseMethod.projectionReg = value;
@@ -341,14 +360,18 @@ package away3d.materials.methods
 			_baseDiffuseMethod.normalFragmentReg = _normalFragmentReg = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set shadowRegister(shadowReg : ShaderRegisterElement) : void
 		{
-
 			super.shadowRegister = shadowReg;
 			_baseDiffuseMethod.shadowRegister = shadowReg;
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set tangentVaryingReg(tangentVaryingReg : ShaderRegisterElement) : void
 		{
 			super.tangentVaryingReg = tangentVaryingReg;

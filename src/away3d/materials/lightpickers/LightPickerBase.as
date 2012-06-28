@@ -53,26 +53,41 @@ package away3d.materials.lightpickers
 			return _numLightProbes;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get pointLights() : Vector.<PointLight>
 		{
 			return _pointLights;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get directionalLights() : Vector.<DirectionalLight>
 		{
 			return _directionalLights;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get lightProbes() : Vector.<LightProbe>
 		{
 			return _lightProbes;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get lightProbeWeights() : Vector.<Number>
 		{
 			return _lightProbeWeights;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get allPickedLights() : Vector.<LightBase>
 		{
 			return _allPickedLights;

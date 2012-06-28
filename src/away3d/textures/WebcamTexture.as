@@ -21,6 +21,15 @@ package away3d.textures
 		private var _playing : Boolean;
 		private var _autoUpdate : Boolean;
 		
+		/**
+		 * COMMENT : todo
+		 * @param	cameraWidth		COMMENT : todo
+		 * @param	cameraHeight	COMMENT : todo
+		 * @param	materialSize	COMMENT : todo
+		 * @param	autoStart		COMMENT : todo
+		 * @param	camera			COMMENT : todo
+		 * @param	smoothing		COMMENT : todo
+		 */
 		public function WebcamTexture( cameraWidth : uint = 320, cameraHeight : uint = 240, materialSize : uint = 256, autoStart : Boolean = true, camera : Camera = null, smoothing : Boolean = true )
 		{
 			_materialSize  = validateMaterialSize( materialSize );

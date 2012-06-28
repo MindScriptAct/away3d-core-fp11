@@ -16,6 +16,13 @@ package away3d.materials.methods
 	{
 		private var _outlinePass : OutlinePass;
 
+		/**
+		 * COMMENT : todo
+		 * @param	outlineColor	COMMENT : todo
+		 * @param	outlineSize		COMMENT : todo
+		 * @param	showInnerLines	COMMENT : todo
+		 * @param	dedicatedMeshes	COMMENT : todo
+		 */
 		public function OutlineMethod(outlineColor : uint = 0x000000,  outlineSize : Number = 1, showInnerLines : Boolean = true, dedicatedMeshes : Boolean = false)
 		{
 			super(true, false, false);
@@ -24,6 +31,9 @@ package away3d.materials.methods
 			_passes.push(_outlinePass);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get showInnerLines() : Boolean
 		{
 			return _outlinePass.showInnerLines;
@@ -34,6 +44,9 @@ package away3d.materials.methods
 			_outlinePass.showInnerLines = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get outlineColor() : uint
 		{
 			return _outlinePass.outlineColor;
@@ -44,6 +57,9 @@ package away3d.materials.methods
 			_outlinePass.outlineColor = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get outlineSize() : Number
 		{
 			return _outlinePass.outlineSize;

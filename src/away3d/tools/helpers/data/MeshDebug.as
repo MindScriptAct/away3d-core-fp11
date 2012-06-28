@@ -17,11 +17,20 @@ package away3d.tools.helpers.data
 		private const VERTEXNORMALS : uint = 1;
 		private const TANGENTS : uint = 2;
 		 
+		/**
+		 * COMMENT : todo
+		 */
 		public function clearAll():void
 		{
 			super.removeAllSegments();
 		}
 		
+		/**
+		 * COMMENT : todo
+		 * @param	mesh	COMMENT : todo
+		 * @param	color	COMMENT : todo
+		 * @param	length	COMMENT : todo
+		 */
 		public function displayNormals(mesh:Mesh, color:uint = 0xFF3399 , length:Number = 30):void
 		{
 			var geometry:Geometry = mesh.geometry;
@@ -72,11 +81,23 @@ package away3d.tools.helpers.data
 			}
 		}
 		
+		/**
+		 * COMMENT : todo
+		 * @param	mesh	COMMENT : todo
+		 * @param	color	COMMENT : todo
+		 * @param	length	COMMENT : todo
+		 */
 		public function displayVertexNormals(mesh:Mesh, color:uint = 0x66CCFF, length:Number = 30):void
 		{
 			build(mesh, VERTEXNORMALS , color, length);
 		}
 		
+		/**
+		 * COMMENT : todo
+		 * @param	mesh	COMMENT : todo
+		 * @param	color	COMMENT : todo
+		 * @param	length	COMMENT : todo
+		 */
 		public function displayTangents(mesh:Mesh, color:uint = 0xFFCC00, length:Number = 30):void
 		{
 			build(mesh, TANGENTS, color, length);

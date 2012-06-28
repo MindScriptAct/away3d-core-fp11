@@ -55,6 +55,9 @@ package away3d.materials.methods
 			_uvVarying = null;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get mode() : String
 		{
 			return _mode;
@@ -67,6 +70,9 @@ package away3d.materials.methods
 			invalidateShaderProgram();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get projector() : TextureProjector
 		{
 			return _projector;

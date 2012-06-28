@@ -48,19 +48,25 @@ package away3d.loaders.misc
 		{
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get url() : String
 		{
 			return _req? _req.url : '';
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get data() : *
 		{
 			return _data;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get loadAsRawData() : Boolean
 		{
 			return _loadAsRawData;

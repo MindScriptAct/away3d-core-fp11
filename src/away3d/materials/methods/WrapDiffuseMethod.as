@@ -55,6 +55,9 @@ package away3d.materials.methods
 			_scatterTextureRegister = null;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get wrapFactor() : Number
 		{
 			return _wrapData[0];

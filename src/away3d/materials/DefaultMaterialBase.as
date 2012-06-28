@@ -63,6 +63,9 @@
 			super.activateForDepth(stage3DProxy, camera, distanceBased);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get specularLightSources() : uint
 		{
 			return _screenPass.specularLightSources;
@@ -73,6 +76,9 @@
 			_screenPass.specularLightSources = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get diffuseLightSources() : uint
 		{
 			return _screenPass.diffuseLightSources;
@@ -183,16 +189,25 @@
 			_screenPass.addMethod(method);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get numMethods() : int
 		{
 			return _screenPass.numMethods;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function hasMethod(method : EffectMethodBase) : Boolean
 		{
 			return _screenPass.hasMethod(method);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function getMethodAt(index : int) : EffectMethodBase
 		{
 			return _screenPass.getMethodAt(index);

@@ -18,6 +18,7 @@ package away3d.materials.methods
 		protected var _normalMapIndex : int = -1;
 		protected var _normalTextureRegister : ShaderRegisterElement;
 
+		/** constructor */
 		public function BasicNormalMethod()
 		{
 			super(false, false, false);
@@ -46,6 +47,9 @@ package away3d.materials.methods
 			return Boolean(_texture);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get normalMap() : Texture2DBase
 		{
 			return _texture;
@@ -69,6 +73,9 @@ package away3d.materials.methods
 			_normalMapIndex = -1;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function dispose() : void
 		{
 			if (_texture) _texture = null;

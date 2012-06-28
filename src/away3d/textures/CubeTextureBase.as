@@ -18,6 +18,9 @@ package away3d.textures
 			super();
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get size() : int
 		{
 			return _width;

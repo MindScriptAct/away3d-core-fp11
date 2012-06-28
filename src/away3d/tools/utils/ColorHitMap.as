@@ -132,14 +132,16 @@ package away3d.tools.utils
 		}
 		
 		/**
-		* The offsetX, offsetY
-		* by default offsetX and offsetY represent the center of the map.
+		* by default offsetX represent the center of the map.
 		*/
 		public function set offsetX(value:Number):void
         {
 			_offsetX = value;
         }
 		
+		/**
+		* by default offsetY represent the center of the map.
+		*/		
 		public function set offsetY(value:Number):void
         {
 			_offsetY = value;
@@ -156,13 +158,16 @@ package away3d.tools.utils
         }
 		
 		/**
-		* defines the  scaleX and scaleY. Defines the ratio map to the 3d world
+		* scaleX defines the ratio map to the 3d world
 		*/
 		public function set scaleX(value:Number):void
         {
 			_scaleX = value;
         }
 		
+		/**
+		* scaleY befines the ratio map to the 3d world
+		*/		
 		public function set scaleY(value:Number):void
         {
 			_scaleY = value;

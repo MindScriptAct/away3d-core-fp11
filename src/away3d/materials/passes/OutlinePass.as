@@ -77,6 +77,9 @@ package away3d.materials.passes
 			delete _dedicatedMeshes[keySubMesh];
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function dispose() : void
 		{
 			super.dispose();
@@ -88,6 +91,9 @@ package away3d.materials.passes
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get showInnerLines() : Boolean
 		{
 			return _showInnerLines;
@@ -98,6 +104,9 @@ package away3d.materials.passes
 			_showInnerLines = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get outlineColor() : uint
 		{
 			return _outlineColor;
@@ -110,7 +119,10 @@ package away3d.materials.passes
 			_colorData[1] = ((value >> 8) & 0xff) / 0xff;
 			_colorData[2] = (value & 0xff) / 0xff;
 		}
-
+		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get outlineSize() : Number
 		{
 			return _offsetData[0];

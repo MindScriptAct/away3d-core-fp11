@@ -13,6 +13,7 @@ package away3d.textures
 	 */
 	public class Texture2DBase extends TextureProxyBase
 	{
+		/** constructor */
 		public function Texture2DBase()
 		{
 			super();

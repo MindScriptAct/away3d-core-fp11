@@ -30,6 +30,7 @@ package away3d.materials.utils
 		private var _lastVolume:Number;
 		private var _container:Sprite;
 		
+		/** constructor */
 		public function SimpleVideoPlayer()
 		{
 			
@@ -79,6 +80,9 @@ package away3d.materials.utils
 		// public methods
 		//////////////////////////////////////////////////////
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function play():void
 		{
 			
@@ -102,6 +106,9 @@ package away3d.materials.utils
 			}
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function pause():void
 		{
 			if(!_paused)
@@ -111,6 +118,9 @@ package away3d.materials.utils
 			}
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function seek(val:Number):void
 		{
 			pause();
@@ -118,6 +128,9 @@ package away3d.materials.utils
 			_ns.resume();
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function stop():void
 		{
 			_ns.close();
@@ -126,6 +139,9 @@ package away3d.materials.utils
 		}
 
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose():void
 		{
 			
@@ -228,6 +244,9 @@ package away3d.materials.utils
 		//////////////////////////////////////////////////////
 		
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get source():String
 		{
 			return _src;
@@ -239,6 +258,9 @@ package away3d.materials.utils
 			if(_playing) _ns.play(_src);
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get loop():Boolean
 		{
 			return _loop;
@@ -249,6 +271,9 @@ package away3d.materials.utils
 			_loop = val;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get volume():Number
 		{
 			return _ns.soundTransform.volume;
@@ -261,6 +286,9 @@ package away3d.materials.utils
 			_lastVolume = val;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get pan():Number
 		{
 			return _ns.soundTransform.pan;
@@ -272,6 +300,9 @@ package away3d.materials.utils
 			_ns.soundTransform = _soundTransform;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get mute():Boolean
 		{
 			return _ns.soundTransform.volume == 0;
@@ -283,6 +314,9 @@ package away3d.materials.utils
 			_ns.soundTransform = _soundTransform;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get soundTransform():SoundTransform
 		{
 			return _ns.soundTransform;
@@ -293,6 +327,9 @@ package away3d.materials.utils
 			_ns.soundTransform = val;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get width():int
 		{
 			return _video.width;
@@ -303,6 +340,9 @@ package away3d.materials.utils
 			_video.width = val;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get height():int
 		{
 			return _video.height;
@@ -318,21 +358,33 @@ package away3d.materials.utils
 		// read-only vars
 		//////////////////////////////////////////////////////
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get container():Sprite
 		{
 			return _container;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get time():Number
 		{
 			return _ns.time;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get playing():Boolean
 		{
 			return _playing;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get paused():Boolean
 		{
 			return _paused;

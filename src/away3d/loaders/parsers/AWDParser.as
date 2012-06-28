@@ -15,6 +15,7 @@ package away3d.loaders.parsers
 	{
 		private var _parser : ParserBase;
 		
+		/** constructor */
 		public function AWDParser()
 		{
 			super(ParserDataFormat.BINARY);

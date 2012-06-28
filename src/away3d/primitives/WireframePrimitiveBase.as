@@ -17,6 +17,11 @@ package away3d.primitives
 		private var _color : uint;
 		private var _thickness : Number;
 
+		/**
+		 * COMMENT : todo
+		 * @param	color		COMMENT : todo
+		 * @param	thickness	COMMENT : todo
+		 */
 		public function WireframePrimitiveBase(color : uint = 0xffffff, thickness : Number = 1)
 		{
 			if(thickness <= 0) thickness = 1;
@@ -24,6 +29,9 @@ package away3d.primitives
 			_thickness = thickness;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get color() : uint
 		{
 			return _color;
@@ -39,6 +47,9 @@ package away3d.primitives
 				_segments[i].startColor = _segments[i].endColor = value;
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function get thickness() : Number
 		{
 			return _thickness;
@@ -54,17 +65,26 @@ package away3d.primitives
 				_segments[i].thickness = _segments[i].thickness = value;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function removeAllSegments() : void
 		{
 			super.removeAllSegments();
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function pushModelViewProjection(camera : Camera3D) : void
 		{
 			if (_geomDirty) updateGeometry();
 			super.pushModelViewProjection(camera);
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override public function get bounds() : BoundingVolumeBase
 		{
 			if (_geomDirty) updateGeometry();

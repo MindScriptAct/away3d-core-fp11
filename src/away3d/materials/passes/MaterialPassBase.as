@@ -67,6 +67,7 @@ package away3d.materials.passes
 
 		/**
 		 * Creates a new MaterialPassBase object.
+		 * @param	renderToTexture COMMENT : todo
 		 */
 		public function MaterialPassBase(renderToTexture : Boolean = false)
 		{
@@ -147,6 +148,10 @@ package away3d.materials.passes
 			_bothSides = value;
 		}
 		
+		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get depthCompareMode() : String
 		{
 			return _depthCompareMode;

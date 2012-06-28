@@ -21,6 +21,7 @@
 		private var _alphaThreshold : Number = 0;
 		private var _alphaMask : Texture2DBase;
 
+		/** constructor */
 		public function DepthMapPass()
 		{
 			super();
@@ -52,6 +53,9 @@
 			_data[8] = _alphaThreshold;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get alphaMask() : Texture2DBase
 		{
 			return _alphaMask;

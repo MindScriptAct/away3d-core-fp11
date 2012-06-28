@@ -87,6 +87,13 @@ package away3d.loaders.parsers
  			super(ParserDataFormat.PLAIN_TEXT);
 		}
 		 
+		
+		/**
+		 * COMMENT : todo
+		 * @param	name	COMMENT : todo
+		 * @param	clone	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getGeometryByName(name : String, clone : Boolean = false) : Geometry
 		{
 			if (!_geometries)

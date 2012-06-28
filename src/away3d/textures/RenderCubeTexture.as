@@ -22,6 +22,9 @@
 			setSize(size, size);
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function set size(value : int) : void
 		{
 			if (value == _width) return;

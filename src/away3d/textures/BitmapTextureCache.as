@@ -15,6 +15,10 @@ package away3d.textures
 		private var _textures : Dictionary;
 		private var _usages : Dictionary;
 
+		/**
+		 * COMMENT : todo
+		 * @param	singletonEnforcer	COMMENT : todo
+		 */
 		public function BitmapTextureCache(singletonEnforcer : SingletonEnforcer)
 		{
 			if (!singletonEnforcer) throw new Error("Cannot instantiate a singleton class. Use static getInstance instead.");
@@ -23,11 +27,20 @@ package away3d.textures
 			_usages = new Dictionary();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public static function getInstance() : BitmapTextureCache
 		{
 			return _instance ||= new BitmapTextureCache(new SingletonEnforcer());
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	bitmapData	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getTexture(bitmapData : BitmapData) : BitmapTexture
 		{
 			var texture : BitmapTexture;
@@ -40,6 +53,10 @@ package away3d.textures
 			return _textures[bitmapData];
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	texture	COMMENT : todo
+		 */
 		public function freeTexture(texture : BitmapTexture) : void
 		{
 			_usages[texture]--;

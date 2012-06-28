@@ -13,6 +13,12 @@ package away3d.materials.methods
 	 */
 	public class EffectMethodBase extends ShadingMethodBase
 	{
+		/**
+		 * COMMENT : todo
+		 * @param	needsNormals	COMMENT : todo
+		 * @param	needsView		COMMENT : todo
+		 * @param	needsGlobalPos	COMMENT : todo
+		 */
 		public function EffectMethodBase(needsNormals : Boolean, needsView : Boolean, needsGlobalPos : Boolean)
 		{
 			super(needsNormals, needsView, needsGlobalPos);

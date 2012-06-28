@@ -67,6 +67,9 @@ package away3d.tools.utils{
 			init();
 		}
 		
+		/**
+		 * COMMENT : todo
+		 */
 		public function get object3d():ObjectContainer3D
 		{
 			return _object3d;

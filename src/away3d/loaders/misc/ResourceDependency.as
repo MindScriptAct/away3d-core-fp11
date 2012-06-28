@@ -35,19 +35,25 @@
 			_assets = new Vector.<IAsset>;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get id() : String
 		{
 			return _id;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assets() : Vector.<IAsset>
 		{
 			return _assets;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get request() : URLRequest
 		{
 			return _req;

@@ -228,6 +228,9 @@ package away3d.materials.methods
 			_globalPosReg = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		arcane function get projectionReg() : ShaderRegisterElement
 		{
 			return _projectionReg;
@@ -280,6 +283,9 @@ package away3d.materials.methods
 			_viewDirFragmentReg = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get viewDirVaryingReg() : ShaderRegisterElement
 		{
 			return _viewDirVaryingReg;
@@ -378,6 +384,9 @@ package away3d.materials.methods
 		{
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get tangentVaryingReg() : ShaderRegisterElement
 		{
 			return _tangentVaryingReg;
