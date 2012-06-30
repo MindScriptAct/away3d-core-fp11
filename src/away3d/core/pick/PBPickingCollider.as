@@ -27,6 +27,19 @@ package away3d.core.pick
 		private var u:Number, v:Number, w:Number;
 		
 		/**
+		 * Creates a new <code>PBPickingCollider</code> object.
+		 * 
+		 * @param findClosestCollision Determines whether the picking collider searches for the closest collision along the ray. Defaults to false.
+		 */
+		public function PBPickingCollider( findClosestCollision:Boolean = false )
+		{
+			_findClosestCollision = findClosestCollision;
+			
+			_kernelOutputBuffer = new Vector.<Number>();
+			_rayTriangleKernel = new Shader( new RayTriangleKernelClass() as ByteArray );
+		}
+		
+		/**
 		 * @inheritDoc
 		 */
 		override public function setLocalRay(localPosition:Vector3D, localDirection:Vector3D):void
@@ -36,19 +49,6 @@ package away3d.core.pick
 			//update ray
 			_rayTriangleKernel.data.rayStartPoint.value = [ rayPosition.x, rayPosition.y, rayPosition.z ];
 			_rayTriangleKernel.data.rayDirection.value = [ rayDirection.x, rayDirection.y, rayDirection.z ];
-		}
-		
-		/**
-		 * Creates a new <code>PBPickingCollider</code> object.
-		 * 
-		 * @param findClosestCollision Determines whether the picking collider searches for the closesst collision along the ray. Defaults to false.
-		 */
-		public function PBPickingCollider( findClosestCollision:Boolean = false )
-		{
-			_findClosestCollision = findClosestCollision;
-			
-			_kernelOutputBuffer = new Vector.<Number>();
-			_rayTriangleKernel = new Shader( new RayTriangleKernelClass() as ByteArray );
 		}
 		
 		/**
@@ -88,7 +88,7 @@ package away3d.core.pick
 			
 			// run kernel.
 			var shaderJob:ShaderJob = new ShaderJob( _rayTriangleKernel, _kernelOutputBuffer, indexBufferDims.x, indexBufferDims.y );
-			shaderJob.start( true ); // TODO: use false and listen for completion
+			shaderJob.start( true ); // TODO: performance test, use false and listen for completion? affects the whole picking system
 
 			// find a proper collision from pb's output
 			var i:uint;
@@ -110,7 +110,7 @@ package away3d.core.pick
 			// Detect collision
 			if( collisionTriangleIndex >= 0 ) {
 				
-				pickingCollisionVO.collisionT = shortestCollisionDistance;
+				pickingCollisionVO.rayEntryDistance = shortestCollisionDistance;
 				cx = rayPosition.x + shortestCollisionDistance * rayDirection.x;
 				cy = rayPosition.y + shortestCollisionDistance * rayDirection.y;
 				cz = rayPosition.z + shortestCollisionDistance * rayDirection.z;
@@ -121,7 +121,6 @@ package away3d.core.pick
 				u = 1.0 - v - w;
 				pickingCollisionVO.uv = getCollisionUV( indexData, uvData, collisionTriangleIndex, v, w, u );
 				
-				// does not search for closest collision, first found will do... // TODO: add option of finding best triangle hit?
 				return true;
 			}
 			
