@@ -25,6 +25,11 @@ package away3d.filters.tasks
 		private var _focusDistance : Number;
 		private var _range : Number = 1000;
 
+		/**
+		 * Constructor
+		 * @param	maxBlurX	COMMENT : todo
+		 * @param	maxBlurY	COMMENT : todo
+		 */
 		public function Filter3DDepthOfFFieldTask(maxBlurX : uint = 3, maxBlurY : uint = 3)
 		{
 			super(true);
@@ -33,6 +38,9 @@ package away3d.filters.tasks
 			_data = Vector.<Number>([0, 0, 0, _focusDistance, 0, 0, 0, 0, _range, 0, 0, 0, 1.0, 1 / 255.0, 1 / 65025.0, 1 / 16581375.0]);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get range() : Number
 		{
 			return _range;
@@ -44,7 +52,9 @@ package away3d.filters.tasks
 			_data[8] = value;
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get focusDistance() : Number
 		{
 			return _focusDistance;
@@ -55,6 +65,9 @@ package away3d.filters.tasks
 			_data[3] = _focusDistance = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get maxBlurX() : uint
 		{
 			return _maxBlurX;
@@ -72,6 +85,9 @@ package away3d.filters.tasks
 			updateBlurData();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get maxBlurY() : uint
 		{
 			return _maxBlurY;
@@ -131,6 +147,9 @@ package away3d.filters.tasks
 			return code;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera : Camera3D, depthTexture : Texture) : void
 		{
 			var context : Context3D = stage3DProxy._context3D;
@@ -144,6 +163,9 @@ package away3d.filters.tasks
 			context.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 0, _data, 4);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 			stage3DProxy.setTextureAt(1, null);

@@ -123,6 +123,9 @@
 			invalidateGeometry();
 		}
  
+		/**
+		 * The width of the terrain plane.
+		 */
         public function get height() : Number
         {
             return _height;

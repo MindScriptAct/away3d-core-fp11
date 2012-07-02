@@ -58,6 +58,7 @@ package away3d.events
 		
 		/**
 		 * Creates a copy of the Object3DEvent object and sets the value of each property to match that of the original.
+		 * @return		A new object that is identical to the original.
 		 */
         public override function clone():Event
         {

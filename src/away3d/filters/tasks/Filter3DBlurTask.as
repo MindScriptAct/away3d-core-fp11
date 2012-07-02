@@ -20,6 +20,11 @@ package away3d.filters.tasks
 		private var _stepY : Number = 1;
 		private var _numSamples : uint;
 
+		/**
+		 * Constructor
+		 * @param	blurX	COMMENT : todo
+		 * @param	blurY	COMMENT : todo
+		 */
 		public function Filter3DBlurTask(blurX : uint = 3, blurY : uint = 3)
 		{
 			super();
@@ -28,6 +33,9 @@ package away3d.filters.tasks
 			_data = Vector.<Number>([0, 0, 0, 1, 0, 0, 0, 0]);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurX() : uint
 		{
 			return _blurX;
@@ -44,6 +52,9 @@ package away3d.filters.tasks
 			updateBlurData();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurY() : uint
 		{
 			return _blurY;
@@ -89,6 +100,9 @@ package away3d.filters.tasks
 			return code;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera3D : Camera3D, depthTexture : Texture) : void
 		{
 			// TODO: not used

@@ -32,7 +32,9 @@ package away3d.library.assets
 			_bitmapData = value;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assetType() : String
 		{
 			return AssetType.TEXTURE;

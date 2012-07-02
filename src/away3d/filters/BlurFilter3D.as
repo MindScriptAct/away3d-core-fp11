@@ -9,6 +9,11 @@ package away3d.filters
 	{
 		private var _blurTask : Filter3DBlurTask;
 
+		/**
+		 * Constructor
+		 * @param	blurX	COMMENT : todo
+		 * @param	blurY	COMMENT : todo
+		 */
 		public function BlurFilter3D(blurX : uint = 3, blurY : uint = 3)
 		{
 			super();
@@ -16,6 +21,9 @@ package away3d.filters
 			addTask(_blurTask);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurX() : uint
 		{
 			return _blurTask.blurX;
@@ -26,6 +34,9 @@ package away3d.filters
 			_blurTask.blurX = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurY() : uint
 		{
 			return _blurTask.blurY;

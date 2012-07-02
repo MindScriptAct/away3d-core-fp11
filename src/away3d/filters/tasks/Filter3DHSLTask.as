@@ -18,12 +18,18 @@ package away3d.filters.tasks
 		private var _b:Number = 1;
 		private var _g:Number = 1;
 		
+		/**
+		 * Constructor
+		 */
 		public function Filter3DHSLTask()
 		{
 			super();
 			updateConstants();
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get saturation():Number
 		{
 			return _saturation;
@@ -37,6 +43,9 @@ package away3d.filters.tasks
 			updateConstants();
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get r():Number
 		{
 			return _r;
@@ -50,6 +59,9 @@ package away3d.filters.tasks
 			updateConstants();
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get b():Number
 		{
 			return _b;
@@ -63,6 +75,9 @@ package away3d.filters.tasks
 			updateConstants();
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get g():Number
 		{
 			return _g;
@@ -125,6 +140,9 @@ package away3d.filters.tasks
 				"mov oc, ft0			        \n";
 		}
 		
+		/**
+		 * @inheritDoc 
+		 */		
 		override public function activate(stage3DProxy : Stage3DProxy, camera3D : Camera3D, depthTexture : Texture) : void
 		{
 			stage3DProxy.context3D.setProgramConstantsFromVector(Context3DProgramType.FRAGMENT, 0, _rgbData, 2);

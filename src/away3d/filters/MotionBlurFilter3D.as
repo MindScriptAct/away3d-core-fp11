@@ -13,6 +13,10 @@ package away3d.filters
 		private var _compositeTask : Filter3DXFadeCompositeTask;
 		private var _copyTask : Filter3DDoubleBufferCopyTask;
 
+		/**
+		 * Constructor
+		 * @param	strength	COMMENT : todo
+		 */
 		public function MotionBlurFilter3D(strength : Number = .65)
 		{
 			super();
@@ -23,6 +27,9 @@ package away3d.filters
 			addTask(_copyTask);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get strength() : Number
 		{
 			return _compositeTask.amount;
@@ -33,6 +40,9 @@ package away3d.filters
 			_compositeTask.amount = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function update(stage : Stage3DProxy, camera : Camera3D) : void
 		{
 			// TODO: not used

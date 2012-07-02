@@ -40,6 +40,12 @@ package away3d.events
 		private var _asset : IAsset;
 		private var _prevName : String;
 		
+		/**
+		 * Constructor
+		 * @param 	type 		The event type.
+		 * @param	asset		COMMENT : todo
+		 * @param	prevName	COMMENT : todo
+		 */
 		public function AssetEvent(type : String, asset : IAsset = null, prevName : String = null)
 		{
 			super(type);
@@ -48,19 +54,26 @@ package away3d.events
 			_prevName = prevName || (_asset? _asset.name : null);
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get asset() : IAsset
 		{
 			return _asset;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assetPrevName() : String
 		{
 			return _prevName;
 		}
 		
-		
+		/**
+		 * Duplicates an instance
+		 * @return	A new object that is identical to the original.
+		 */
 		public override function clone() : Event
 		{
 			return new AssetEvent(type, asset, assetPrevName);

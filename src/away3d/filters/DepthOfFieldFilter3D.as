@@ -15,6 +15,11 @@ package away3d.filters
 		private var _dofTask : Filter3DDepthOfFFieldTask;
 		private var _focusTarget : ObjectContainer3D;
 
+		/**
+		 * COMMENT : todo
+		 * @param	maxBlurX	COMMENT : todo
+		 * @param	maxBlurY	COMMENT : todo
+		 */
 		public function DepthOfFieldFilter3D(maxBlurX : uint = 3, maxBlurY : uint = 3)
 		{
 			super();
@@ -22,6 +27,9 @@ package away3d.filters
 			addTask(_dofTask);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get focusTarget() : ObjectContainer3D
 		{
 			return _focusTarget;
@@ -32,6 +40,9 @@ package away3d.filters
 			_focusTarget = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get focusDistance() : Number
 		{
 			return _dofTask.focusDistance;
@@ -42,6 +53,9 @@ package away3d.filters
 			_dofTask.focusDistance = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get range() : Number
 		{
 			return _dofTask.range;
@@ -52,6 +66,9 @@ package away3d.filters
 			_dofTask.range = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get maxBlurX() : uint
 		{
 			return _dofTask.maxBlurX;
@@ -62,6 +79,9 @@ package away3d.filters
 			_dofTask.maxBlurX = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get maxBlurY() : uint
 		{
 			return _dofTask.maxBlurY;
@@ -72,7 +92,9 @@ package away3d.filters
 			_dofTask.maxBlurY = value;
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		override public function update(stage : Stage3DProxy, camera : Camera3D) : void
 		{
 			// TODO: not used

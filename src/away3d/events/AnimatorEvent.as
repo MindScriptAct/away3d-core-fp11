@@ -30,8 +30,9 @@ package away3d.events
 
 		/**
 		 * Create a new GeometryEvent
-		 * @param type The event type.
-		 * @param subGeometry An optional SubGeometry object that is the subject of this event.
+		 * @param	type 		The event type.
+		 * @param	animator	COMMENT : todo
+		 * @param	subGeometry An optional SubGeometry object that is the subject of this event.
 		 */
 		public function AnimatorEvent(type : String, animator : AnimatorBase, sequence : AnimationSequenceBase = null) : void
 		{

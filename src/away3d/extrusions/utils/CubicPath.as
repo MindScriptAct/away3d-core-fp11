@@ -24,6 +24,9 @@ package away3d.extrusions.utils
 			_worldAxis = new Vector3D(0.0, 1.0, 0.0);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function set pointData(data:Vector.<Vector3D>):void
 		{
 			_segments = new Vector.<IPathSegment>();
@@ -41,42 +44,57 @@ package away3d.extrusions.utils
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get length():uint
 		{
 			return _segments.length;
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get segments():Vector.<IPathSegment>
 		{
 			return _segments;
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get worldAxis():Vector3D
 		{
 			return _worldAxis;
 		}
-
 
 		public function set worldAxis(value:Vector3D):void
 		{
 			_worldAxis = value;
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function getSegmentAt(index:uint):IPathSegment
 		{
 			return _segments[index];
 		}
 
-
+		/**
+		 * COMMENT : todo
+		 * @param	segment	COMMENT : todo
+		 */
 		public function add(segment:IPathSegment):void
 		{
 			_segments.push(segment);
 		}
 
-
+		/**
+		 * COMMENT : todo
+		 * @param	index	COMMENT : todo
+		 * @param	join	COMMENT : todo
+		 */
 		public function remove(index:uint, join:Boolean = false):void
 		{
 			if (_segments.length == 0 || index >= _segments.length - 1)
@@ -119,6 +137,9 @@ package away3d.extrusions.utils
 				_segments = new Vector.<IPathSegment>();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose():void
 		{
 			while (_segments.length > 0)

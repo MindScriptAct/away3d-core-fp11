@@ -16,6 +16,10 @@ package away3d.filters.tasks
 		private var _data : Vector.<Number>;
 		private var _overlayTexture : TextureBase;
 
+		/**
+		 * Constructor
+		 * @param	amount	COMMENT : todo
+		 */
 		public function Filter3DXFadeCompositeTask(amount : Number)
 		{
 			super();
@@ -24,6 +28,9 @@ package away3d.filters.tasks
 			_data = Vector.<Number>([ amount, 0, 0, 0 ]);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get overlayTexture() : TextureBase
 		{
 			return _overlayTexture;
@@ -34,6 +41,9 @@ package away3d.filters.tasks
 			_overlayTexture = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get amount() : Number
 		{
 			return _data[0];
@@ -54,6 +64,9 @@ package away3d.filters.tasks
 					"add oc, ft1, ft0				\n";
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera3D : Camera3D, depthTexture : Texture) : void
 		{
 			// TODO: not used
@@ -64,6 +77,9 @@ package away3d.filters.tasks
 			stage3DProxy.setTextureAt(1, _overlayTexture);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 			stage3DProxy.setTextureAt(1, null);

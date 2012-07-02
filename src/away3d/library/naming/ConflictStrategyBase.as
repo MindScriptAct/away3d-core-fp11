@@ -24,6 +24,9 @@ package away3d.library.naming
 	public class ConflictStrategyBase
 	{
 		
+		/**
+		 * Constructor
+		 */
 		public function ConflictStrategyBase()
 		{
 		}

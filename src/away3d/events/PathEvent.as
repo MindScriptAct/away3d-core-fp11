@@ -16,6 +16,10 @@
 		/** Dispatched when the time pointer enters a new PathSegment */
 		public static const CHANGE_SEGMENT:String = "change_segment";
     	 
+		/**
+		 * Constructor
+		 * @param	type	The event type.
+		 */
         public function PathEvent(type:String)
         {
             super(type);

@@ -20,6 +20,10 @@ package away3d.library.assets
 		
 		public static const DEFAULT_NAMESPACE : String = 'default';
 		
+		/**
+		 * Constructor
+		 * @param	name	COMMENT : todo
+		 */
 		public function NamedAssetBase(name : String=null)
 		{
 			if (name == null)
@@ -42,7 +46,9 @@ package away3d.library.assets
 			return _originalName;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get name() : String
 		{
 			return _name;
@@ -62,7 +68,9 @@ package away3d.library.assets
 				dispatchEvent(new AssetEvent(AssetEvent.ASSET_RENAME, IAsset(this), prev));
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assetNamespace() : String
 		{
 			return _namespace;
@@ -74,13 +82,23 @@ package away3d.library.assets
 			return _full_path;
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 * @param	name	COMMENT : todo
+		 * @param	ns		COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function assetPathEquals(name : String, ns : String) : Boolean
 		{
 			return (_name == name && (!ns || _namespace==ns));
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 * @param	name				COMMENT : todo
+		 * @param	ns					COMMENT : todo
+		 * @param	overrideOriginal	COMMENT : todo
+		 */
 		public function resetAssetPath(name : String, ns : String = null, overrideOriginal : Boolean = true) : void
 		{
 			_name = name? name : 'null';

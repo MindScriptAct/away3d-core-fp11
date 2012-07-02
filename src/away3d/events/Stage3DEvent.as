@@ -14,6 +14,12 @@ package away3d.events
 		/** COMMENT : todo */
 		public static const CONTEXT3D_RECREATED : String = "Context3DRecreated";
 
+		/**
+		 * Constructor
+		 * @param	type		The event type.
+		 * @param	bubbles		Determines whether the Event object participates in the bubbling stage of the event flow.
+		 * @param	cancelable	Determines whether the Event object can be canceled.
+		 */
 		public function Stage3DEvent(type : String, bubbles : Boolean = false, cancelable : Boolean = false)
 		{
 			super(type, bubbles, cancelable);

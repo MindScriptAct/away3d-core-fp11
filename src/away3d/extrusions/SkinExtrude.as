@@ -42,15 +42,15 @@ package away3d.extrusions
 		private var _flip:Boolean;
 		
 		/*
-		* Class SkinExtrude generates (and becomes) a mesh from a multidimentional vector of vector3D's . <code>SkinExtrude</code>
-		*@param	material			MaterialBase. The SkinExtrude (Mesh) material
-		*@param	profiles			Vector.&;t;Vector.&lt;Vector3D&gt;&gt; Multidimentional vector of vectors holding the vector3d's defining the shape. &lt; &lt;va0, va1&gt;, &lt;vb0, vb1&gt; &gt;
-		*@param	subdivision		[optional] uint. The _subdivision between vectors. Default is 1.
-		*@param	centerMesh	[optional] Boolean. If the final mesh must be _centerMeshed. Default is false.
-		*@param	closeShape		[optional] Boolean. If the last vector must be linked to the first vector. Default is false.
-		*@param	coverAll			[optional] Boolean. If the mapping is stretched over the entire mesh or from vector to vector. Default is false.
-		*@param	flip				[optional] Boolean. If the faces need to be inverted. Default is false.
-		*/
+		 * Class SkinExtrude generates (and becomes) a mesh from a multidimentional vector of vector3D's . <code>SkinExtrude</code>
+		 * @param	material			MaterialBase. The SkinExtrude (Mesh) material
+		 * @param	profiles			Vector.&;t;Vector.&lt;Vector3D&gt;&gt; Multidimentional vector of vectors holding the vector3d's defining the shape. &lt; &lt;va0, va1&gt;, &lt;vb0, vb1&gt; &gt;
+		 * @param	subdivision		[optional] uint. The _subdivision between vectors. Default is 1.
+		 * @param	centerMesh	[optional] Boolean. If the final mesh must be _centerMeshed. Default is false.
+		 * @param	closeShape		[optional] Boolean. If the last vector must be linked to the first vector. Default is false.
+		 * @param	coverAll			[optional] Boolean. If the mapping is stretched over the entire mesh or from vector to vector. Default is false.
+		 * @param	flip				[optional] Boolean. If the faces need to be inverted. Default is false.
+		 */
         public function SkinExtrude(material : MaterialBase, profiles:Vector.<Vector.<Vector3D>>, subdivision:uint = 1, centerMesh:Boolean = false, closeShape:Boolean = false, coverAll:Boolean = false, flip:Boolean = false)
         {
 		 	var geom : Geometry = new Geometry();
@@ -150,6 +150,9 @@ package away3d.extrusions
 			}
     	}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get subdivision():Number
     	{
     		return _subdivision;

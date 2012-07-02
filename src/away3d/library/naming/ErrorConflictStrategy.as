@@ -7,6 +7,9 @@ package away3d.library.naming
 	 */
 	public class ErrorConflictStrategy extends ConflictStrategyBase
 	{
+		/**
+		 * Constructor
+		 */
 		public function ErrorConflictStrategy()
 		{
 			super();

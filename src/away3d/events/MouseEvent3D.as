@@ -172,6 +172,7 @@ package away3d.events
 
 		/**
 		 * Creates a copy of the MouseEvent3D object and sets the value of each property to match that of the original.
+		 * @return	A new object that is identical to the original.
 		 */
 		public override function clone() : Event
 		{
@@ -197,6 +198,9 @@ package away3d.events
 			return result;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get scenePosition():Vector3D {
 			if( object is ObjectContainer3D ) {
 				return ObjectContainer3D( object ).sceneTransform.transformVector( localPosition );
@@ -206,6 +210,9 @@ package away3d.events
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get sceneNormal():Vector3D {
 			if( object is ObjectContainer3D ) {
 				var sceneNormal:Vector3D = ObjectContainer3D( object ).sceneTransform.deltaTransformVector( localNormal );

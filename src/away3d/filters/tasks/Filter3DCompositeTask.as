@@ -17,6 +17,11 @@ package away3d.filters.tasks
 		private var _overlayTexture : TextureBase;
 		private var _blendMode : String;
 
+		/**
+		 * COMMENT : todo
+		 * @param	blendMode	COMMENT : todo
+		 * @param	exposure	COMMENT : todo
+		 */
 		public function Filter3DCompositeTask(blendMode : String, exposure : Number = 1)
 		{
 			super();
@@ -24,6 +29,9 @@ package away3d.filters.tasks
 			_blendMode = blendMode;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get overlayTexture() : TextureBase
 		{
 			return _overlayTexture;
@@ -34,6 +42,9 @@ package away3d.filters.tasks
 			_overlayTexture = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get exposure() : Number
 		{
 			return _data[0];
@@ -43,7 +54,6 @@ package away3d.filters.tasks
 		{
 			_data[0] = value;
 		}
-
 
 		override protected function getFragmentCode() : String
 		{
@@ -76,6 +86,9 @@ package away3d.filters.tasks
 			return code;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera3D : Camera3D, depthTexture : Texture) : void
 		{
 			// TODO: not used
@@ -86,6 +99,9 @@ package away3d.filters.tasks
 			stage3DProxy.setTextureAt(1, _overlayTexture);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 			stage3DProxy.setTextureAt(1, null);

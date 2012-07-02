@@ -12,13 +12,22 @@ package away3d.library.utils
 		
 		private var _idx : uint;
 		
+		/**
+		 * Constructor
+		 * @param	assets				COMMENT : todo
+		 * @param	assetTypeFilter		COMMENT : todo
+		 * @param	namespaceFilter		COMMENT : todo
+		 * @param	filterFunc			COMMENT : todo
+		 */
 		public function AssetLibraryIterator(assets : Vector.<IAsset>, assetTypeFilter : String, namespaceFilter : String, filterFunc : Function)
 		{
 			_assets = assets;
 			filter(assetTypeFilter, namespaceFilter, filterFunc);
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get currentAsset() : IAsset
 		{
 			// Return current, or null if no current
@@ -26,14 +35,18 @@ package away3d.library.utils
 				_filtered[_idx] : null;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get numAssets() : uint
 		{
 			return _filtered.length;
 		}
 		
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function next() : IAsset
 		{
 			var next : IAsset = null;
@@ -46,13 +59,18 @@ package away3d.library.utils
 			return next;
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 */
 		public function reset() : void
 		{
 			_idx = 0;
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 * @param	index	COMMENT : todo
+		 */
 		public function setIndex(index : uint) : void
 		{
 			_idx = index;

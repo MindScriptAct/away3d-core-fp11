@@ -13,6 +13,10 @@ package away3d.library.naming
 		private var _separator : String;
 		private var _next_suffix : Object;
 		
+		/**
+		 * Constructor
+		 * @param	separator	COMMENT : todo
+		 */
 		public function NumSuffixConflictStrategy(separator : String = '.')
 		{
 			super();

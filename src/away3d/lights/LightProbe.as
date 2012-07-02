@@ -35,6 +35,9 @@ package away3d.lights
 			return new LightProbeNode(this);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get diffuseMap() : CubeTextureBase
 		{
 			return _diffuseMap;
@@ -45,6 +48,9 @@ package away3d.lights
 			_diffuseMap = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get specularMap() : CubeTextureBase
 		{
 			return _specularMap;

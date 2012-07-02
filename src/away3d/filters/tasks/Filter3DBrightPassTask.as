@@ -15,6 +15,10 @@ package away3d.filters.tasks
 		private var _brightPassData : Vector.<Number>;
 		private var _threshold : Number;
 
+		/**
+		 * Constructor
+		 * @param	threshold	COMMENT : todo
+		 */
 		public function Filter3DBrightPassTask(threshold : Number = .75)
 		{
 			super();
@@ -22,6 +26,9 @@ package away3d.filters.tasks
 			_brightPassData = Vector.<Number>([threshold, 1/(1-threshold), 0, 0]);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get threshold() : Number
 		{
 			return _threshold;
@@ -34,6 +41,9 @@ package away3d.filters.tasks
 			_brightPassData[1] = 1/(1-value);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override protected function getFragmentCode() : String
 		{
 			return 	"tex ft0, v0, fs0 <2d,linear,clamp>	\n" +
@@ -46,6 +56,9 @@ package away3d.filters.tasks
 					"mov oc, ft0					\n";
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera3D : Camera3D, depthTexture : Texture) : void
 		{
 			// TODO: not used

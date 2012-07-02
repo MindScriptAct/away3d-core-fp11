@@ -28,7 +28,11 @@ package away3d.events
 		*/
 		public static const READY_FOR_DEPENDENCIES : String = 'readyForDependencies';
 		
-		
+		/**
+		 * Constructor
+		 * @param	type		The event type.
+		 * @param	message		COMMENT : todo
+		 */
 		public function ParserEvent(type:String, message : String='')
 		{
 			super(type);
@@ -46,7 +50,10 @@ package away3d.events
 		}
 		
 		
-		
+		/**
+		 * Duplicates an instance
+		 * @return	A new object that is identical to the original.
+		 */
 		public override function clone() : Event
 		{
 			return new ParserEvent(type, message);

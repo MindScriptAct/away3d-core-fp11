@@ -19,11 +19,17 @@ package away3d.filters.tasks
 	{
 		private var _secondaryInputTexture : Texture;
 
+		/**
+		 * Constructor
+		 */
 		public function Filter3DDoubleBufferCopyTask()
 		{
 			super();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get secondaryInputTexture() : Texture
 		{
 			return _secondaryInputTexture;
@@ -48,6 +54,9 @@ package away3d.filters.tasks
 			dummy.dispose();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera : Camera3D, depthTexture : Texture) : void
 		{
 			swap();

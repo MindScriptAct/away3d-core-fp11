@@ -24,6 +24,9 @@ package away3d.lights.shadowmaps
 		private var _lenses : Vector.<PerspectiveLens>;
 		private var _needsRender : Vector.<Boolean>;
 
+		/**
+		 * Constructor
+		 */
 		public function CubeMapShadowMapper()
 		{
 			super();

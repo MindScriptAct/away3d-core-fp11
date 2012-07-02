@@ -23,6 +23,10 @@ package away3d.lights.shadowmaps
 		private var _mtx : Matrix3D = new Matrix3D();
 		private var _coverageRatio : Number;
 
+		/**
+		 * Constructor
+		 * @param	coverageRatio	COMMENT : todo
+		 */
 		public function NearDirectionalShadowMapper(coverageRatio : Number = .5)
 		{
 			super();

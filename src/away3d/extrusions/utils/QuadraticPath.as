@@ -255,6 +255,11 @@ package away3d.extrusions.utils
 			}
         }
         
+		/**
+		 * COMMENT : todo
+		 * @param	points	COMMENT : todo
+		 * @param	closed	COMMENT : todo
+		 */
   		public function continuousCurve(points:Vector.<Vector3D>, closed:Boolean = false):void
   		{
   			var aVectors:Vector.<Vector3D> = new Vector.<Vector3D>();
@@ -304,6 +309,9 @@ package away3d.extrusions.utils
   		}
 
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function set pointData(aVectors:Vector.<Vector3D>):void
 		{
 			if(aVectors.length < 3)
@@ -316,7 +324,9 @@ package away3d.extrusions.utils
 				_segments.push( new QuadraticPathSegment(aVectors[i], aVectors[i+1], aVectors[i+2]));
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get worldAxis():Vector3D
 		{
 			return _worldAxis;
@@ -332,6 +342,9 @@ package away3d.extrusions.utils
 			removeSegment(index, join);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose():void
 		{
 			var i:uint = 0;

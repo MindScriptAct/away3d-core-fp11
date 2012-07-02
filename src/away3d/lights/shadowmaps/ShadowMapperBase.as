@@ -29,6 +29,9 @@ package away3d.lights.shadowmaps
 		protected var _light : LightBase;
 		private var _explicitDepthMap : Boolean;
 
+		/** 
+		 * Constructor 
+		 */
 		public function ShadowMapperBase()
 		{
 			_casterCollector = new ShadowCasterCollector();
@@ -46,6 +49,9 @@ package away3d.lights.shadowmaps
 			_explicitDepthMap = depthMap? true : false;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get light() : LightBase
 		{
 			return _light;
@@ -56,11 +62,17 @@ package away3d.lights.shadowmaps
 			_light = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get depthMap() : TextureProxyBase
 		{
 			return _depthMap ||= createDepthTexture();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get depthMapSize() : uint
 		{
 			return _depthMapSize;
@@ -80,6 +92,9 @@ package away3d.lights.shadowmaps
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose() : void
 		{
 			_casterCollector = null;

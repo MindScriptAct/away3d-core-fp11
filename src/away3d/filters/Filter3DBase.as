@@ -16,11 +16,17 @@ package away3d.filters
 		private var _textureWidth : int;
 		private var _textureHeight : int;
 
+		/**
+		 * Constructor
+		 */
 		public function Filter3DBase()
 		{
 			_tasks = new Vector.<Filter3DTaskBase>();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get requireDepthRender() : Boolean
 		{
 			return _requireDepthRender;
@@ -32,16 +38,27 @@ package away3d.filters
 			_requireDepthRender ||= filter.requireDepthRender;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get tasks() : Vector.<Filter3DTaskBase>
 		{
 			return _tasks;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return					COMMENT : todo
+		 */
 		public function getMainInputTexture(stage3DProxy : Stage3DProxy) : Texture
 		{
 			return _tasks[0].getMainInputTexture(stage3DProxy);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get textureWidth() : int
 		{
 			return _textureWidth;
@@ -55,6 +72,9 @@ package away3d.filters
 				_tasks[i].textureWidth = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get textureHeight() : int
 		{
 			return _textureHeight;
@@ -68,6 +88,11 @@ package away3d.filters
 		}
 
 		// link up the filters correctly with the next filter
+		/**
+		 * COMMENT : todo
+		 * @param	target			COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 */
 		public function setRenderTargets(target : Texture, stage3DProxy : Stage3DProxy) : void
 		{
 			// TODO: not used
@@ -75,12 +100,20 @@ package away3d.filters
 			_tasks[_tasks.length-1].target = target;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose() : void
 		{
 			for (var i : int = 0; i < _tasks.length; ++i)
 				_tasks[i].dispose();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage	COMMENT : todo
+		 * @param	camera	COMMENT : todo
+		 */
 		public function update(stage : Stage3DProxy, camera : Camera3D) : void
 		{
 

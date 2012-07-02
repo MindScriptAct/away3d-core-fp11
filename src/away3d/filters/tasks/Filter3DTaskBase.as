@@ -32,11 +32,18 @@ package away3d.filters.tasks
 		private var _requireDepthRender : Boolean;
 		protected var _textureScale : int = 0;
 
+		/**
+		 * COMMENT : todo
+		 * @param	requireDepthRender	COMMENT : todo
+		 */
 		public function Filter3DTaskBase(requireDepthRender : Boolean = false)
 		{
 			_requireDepthRender = requireDepthRender;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get textureScale() : int
 		{
 			return _textureScale;
@@ -51,6 +58,9 @@ package away3d.filters.tasks
 			_textureDimensionsInvalid = true;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get target() : Texture
 		{
 			return _target;
@@ -61,6 +71,9 @@ package away3d.filters.tasks
 			_target = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get textureWidth() : int
 		{
 			return _textureWidth;
@@ -74,6 +87,9 @@ package away3d.filters.tasks
 			_textureDimensionsInvalid = true;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get textureHeight() : int
 		{
 			return _textureHeight;
@@ -87,6 +103,11 @@ package away3d.filters.tasks
 			_textureDimensionsInvalid = true;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getMainInputTexture(stage : Stage3DProxy) : Texture
 		{
 			if (_textureDimensionsInvalid) updateTextures(stage);
@@ -94,17 +115,27 @@ package away3d.filters.tasks
 			return _mainInputTexture;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose() : void
 		{
 			if (_mainInputTexture) _mainInputTexture.dispose();
 			if (_program3D) _program3D.dispose();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		protected function invalidateProgram3D() : void
 		{
 			_program3DInvalid = true;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage	COMMENT : todo
+		 */
 		protected function updateProgram3D(stage : Stage3DProxy) : void
 		{
 			if (_program3D) _program3D.dispose();
@@ -114,18 +145,28 @@ package away3d.filters.tasks
 			_program3DInvalid = false;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		protected function getVertexCode() : String
 		{
 			return 	"mov op, va0\n"+
 					"mov v0, va1";
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		protected function getFragmentCode() : String
 		{
 			throw new AbstractMethodError();
 			return null;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage	COMMENT : todo
+		 */
 		protected function updateTextures(stage : Stage3DProxy) : void
 		{
 			if (_mainInputTexture) _mainInputTexture.dispose();
@@ -135,20 +176,38 @@ package away3d.filters.tasks
 			_textureDimensionsInvalid = false;
 		}
 
+		/**
+		 * Constructor
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getProgram3D(stage3DProxy : Stage3DProxy) : Program3D
 		{
 			if (_program3DInvalid) updateProgram3D(stage3DProxy);
 			return _program3D;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @param	camera			COMMENT : todo
+		 * @param	depthTexture	COMMENT : todo
+		 */
 		public function activate(stage3DProxy : Stage3DProxy, camera : Camera3D, depthTexture : Texture) : void
 		{
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 */
 		public function deactivate(stage3DProxy : Stage3DProxy) : void
 		{
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get requireDepthRender() : Boolean
 		{
 			return _requireDepthRender;

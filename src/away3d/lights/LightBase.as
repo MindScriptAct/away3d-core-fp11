@@ -45,13 +45,15 @@ package away3d.lights
 
 		/**
 		 * Create a new LightBase object.
-		 * @param positionBased Indicates whether or not the light has a valid position, or is "infinite" such as a DirectionalLight.
 		 */
 		public function LightBase()
 		{
 			super();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get castsShadows() : Boolean
 		{
 			return _castsShadows;
@@ -143,6 +145,9 @@ package away3d.lights
 			updateAmbient();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get ambientColor() : uint
 		{
 			return _ambientColor;
@@ -204,6 +209,9 @@ package away3d.lights
 			_diffuseB = _colorB*_diffuse;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get shadowMapper() : ShadowMapperBase
 		{
 			return _shadowMapper;

@@ -29,7 +29,7 @@ package away3d.extrusions.utils
 		public var end:Vector3D;
 
 		/**
-		 *
+		 * Constructor
 		 * @param start The first anchor point.
 		 * @param control1 The first control point.
 		 * @param control2 The second control point.
@@ -43,12 +43,17 @@ package away3d.extrusions.utils
 			this.end = end;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function toString():String
 		{
 			return start + ", " + control1 + ", " + control2 + ", " + end;
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function dispose():void
 		{
 			start = control1 = control2 = end = null;

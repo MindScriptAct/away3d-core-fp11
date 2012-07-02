@@ -28,6 +28,15 @@ package away3d.filters.tasks
 		private var _cx:Number = 0.5;
 		private var _cy:Number = 0.5;
 
+		/**
+		 * Constructor
+		 * @param	intensity	COMMENT : todo
+		 * @param	glowGamma	COMMENT : todo
+		 * @param	blurStart	COMMENT : todo
+		 * @param	blurWidth	COMMENT : todo
+		 * @param	cx			COMMENT : todo
+		 * @param	cy			COMMENT : todo
+		 */
 		public function Filter3DRadialBlurTask(intensity:Number = 1.0, glowGamma:Number = 1.0, blurStart:Number = 1.0, blurWidth:Number = -0.3, cx:Number = 0.5, cy:Number = 0.5)
 		{
 			super();
@@ -51,7 +60,9 @@ package away3d.filters.tasks
 			_data[5] = _cy;
 		}
 
-
+		/**
+		 * @inheritDoc 
+		 */
 		override protected function getVertexCode() : String
 		{
 			return 	"mov op, va0\n"+
@@ -60,6 +71,9 @@ package away3d.filters.tasks
 					"mov v0, vt0";
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override protected function getFragmentCode() : String
 		{
 			var code : String;
@@ -113,6 +127,9 @@ package away3d.filters.tasks
 			return code;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get intensity() : Number
 		{
 			return _intensity;
@@ -124,6 +141,9 @@ package away3d.filters.tasks
 			resetUniforms();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get glowGamma() : Number
 		{
 			return _glowGamma;
@@ -135,6 +155,9 @@ package away3d.filters.tasks
 			resetUniforms();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurStart() : Number
 		{
 			return _blurStart;
@@ -146,6 +169,9 @@ package away3d.filters.tasks
 			resetUniforms();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurWidth() : Number
 		{
 			return _blurWidth;
@@ -157,6 +183,9 @@ package away3d.filters.tasks
 			resetUniforms();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get cx() : Number
 		{
 			return _cx;
@@ -168,6 +197,9 @@ package away3d.filters.tasks
 			resetUniforms();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get cy() : Number
 		{
 			return _cy;
@@ -179,6 +211,9 @@ package away3d.filters.tasks
 			resetUniforms();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function activate(stage3DProxy : Stage3DProxy, camera3D : Camera3D, depthTexture : Texture) : void
 		{
 			// TODO: not used

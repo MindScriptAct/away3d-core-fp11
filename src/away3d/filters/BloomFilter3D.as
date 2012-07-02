@@ -18,6 +18,14 @@ package away3d.filters
 		private var _blurTask : Filter3DBlurTask;
 		private var _compositeTask : Filter3DCompositeTask;
 
+		/**
+		 * Constructor
+		 * @param	blurX		COMMENT : todo
+		 * @param	blurY		COMMENT : todo
+		 * @param	threshold	COMMENT : todo
+		 * @param	exposure	COMMENT : todo
+		 * @param	quality		COMMENT : todo
+		 */
 		public function BloomFilter3D(blurX : uint = 15, blurY : uint = 15, threshold : Number = .75, exposure : Number = 3, quality : int = 3)
 		{
 			super();
@@ -35,6 +43,9 @@ package away3d.filters
 			addTask(_compositeTask);
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function setRenderTargets(mainTarget : Texture, stage3DProxy : Stage3DProxy) : void
 		{
 			_brightPassTask.target = _blurTask.getMainInputTexture(stage3DProxy);
@@ -45,6 +56,9 @@ package away3d.filters
 			super.setRenderTargets(mainTarget, stage3DProxy);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get exposure() : Number
 		{
 			return _compositeTask.exposure;
@@ -55,6 +69,9 @@ package away3d.filters
 			_compositeTask.exposure = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurX() : uint
 		{
 			return _blurTask.blurX;
@@ -65,6 +82,9 @@ package away3d.filters
 			_blurTask.blurX = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blurY() : uint
 		{
 			return _blurTask.blurY;
@@ -75,6 +95,9 @@ package away3d.filters
 			_blurTask.blurY = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get threshold() : Number
 		{
 			return _brightPassTask.threshold;

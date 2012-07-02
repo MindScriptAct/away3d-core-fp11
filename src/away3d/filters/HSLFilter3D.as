@@ -9,6 +9,13 @@ package away3d.filters
 	{
 		private var _hslTask:Filter3DHSLTask;
 		
+		/**
+		 * Constructor
+		 * @param	saturation	COMMENT : todo
+		 * @param	r			COMMENT : todo
+		 * @param	g			COMMENT : todo
+		 * @param	b			COMMENT : todo
+		 */
 		public function HSLFilter3D(saturation:Number = 1,r:Number = 1,g:Number = 1,b:Number = 1)
 		{
 			super();
@@ -21,6 +28,9 @@ package away3d.filters
 			addTask(_hslTask);
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get saturation():Number
 		{
 			return _hslTask.saturation;
@@ -32,6 +42,9 @@ package away3d.filters
 			_hslTask.saturation = value;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get r():Number
 		{
 			return _hslTask.r;
@@ -43,6 +56,9 @@ package away3d.filters
 			_hslTask.r = value;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get b():Number
 		{
 			return _hslTask.b;
@@ -54,6 +70,9 @@ package away3d.filters
 			_hslTask.b = value;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get g():Number
 		{
 			return _hslTask.g;

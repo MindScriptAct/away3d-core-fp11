@@ -26,6 +26,9 @@ package away3d.lights.shadowmaps
 		private var _matrix : Matrix3D;
 		private var _depthLens : FreeMatrixLens;
 
+		/**
+		 * Constructor
+		 */
 		public function DirectionalShadowMapper()
 		{
 			super();
@@ -35,6 +38,9 @@ package away3d.lights.shadowmaps
 			_matrix = new Matrix3D();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get lightOffset() : Number
 		{
 			return _lightOffset;

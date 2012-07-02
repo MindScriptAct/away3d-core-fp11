@@ -74,15 +74,17 @@ package away3d.library
 		}
 		
 		/**
-		 * 
-		 */		
+		 * COMMENT : todo
+		 * @param	parserClass		COMMENT : todo
+		 */	
 		public function enableParser(parserClass : Class) : void
 		{
 			SingleFileLoader.enableParser(parserClass);
 		}
 		
 		/**
-		 * 
+		 * COMMENT : todo
+		 * @param	parserClasses	COMMENT : todo
 		 */
 		public function enableParsers(parserClasses : Vector.<Class>) : void
 		{
@@ -179,7 +181,10 @@ package away3d.library
 		}
 		
 		/**
-		 * 
+		 * COMMENT : todo
+		 * @param	name	COMMENT : todo
+		 * @param	ns		COMMENT : todo
+		 * @return		COMMENT : todo
 		 */
 		public function getAsset(name : String, ns : String = null) : IAsset
 		{
