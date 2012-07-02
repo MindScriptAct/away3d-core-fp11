@@ -26,6 +26,7 @@ package away3d.animators
 
 		/**
 		 * Creates a new AnimationSequenceController object.
+		 * @param	target	COMMENT : todo
 		 */
 		public function SmoothSkeletonAnimator(target : SkeletonAnimationState)
 		{
@@ -43,7 +44,8 @@ package away3d.animators
 
 		/**
 		 * Plays a sequence with a given name. If the sequence is not found, it may not be loaded yet, and it will retry every frame.
-		 * @param sequenceName The name of the clip to be played.
+		 * @param	sequenceName 	The name of the clip to be played.
+		 * @param	crossFadeTime	COMMENT : todo
 		 */
 		public function play(sequenceName : String, crossFadeTime : Number = 0) : void
 		{
@@ -74,6 +76,11 @@ package away3d.animators
 			start();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	sequenceName	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function hasSequence(sequenceName:String):Boolean
 		{
 			if(_clips[sequenceName] == null) return false;
@@ -82,6 +89,7 @@ package away3d.animators
 
 		/**
 		 * Adds a sequence to the controller.
+		 * @param	sequence	COMMENT : todo
 		 */
 		public function addSequence(sequence : SkeletonAnimationSequence) : void
 		{
@@ -139,6 +147,8 @@ package away3d.animators
 
 		/**
 		 * Retrieves a sequence with a given name.
+		 * @param	sequenceName	COMMENT : todo
+		 * @return	COMMENT : todo
 		 */
 		public function getSequence(sequenceName : String) : AnimationSequenceBase
 		{

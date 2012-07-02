@@ -14,6 +14,10 @@ package away3d.animators
 		private var _updateRootPosition : Boolean = true;
 		protected var _target : SkeletonAnimationState;
 
+		/**
+		 * Constructor
+		 * @param	target	COMMENT : todo
+		 */
 		public function SkeletonAnimatorBase(target : SkeletonAnimationState)
 		{
 			_target = target;
@@ -25,6 +29,9 @@ package away3d.animators
 			throw new AbstractMethodError();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get rootDelta() : Vector3D
 		{
 			return _target.blendTree.rootDelta;
@@ -43,6 +50,9 @@ package away3d.animators
 				_target.applyRootDelta();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get updateRootPosition() : Boolean
 		{
 			return _updateRootPosition;

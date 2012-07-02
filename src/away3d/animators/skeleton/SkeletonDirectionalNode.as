@@ -22,11 +22,17 @@ package away3d.animators.skeleton
 		private var _blendWeight : Number;
 		private var _blendDirty : Boolean;
 
+		/**
+		 * Constructor
+		 */
 		public function SkeletonDirectionalNode()
 		{
 			super();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set time(value : Number) : void
 		{
 			forward.time = value;
@@ -37,6 +43,9 @@ package away3d.animators.skeleton
 		}
 
 		// between 0 - 360
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set direction(value : Number) : void
 		{
 			forward.direction = value;
@@ -47,6 +56,9 @@ package away3d.animators.skeleton
 			super.direction = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePose(skeleton : Skeleton) : void
 		{
 			if (_blendDirty) updateBlend();
@@ -112,6 +124,9 @@ package away3d.animators.skeleton
 			}
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePositionData() : void
 		{
 			if (_blendDirty) updateBlend();

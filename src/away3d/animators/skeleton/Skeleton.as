@@ -87,7 +87,9 @@ package away3d.animators.skeleton
 			return joints.length;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assetType() : String
 		{
 			return AssetType.SKELETON;

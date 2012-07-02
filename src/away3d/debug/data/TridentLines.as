@@ -10,6 +10,11 @@
 	 */
 	public class TridentLines extends SegmentSet
 	{
+		/**
+		 * Constructor
+		 * @param	vectors		COMMENT : todo
+		 * @param	colors		COMMENT : todo
+		 */
 		public function TridentLines(vectors:Vector.<Vector.<Vector3D>>, colors:Vector.<uint>):void
 		{
 			super();
@@ -38,5 +43,3 @@
 
 	}
 }
-
- 

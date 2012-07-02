@@ -21,6 +21,7 @@ package away3d.animators
 
 		/**
 		 * Creates a new AnimationSequenceController object.
+		 * @param	target	COMMENT : todo
 		 */
 		public function VertexAnimator(target : VertexAnimationState)
 		{

@@ -18,6 +18,9 @@ package away3d.animators.skeleton
 		private var _inputs : Vector.<SkeletonTreeNode>;
 		private var _numInputs : uint;
 
+		/**
+		 * Constructor
+		 */
 		public function SkeletonNaryLERPNode()
 		{
 			super();
@@ -25,22 +28,39 @@ package away3d.animators.skeleton
 			_blendWeights = new Vector.<Number>();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	input	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getInputIndex(input : SkeletonTreeNode) : int
 		{
 			return _inputs.indexOf(input);
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	index	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getInputAt(index : uint) : SkeletonTreeNode
 		{
 			return _inputs[index];
 		}
 
+		/**
+		 * COMMENT : todo 
+		 * @param	index	COMMENT : todo
+		 */
 		public function addInput(input : SkeletonTreeNode) : void
 		{
 			_inputs[_numInputs] = input;
 			_blendWeights[_numInputs++] = 0;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePose(skeleton : Skeleton) : void
 		{
 			var input : SkeletonTreeNode;
@@ -128,6 +148,9 @@ package away3d.animators.skeleton
 			}
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePositionData() : void
 		{
 			var delta : Vector3D;
@@ -149,11 +172,17 @@ package away3d.animators.skeleton
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blendWeights() : Vector.<Number>
 		{
 			return _blendWeights;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function updateWeights(weights : Vector.<Number>) : void
 		{
 			var weight : Number;

@@ -28,6 +28,9 @@ package away3d.animators
 		private var _time : int;
 		private var _timeScale : Number = 1;
 
+		/**
+		 * Constructor
+		 */
 		public function AnimatorBase()
 		{
 //			start();
@@ -46,18 +49,24 @@ package away3d.animators
 			_timeScale = value;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get assetType() : String
 		{
 			return AssetType.ANIMATOR;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function stop() : void
 		{
 			notifyStop();
 		}
 		
 		/**
-		 * @inheritDoc
+		 * COMMENT : todo 
 		 */
 		public function dispose() : void
 		{

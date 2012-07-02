@@ -12,11 +12,17 @@ package away3d.animators.skeleton
 		public var inputB : SkeletonTreeNode;
 		private var _blendWeight : Number;
 
+		/**
+		 * Constructor
+		 */
 		public function SkeletonBinaryLERPNode()
 		{
 			super();
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set time(value : Number) : void
 		{
 			inputA.time = value;
@@ -31,6 +37,9 @@ package away3d.animators.skeleton
 			super.direction = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blendWeight() : Number
 		{
 			return _blendWeight;
@@ -42,7 +51,10 @@ package away3d.animators.skeleton
 			_duration = inputA.duration + _blendWeight*(inputB.duration - inputA.duration);
 		}
 
-// todo: return whether or not update was performed
+		// todo: return whether or not update was performed
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePose(skeleton : Skeleton) : void
 		{
 			// todo: should only update if blendWeight dirty, or if either child returns false
@@ -76,6 +88,9 @@ package away3d.animators.skeleton
 			}
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePositionData() : void
 		{
 			var deltA : Vector3D = inputA.rootDelta;

@@ -58,6 +58,9 @@ package away3d.entities
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get width():Number {
 			return _width;
 		}
@@ -68,6 +71,9 @@ package away3d.entities
 			invalidateTransform();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get height():Number {
 			return _height;
 		}
@@ -78,26 +84,54 @@ package away3d.entities
 			invalidateTransform();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getVertexBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return _geometry.getVertexBuffer( stage3DProxy );
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getUVBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return _geometry.getUVBuffer( stage3DProxy );
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getVertexNormalBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return _geometry.getVertexNormalBuffer( stage3DProxy );
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getVertexTangentBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return _geometry.getVertexTangentBuffer( stage3DProxy );
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getIndexBuffer( stage3DProxy:Stage3DProxy ):IndexBuffer3D {
 			return _geometry.getIndexBuffer( stage3DProxy );
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function pushModelViewProjection( camera:Camera3D ):void {
 			var comps:Vector.<Vector3D>;
 			var rot:Vector3D;
@@ -119,14 +153,23 @@ package away3d.entities
 			_zIndices[_mvpIndex] = -_pos.z;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get numTriangles():uint {
 			return 2;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get sourceEntity():Entity {
 			return this;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get material():MaterialBase {
 			return _material;
 		}
@@ -138,14 +181,23 @@ package away3d.entities
 			if( _material ) _material.addOwner( this );
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get animation():AnimationBase {
 			return _nullAnimation;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get animationState():AnimationStateBase {
 			return _animationState;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get castsShadows():Boolean {
 			return _shadowCaster;
 		}
@@ -169,52 +221,89 @@ package away3d.entities
 			_transform.prependScale( _width, _height, 1 );
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get uvTransform():Matrix {
 			return null;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getSecondaryUVBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return _geometry.getSecondaryUVBuffer(stage3DProxy);
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getCustomBuffer(stage3DProxy : Stage3DProxy) : VertexBuffer3D
 		{
 			return _geometry.getCustomBuffer(stage3DProxy);
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get vertexBufferOffset() : int
 		{
 			return _geometry.vertexBufferOffset;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get normalBufferOffset() : int
 		{
 			return _geometry.normalBufferOffset;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get tangentBufferOffset() : int
 		{
 			return _geometry.tangentBufferOffset;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get UVBufferOffset() : int
 		{
 			return _geometry.UVBufferOffset;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get secondaryUVBufferOffset() : int
 		{
 			return _geometry.secondaryUVBufferOffset;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get vertexData():Vector.<Number> {
 			return _geometry.vertexData;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get indexData():Vector.<uint> {
 			return _geometry.indexData;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get UVData():Vector.<Number> {
 			return _geometry.UVData;
 		}

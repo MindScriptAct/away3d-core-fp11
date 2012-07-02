@@ -22,7 +22,10 @@ package away3d.animators
 		private var _absoluteTime : Number;
 		private var _deltaFrame : UVAnimationFrame;
 		
-		
+		/**
+		 * Constructor
+		 * @param	target	COMMENT : todo
+		 */
 		public function UVAnimator(target : SubMesh)
 		{
 			super();
@@ -36,13 +39,19 @@ package away3d.animators
 			_tlUtil = new TimelineUtil();
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 * @param	sequence	COMMENT : todo
+		 */
 		public function addSequence(sequence : UVAnimationSequence) : void
 		{
 			_sequences[sequence.name] = sequence;
 		}
 		
-		
+		/**
+		 * COMMENT : todo
+		 * @param	sequenceName	COMMENT : todo
+		 */
 		public function play(sequenceName : String) : void
 		{
 			var material : TextureMaterial = _target.material as TextureMaterial;

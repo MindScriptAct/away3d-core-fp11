@@ -42,7 +42,6 @@ package away3d.animators.data
 		/**
 		 * Creates a SkeletonAnimationState object.
 		 * @param animation The animation object the state refers to.
-		 * @param jointsPerVertex The amount of joints per vertex define
 		 */
 		public function SkeletonAnimationState(animation : SkeletonAnimation)
 		{
@@ -375,6 +374,9 @@ package away3d.animators.data
 			}
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function applyRootDelta() : void
 		{
 			var delta : Vector3D = blendTree.rootDelta;

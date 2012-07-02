@@ -32,12 +32,18 @@ package away3d.animators.skeleton
 			super();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function reset() : void
 		{
 			if (!clip.looping)
 				_resetTime = true;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set time(value : Number) : void
 		{
 			if (_resetTime) {

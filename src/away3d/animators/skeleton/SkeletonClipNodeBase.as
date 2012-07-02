@@ -23,7 +23,6 @@ package away3d.animators.skeleton
 
 		/**
 		 * Creates a new SkeletonPhaseClipNode object.
-		 * @param numJoints The amount of joints in the target skeleton.
 		 */
 		public function SkeletonClipNodeBase()
 		{
@@ -52,6 +51,9 @@ package away3d.animators.skeleton
 			return _clip.duration;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get clip() : SkeletonAnimationSequence
 		{
 			return _clip;

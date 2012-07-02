@@ -38,12 +38,18 @@
 			this.material = material;
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function bakeTransformations():void
 		{
 			geometry.applyTransformation(transform);
 			transform.identity();
 		}
 		
+		/**
+		 * COMMENT : todo 
+		 */
 		public override function get assetType() : String
 		{
 			return AssetType.MESH;
@@ -313,6 +319,11 @@
 			}
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	subGeometry		COMMENT : todo
+		 * @return		COMMENT : todo
+		 */
 		public function getSubMeshForSubGeometry(subGeometry : SubGeometry) : SubMesh
 		{
 			return _subMeshes[_geometry.subGeometries.indexOf(subGeometry)];

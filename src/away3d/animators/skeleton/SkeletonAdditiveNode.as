@@ -17,16 +17,25 @@ package away3d.animators.skeleton
 
 		private static var _tempQuat : Quaternion = new Quaternion();
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function SkeletonAdditiveNode()
 		{
 			super();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		override public function get duration() : Number
 		{
 			return baseInput.duration;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blendWeight() : Number
 		{
 			return _blendWeight;
@@ -38,6 +47,9 @@ package away3d.animators.skeleton
 			_duration = baseInput.duration;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set time(value : Number) : void
 		{
 			baseInput.time = value;
@@ -45,6 +57,9 @@ package away3d.animators.skeleton
 			super.time = value;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function set direction(value : Number) : void
 		{
 			baseInput.direction = value;
@@ -53,6 +68,9 @@ package away3d.animators.skeleton
 		}
 
 		// todo: return whether or not update was performed
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePose(skeleton : Skeleton) : void
 		{
 			// todo: should only update if blendWeight dirty, or if either child returns false
@@ -88,6 +106,9 @@ package away3d.animators.skeleton
 			}
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function updatePositionData() : void
 		{
 			var deltA : Vector3D = baseInput.rootDelta;

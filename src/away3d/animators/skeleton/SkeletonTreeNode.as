@@ -42,6 +42,9 @@ package away3d.animators.skeleton
 			_time = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get direction() : Number
 		{
 			return _direction;
@@ -52,6 +55,9 @@ package away3d.animators.skeleton
 			_direction = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get duration() : Number
 		{
 			return _duration;

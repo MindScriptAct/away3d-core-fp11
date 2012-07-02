@@ -14,23 +14,32 @@ package away3d.animators.utils
 		private var _frame1 : uint;
 		private var _blendWeight : Number;
 		
+		/**
+		 * Constructor
+		 */
 		public function TimelineUtil()
 		{
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get frame0() : Number
 		{
 			return _frame0;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get frame1() : Number
 		{
 			return _frame1;
 		}
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get blendWeight() : Number
 		{
 			return _blendWeight;

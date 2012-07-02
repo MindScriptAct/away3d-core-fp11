@@ -67,6 +67,9 @@ package away3d.animators
 
 		/**
 		 * sets an optional offset to the position on the path, ideal for cameras or reusing the same <code>Path</code> object for parallel animations
+		 * @param	x	COMMENT : todo
+		 * @param	y	COMMENT : todo
+		 * @param	z	COMMENT : todo
 		 */
 		public function setOffset(x:Number = 0, y:Number = 0, z:Number = 0):void
 		{
@@ -332,7 +335,9 @@ package away3d.animators
 			_index = (val > _path.length - 1) ? _path.length - 1 : (val > 0) ? val : 0;
 		}
 
-
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get index():uint
 		{
 			return _index;

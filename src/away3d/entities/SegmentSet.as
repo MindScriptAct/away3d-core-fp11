@@ -44,6 +44,9 @@
 		private var _indexBuffer:IndexBuffer3D;
 		private var _lineCount:uint;
 
+		/**
+		 * Constructor
+		 */
 		public function SegmentSet()
 		{
 			super();
@@ -57,6 +60,10 @@
 			material = new SegmentMaterial();
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	segment	COMMENT : todo
+		 */
 		public function addSegment( segment:Segment ):void
 		{
 			segment.index = _vertices.length;
@@ -152,6 +159,10 @@
 			_indexBufferDirty = true;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	segment	COMMENT : todo
+		 */
 		public function removeSegment( segment:Segment ):void
 		{
 			//to do, add support curve indices/offset
@@ -172,10 +183,18 @@
 			_indexBufferDirty = true;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	index	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getSegment( index:uint ):Segment {
 			return _segments[index];
 		}
 
+		/**
+		 * COMMENT : todo
+		 */
 		public function removeAllSegments():void
 		{
 			_vertices.length = 0;
@@ -188,6 +207,11 @@
 			_indexBufferDirty = true;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getIndexBuffer( stage3DProxy:Stage3DProxy ):IndexBuffer3D
 		{
 			if( _indexBufferDirty ) {
@@ -198,6 +222,11 @@
 			return _indexBuffer;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	stage3DProxy	COMMENT : todo
+		 * @return	COMMENT : todo
+		 */
 		public function getVertexBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D
 		{
 			if( _numVertices == 0 )
@@ -211,52 +240,88 @@
 			return _vertexBuffer;
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override public function dispose():void {
 			super.dispose();
 			if( _vertexBuffer ) _vertexBuffer.dispose();
 			if( _indexBuffer ) _indexBuffer.dispose();
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function getUVBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return null;
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function getVertexNormalBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return null;
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function getVertexTangentBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return null;
 		}
 
+		/**
+		 * Returns false 
+		 */
 		override public function get mouseEnabled():Boolean {
 			return false;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get numTriangles():uint {
 			return _numIndices / 3;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get sourceEntity():Entity {
 			return this;
 		}
 
+		/**
+		 * Returns false 
+		 */
 		public function get castsShadows():Boolean {
 			return false;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get material():MaterialBase {
 			return _material;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get animation():AnimationBase {
 			return _nullAnimation;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get animationState():AnimationStateBase {
 			return _animationState;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function set material( value:MaterialBase ):void {
 			if( value == _material ) return;
 			if( _material ) _material.removeOwner( this );
@@ -278,51 +343,84 @@
 			return new RenderableNode( this );
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function get uvTransform():Matrix {
 			return null;
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function getSecondaryUVBuffer( stage3DProxy:Stage3DProxy ):VertexBuffer3D {
 			return null;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get vertexData():Vector.<Number> {
 			return _vertices;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get indexData():Vector.<uint> {
 			return _indices;
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function get UVData():Vector.<Number> {
 			return null;
 		}
 
+		/**
+		 * Returns null 
+		 */
 		public function getCustomBuffer(stage3DProxy : Stage3DProxy) : VertexBuffer3D
 		{
 			return null;
 		}
 
+		/**
+		 * Returns 0 
+		 */
 		public function get vertexBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * Returns 0 
+		 */
 		public function get normalBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * Returns 0 
+		 */
 		public function get tangentBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * Returns 0 
+		 */
 		public function get UVBufferOffset() : int
 		{
 			return 0;
 		}
 
+		/**
+		 * Returns 0 
+		 */
 		public function get secondaryUVBufferOffset() : int
 		{
 			return 0;

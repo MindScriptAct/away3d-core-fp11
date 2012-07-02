@@ -11,6 +11,10 @@ package away3d.animators.data
 	{
 		arcane var _frames : Vector.<UVAnimationFrame>;
 		
+		/**
+		 * COMMENT : todo
+		 * @param	name	COMMENT : todo
+		 */
 		public function UVAnimationSequence(name:String)
 		{
 			super(name);

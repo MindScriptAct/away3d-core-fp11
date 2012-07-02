@@ -196,26 +196,41 @@ package away3d.debug
 			_init();
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get max_ram() : Number
 		{
 			return _max_ram;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get ram() : Number
 		{
 			return _ram;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get avg_fps() : Number
 		{
 			return _avg_fps;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get max_fps() : uint
 		{
 			return _max_fps;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get fps():int
 		{
 			return _fps;
@@ -726,7 +741,9 @@ package away3d.debug
 		}
 		
 		
-		
+		/**
+		 * COMMENT : todo 
+		 */
 		public function reset() : void
 		{
 			var i : int;

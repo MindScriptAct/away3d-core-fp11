@@ -9,14 +9,16 @@
 	import flash.geom.Vector3D;
 
 	/**
-	 * Creates a new <code>Trident</code> object.
-	 *
-	 * @param	 length				The length of the trident axes. Default is 1000.
-	 * @param	 showLetters		If the Trident should display the letters X, Y and Z at each axis arrows. Default is true.
+	 * Trident is debug object for showing x,y and z axes in 3d space.
 	 */
-
 	public class Trident extends Mesh
 	{
+		
+		/**
+		 * Creates a new <code>Trident</code> object.
+		 * @param	 length				The length of the trident axes. Default is 1000.
+		 * @param	 showLetters		If the Trident should display the letters X, Y and Z at each axis arrows. Default is true.
+		 */
 		public function Trident(length:Number = 1000, showLetters:Boolean = true):void
 		{
 			super();

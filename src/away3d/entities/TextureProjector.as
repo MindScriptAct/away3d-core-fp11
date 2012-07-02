@@ -21,6 +21,10 @@ package away3d.entities
 		private var _viewProjection : Matrix3D = new Matrix3D();
 		private var _texture : Texture2DBase;
 
+		/**
+		 * Constructor
+		 * @param	texture	COMMENT : todo
+		 */
 		public function TextureProjector(texture : Texture2DBase)
 		{
 			_lens = new PerspectiveLens();
@@ -30,6 +34,9 @@ package away3d.entities
 			rotationX = -90;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get aspectRatio() : Number
 		{
 			return _lens.aspectRatio;
@@ -40,6 +47,9 @@ package away3d.entities
 			_lens.aspectRatio = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get fieldOfView() : Number
 		{
 			return _lens.fieldOfView;
@@ -50,10 +60,16 @@ package away3d.entities
 			_lens.fieldOfView = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get texture() : Texture2DBase
 		{
 			return _texture;
 		}
+		/**
+		 * COMMENT : todo 
+		 */
 
 		public function set bitmapData(value : Texture2DBase) : void
 		{
@@ -61,6 +77,9 @@ package away3d.entities
 			_texture = value;
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function get viewProjection() : Matrix3D
 		{
 			if (_viewProjectionInvalid) {

@@ -47,6 +47,11 @@ package away3d.animators
 			return _lerpNode;
 		}
 
+		/**
+		 * COMMENT : todo
+		 * @param	clipName	COMMENT : todo
+		 * @param	weight		COMMENT : todo
+		 */
 		public function setWeight(clipName : String, weight : Number) : void
 		{
 			if (weight > 1) weight = 1;
@@ -163,6 +168,9 @@ package away3d.animators
 			return _clips[sequenceName];
 		}
 
+		/**
+		 * COMMENT : todo 
+		 */
 		public function play() : void
 		{
 			start();

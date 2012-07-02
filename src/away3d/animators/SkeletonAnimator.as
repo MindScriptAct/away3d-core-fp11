@@ -18,6 +18,7 @@ package away3d.animators
 
 		/**
 		 * Creates a new AnimationSequenceController object.
+		 * @param	target	COMMENT : todo
 		 */
 		public function SkeletonAnimator(target : SkeletonAnimationState)
 		{
@@ -25,6 +26,9 @@ package away3d.animators
 			_sequences = [];
 		}
 
+		/**
+		 * @inheritDoc 
+		 */
 		override protected function createBlendTree() : SkeletonTreeNode
 		{
 			return _clipNode = new SkeletonTimelineClipNode();
