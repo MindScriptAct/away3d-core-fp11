@@ -8,7 +8,10 @@ package away3d.utils
     import flash.geom.Matrix;
     import flash.utils.*;
 
-    /** Helper class for casting assets to usable objects */
+    /** 
+	 * Helper class for casting assets to usable objects
+	 * COMMENT : todo There, how it is used?
+	 */
     public class Cast
     {
 		private static var _colorNames:Dictionary;
@@ -17,7 +20,11 @@ package away3d.utils
 		private static var _notClasses:Dictionary = new Dictionary();
 		private static var _classes:Dictionary = new Dictionary();
 		
-		
+		/**
+		 * Tries to resolve String object out of data. 
+		 * @param	data	untyped data to be resolved
+		 * @return			typed String object
+		 */
         public static function string(data:*):String
         {
             if (data is Class)
@@ -29,6 +36,12 @@ package away3d.utils
             return String(data);
         }
     
+		/**
+		 * Tries to resolve ByteArray object out of data. 
+		 * Data can be Class, ByteArray
+		 * @param	data	untyped data to be resolved
+		 * @return			typed ByteArray object
+		 */
         public static function byteArray(data:*):ByteArray
         {
             //throw new Error(typeof(data));
@@ -42,6 +55,12 @@ package away3d.utils
             return ByteArray(data);
         }
     
+		/**
+		 * Tries to resolve XML object out of data. 
+		 * Data can be Class, XML or XML string
+		 * @param	data	untyped data to be resolved
+		 * @return			typed XML object
+		 */
         public static function xml(data:*):XML
         {
             if (data is Class)
@@ -63,6 +82,12 @@ package away3d.utils
             return true;
         }
 
+		/**
+ 		 * Tries to resolve color out of data.
+ 		 * Data can be color name as String, uint, int
+		 * @param	data	data to be resolved
+		 * @return			color value
+		 */
         public static function tryColor(data:*):uint
         {
             if (data is uint)
@@ -230,6 +255,11 @@ package away3d.utils
             return 0xFFFFFF;                                  
         }
         
+		/**
+		 * Tries to resolve color out of data.
+		 * @param	data	data to be resolved
+		 * @return			color value
+		 */
         public static function color(data:*):uint
         {
             var result:uint = tryColor(data);
@@ -240,6 +270,11 @@ package away3d.utils
             return result;
         }
 
+		/**
+		 * Tries to resolve class object out of class name.
+		 * @param	name	Class name
+		 * @return			Class object or unresolved name
+		 */
         public static function tryClass(name:String):Object
         {
             if (_notClasses[name])
@@ -261,6 +296,13 @@ package away3d.utils
             return name;
         }
 
+
+		/**
+		 * Tries to resolve BitmapData object out of data.
+		 * Data can be class name as String, Class, BitmapData, Bitmap, DisplayObject
+		 * @param	data	untyped data to be resolved
+		 * @return			typed BitmapData object
+		 */
         public static function bitmapData(data:*):BitmapData
         {
             if (data == null)
@@ -297,6 +339,12 @@ package away3d.utils
             throw new CastError("Can't cast to BitmapData: "+data);
         }
 
+		/**
+		 * Tries to resolve BitmapTexture object out of data. 
+		 * Data can be class name string, Class, BitmapTexture, BitmapData
+		 * @param	data	untyped data to be resolved
+		 * @return			typed BitmapTexture object
+		 */
         public static function bitmapTexture(data:*):BitmapTexture
         {
             if (data == null)
