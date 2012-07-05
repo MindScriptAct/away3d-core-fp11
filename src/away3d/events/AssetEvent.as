@@ -26,7 +26,7 @@ package away3d.events
 		/** COMMENT : todo */
 		public static const ANIMATION_COMPLETE : String = 'animationComplete';
 		/** COMMENT : todo */
-		public static const BITMAP_COMPLETE : String = 'bitmapComplete';
+		public static const TEXTURE_COMPLETE : String = 'bitmapComplete';
 		/** COMMENT : todo */
 		public static const MATERIAL_COMPLETE : String = 'materialComplete';
 		/** COMMENT : todo */

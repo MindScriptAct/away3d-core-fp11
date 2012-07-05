@@ -211,10 +211,13 @@ package away3d.cameras
 		 * @param mY The y coordinate relative to the View3D. -1 corresponds to the top side of the viewport, 1 to the bottom.
 		 * @return The scene position of the given screen coordinates.
 		 */
-		public function unproject(mX : Number, mY : Number):Vector3D		{
-			return sceneTransform.transformVector(lens.unproject(mX, mY, 0));		}		/**		 * Returns the ray in scene space from the camera to the point on the screen in normalized coordinates.		 * @param mX The x coordinate relative to the View3D. -1 corresponds to the utter left side of the viewport, 1 to the right.		 * @param mY The y coordinate relative to the View3D. -1 corresponds to the top side of the viewport, 1 to the bottom.		 * @return The ray from the camera to the scene space position of a point on the projection plane.		 */
-		public function getRay(mX : Number, mY : Number) : Vector3D		{
-			return sceneTransform.deltaTransformVector(lens.unproject(mX, mY, 0));
+		public function unproject(mX : Number, mY : Number, mZ : Number = 0):Vector3D
+		{
+			return sceneTransform.transformVector(lens.unproject(mX, mY, mZ));
+		}		/**		 * Returns the ray in scene space from the camera to the point on the screen in normalized coordinates.		 * @param mX The x coordinate relative to the View3D. -1 corresponds to the utter left side of the viewport, 1 to the right.		 * @param mY The y coordinate relative to the View3D. -1 corresponds to the top side of the viewport, 1 to the bottom.		 * @return The ray from the camera to the scene space position of a point on the projection plane.		 */
+		public function getRay(mX : Number, mY : Number, mZ : Number = 0) : Vector3D
+		{
+			return sceneTransform.deltaTransformVector(lens.unproject(mX, mY, mZ));
 		}
 		/**
 		 * COMMENT : todo

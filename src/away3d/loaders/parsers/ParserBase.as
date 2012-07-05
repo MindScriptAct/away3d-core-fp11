@@ -23,6 +23,96 @@ package away3d.loaders.parsers
 
 	use namespace arcane;
 	
+	
+	/**
+	 * Dispatched when the parsing finishes.
+	 * 
+	 * @eventType away3d.events.ParserEvent
+	 */
+	[Event(name="parseComplete", type="away3d.events.ParserEvent")]
+	
+	/**
+	 * Dispatched when parser pauses to wait for dependencies, used internally to trigger
+	 * loading of dependencies which are then returned to the parser through it's interface
+	 * in the arcane namespace.
+	 * 
+	 * @eventType away3d.events.ParserEvent
+	 */
+	[Event(name="readyForDependencies", type="away3d.events.ParserEvent")]
+	
+	/**
+	 * Dispatched if an error was caught during parsing.
+	 * 
+	 * @eventType away3d.events.ParserEvent
+	 */
+	[Event(name="parseError", type="away3d.events.ParserEvent")]
+	
+	/**
+	 * Dispatched when any asset finishes parsing. Also see specific events for each
+	 * individual asset type (meshes, materials et c.)
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="assetComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a geometry asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="geometryComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a skeleton asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="skeletonComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a skeleton pose asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="skeletonPoseComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a container asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="containerComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a animation asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="animationComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a texture asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="textureComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a material asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="materialComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when a animator asset has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="animatorComplete", type="away3d.events.AssetEvent")]
+	
+	
+	
 	/**
 	 * <code>ParserBase</code> provides an abstract base class for objects that convert blocks of data to data structures
 	 * supported by Away3D.
@@ -202,7 +292,6 @@ package away3d.loaders.parsers
 		
 		arcane function resumeParsingAfterDependencies() : void
 		{
-			_dependencies.length = 0;
 			_parsingPaused = false;
 			_timer.start();
 		}
@@ -228,7 +317,7 @@ package away3d.loaders.parsers
 					break;
 				case AssetType.TEXTURE:
 					type_name = 'texture';
-					type_event = AssetEvent.BITMAP_COMPLETE;
+					type_event = AssetEvent.TEXTURE_COMPLETE;
 					break;
 				case AssetType.CONTAINER:
 					type_name = 'container';
@@ -292,9 +381,9 @@ package away3d.loaders.parsers
 		}
 		
 		
-		protected function addDependency(id : String, req : URLRequest, retrieveAsRawData : Boolean = false, data : * = null) : void
+		protected function addDependency(id : String, req : URLRequest, retrieveAsRawData : Boolean = false, data : * = null, suppressErrorEvents : Boolean = false) : void
 		{
-			_dependencies.push(new ResourceDependency(id, req, data, this, retrieveAsRawData));
+			_dependencies.push(new ResourceDependency(id, req, data, this, retrieveAsRawData, suppressErrorEvents));
 		}
 		
 		

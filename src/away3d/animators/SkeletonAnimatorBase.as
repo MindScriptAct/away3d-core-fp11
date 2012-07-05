@@ -39,9 +39,6 @@ package away3d.animators
 
 		override protected function updateAnimation(realDT : Number, scaledDT : Number) : void
 		{
-			// TODO: not used
-			realDT = realDT;
-			scaledDT = scaledDT;
 			_target.invalidateState();
 
 			_target.blendTree.updatePositionData();

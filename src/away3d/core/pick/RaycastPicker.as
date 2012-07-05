@@ -56,9 +56,10 @@ package away3d.core.pick
 				return null;
 			
 			//update ray
-			var rayPosition:Vector3D = view.camera.scenePosition;
-			var rayDirection:Vector3D = view.getRay( x, y );
-			
+			var rayPosition:Vector3D = view.unproject( x, y, 0 );
+			var rayDirection:Vector3D = view.unproject( x, y, 1 );
+			rayDirection = rayDirection.subtract( rayPosition );
+
 			//set entities
 			var filteredEntities:Vector.<Entity> = new Vector.<Entity>();
 
@@ -66,11 +67,11 @@ package away3d.core.pick
 			len = collector.entities.length;
 			for( i = 0; i < len; i++ ) {
 				_entity = collector.entities[ i ];
-				if( _entity.visible && _entity._implicitMouseEnabled ) {
+				if( _entity.visible && _entity._ancestorsAllowMouseEnabled && _entity.mouseEnabled ) {
 					filteredEntities.push( _entity );
 				}
 			}
-			
+
 			//reset
 			_collides = false;
 			_numberOfCollisions = 0;
@@ -170,9 +171,9 @@ package away3d.core.pick
 				var mesh:Mesh = pickingCollisionVO.entity as Mesh;
 				var subMesh:SubMesh;
 				var collides:Boolean;
-				
 				for each (subMesh in mesh.subMeshes) {
 					if( pickingCollider.testSubMeshCollision( subMesh, pickingCollisionVO, shortestCollisionDistance ) ) {
+						pickingCollisionVO.renderable = subMesh;
 						shortestCollisionDistance = _pickingCollisionVO.rayEntryDistance;
 						collides = true;
 						if( !_findClosestCollision )
