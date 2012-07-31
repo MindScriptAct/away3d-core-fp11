@@ -25,15 +25,20 @@ package away3d.library.assets
 		public static const CONTAINER : String = 'container';
 		
 		/** COMMENT : todo */
-		public static const ANIMATION : String = 'animation';
-		
-		/** COMMENT : todo */
 		public static const TEXTURE : String = 'texture';
 		
 		/** COMMENT : todo */
 		public static const MATERIAL : String = 'material';
-		
 		/** COMMENT : todo */
-		public static const ANIMATOR : String = 'animator';
+		public static const ANIMATION_SET : String = 'animationSet';
+
+		/** COMMENT : todo */
+		public static const ANIMATION_STATE : String = 'animationState';
+
+		/** COMMENT : todo */
+		public static const ANIMATION_NODE : String = 'animationNode';
+
+		/** COMMENT : todo */
+		public static const STATE_TRANSITION : String = 'stateTransition';
 	}
 }

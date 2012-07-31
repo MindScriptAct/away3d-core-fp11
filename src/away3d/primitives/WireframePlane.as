@@ -3,7 +3,7 @@
 	import flash.geom.Vector3D;
 
 	/**
-	 * Generates a wireframe plane primitive.
+	 * A WireframePlane primitive mesh.
 	 */
 	public class WireframePlane extends WireframePrimitiveBase
 	{
@@ -18,16 +18,16 @@
 		private var _orientation : String;
 
 		/**
-		 * Generated wireframe plane
-		 * @param	width		The width of the plane.
-		 * @param	height		The height of the plane.
-		 * @param 	segmentsW 	The number of segments that make up the plane along the X-axis. Defaults to 1.
-		 * @param 	segmentsH 	The number of segments that make up the plane along the Y or Z-axis. Defaults to 1.
-		 * @param	color		The color of the wireframe lines.
-		 * @param	thickness	The thickness of the wireframe lines
-		 * @param	orientation Defines plain orientation axes. Can be "yz", "xy" or "xz"
+		 * Creates a new WireframePlane object.
+		 * @param width The size of the cube along its X-axis.
+		 * @param height The size of the cube along its Y-axis.
+		 * @param segmentsW The number of segments that make up the cube along the X-axis.
+		 * @param segmentsH The number of segments that make up the cube along the Y-axis.
+		 * @param color The colour of the wireframe lines
+		 * @param thickness The thickness of the wireframe lines
+		 * @param orientation The orientaion in which the plane lies.
 		 */
-		public function WireframePlane(width : Number = 100, height : Number = 100, segmentsH : int = 10, segmentsW : int = 10, color:uint = 0xFFFFFF, thickness:Number = 1, orientation : String = "xz") {
+		public function WireframePlane(width : Number, height : Number, segmentsW : int = 10, segmentsH : int = 10, color:uint = 0xFFFFFF, thickness:Number = 1, orientation : String = "yz") {
 			super(color, thickness);
 
 			_width = width;
@@ -38,7 +38,7 @@
 		}
 
 		/**
-		 * COMMENT : todo 
+		 * The orientaion in which the plane lies.
 		 */
 		public function get orientation() : String
 		{
@@ -52,7 +52,7 @@
 		}
 
 		/**
-		 * COMMENT : todo 
+		 * The size of the cube along its X-axis.
 		 */
 		public function get width() : Number
 		{
@@ -66,7 +66,7 @@
 		}
 
 		/**
-		 * COMMENT : todo 
+		 * The size of the cube along its Y-axis.
 		 */
 		public function get height() : Number
 		{
@@ -81,7 +81,7 @@
 		}
 
 		/**
-		 * COMMENT : todo 
+		 * The number of segments that make up the plane along the X-axis.
 		 */
 		public function get segmentsW() : int
 		{
@@ -96,7 +96,7 @@
 		}
 
 		/**
-		 * COMMENT : todo 
+		 * The number of segments that make up the plane along the Y-axis.
 		 */
 		public function get segmentsH() : int
 		{
@@ -110,6 +110,9 @@
 			invalidateGeometry();
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override protected function buildGeometry() : void
 		{
 			var v0 : Vector3D = new Vector3D();

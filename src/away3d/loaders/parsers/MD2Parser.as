@@ -1,10 +1,10 @@
 package away3d.loaders.parsers
 {
-	import away3d.animators.VertexAnimator;
-	import away3d.animators.data.VertexAnimation;
-	import away3d.animators.data.VertexAnimationMode;
-	import away3d.animators.data.VertexAnimationSequence;
-	import away3d.animators.data.VertexAnimationState;
+	import away3d.materials.utils.DefaultMaterialManager;
+	import away3d.animators.nodes.VertexClipNode;
+	import away3d.animators.VertexAnimationState;
+	import away3d.animators.VertexAnimationSet;
+	import flash.utils.Dictionary;
 	import away3d.arcane;
 	import away3d.core.base.Geometry;
 	import away3d.core.base.SubGeometry;
@@ -28,6 +28,7 @@ package away3d.loaders.parsers
 	{
 		public static var FPS : int = 6;
 		
+		private var _clipNodes:Dictionary = new Dictionary(true);
 		private var _byteData : ByteArray;
 		private var _startedParsing : Boolean;
 		private var _parsedHeader : Boolean;
@@ -58,7 +59,7 @@ package away3d.loaders.parsers
 		private var _vertIndices : Vector.<Number>;
 		
 		// the current subgeom being built
-		private var _animator : VertexAnimator;
+		private var _animationSet : VertexAnimationSet = new VertexAnimationSet();
 		private var _firstSubGeom : SubGeometry;
 		private var _uvs : Vector.<Number>;
 		private var _finalUV : Vector.<Number>;
@@ -124,7 +125,7 @@ package away3d.loaders.parsers
 			// TODO: not used
 			resourceDependency = resourceDependency; 			
 			// apply system default
-			TextureMaterial(_mesh.material).texture = new BitmapTexture(defaultBitmapData);
+			_mesh.material = DefaultMaterialManager.getDefaultMaterial();
 		} 
 		
 		
@@ -148,56 +149,43 @@ package away3d.loaders.parsers
 					
 					// TODO: Create a mesh only when encountered (if it makes sense
 					// for this file format) and return it using finalizeAsset()
-					_mesh = new Mesh();
-					_mesh.material = new TextureMaterial( new BitmapTexture(defaultBitmapData) );
+					_geometry = new Geometry();
+					_mesh = new Mesh(_geometry, null);
+					_mesh.material = DefaultMaterialManager.getDefaultMaterial();
 					
-					_geometry = _mesh.geometry;
-					_geometry.animation = new VertexAnimation(2, VertexAnimationMode.ABSOLUTE);
-					_animator = new VertexAnimator(VertexAnimationState(_mesh.animationState));
-					
+					//_geometry.animation = new VertexAnimation(2, VertexAnimationMode.ABSOLUTE);
+					//_animator = new VertexAnimator(VertexAnimationState(_mesh.animationState));
 					
 					// Parse header and decompress body
 					parseHeader();
 					parseMaterialNames();
 				}
-					
+
+				else if (!_parsedUV) {
+					parseUV();
+				}
+
+				else if (!_parsedFaces) {
+					parseFaces();
+				}
+
+				else if (!_parsedFrames) {
+					parseFrames();
+				}
+
 				else {
-					if (!_parsedUV) {
-						parseUV();
-					}
-						
-					else {
-						if (!_parsedFaces) {
-							parseFaces();
-						}
-							
-						else {
-							if (!_parsedFrames) {
-								parseFrames();
-							}
-								
-							else {
-								var sub : SubGeometry = new SubGeometry();
-								
-								_geometry.addSubGeometry(sub);
-								sub.updateVertexData(_firstSubGeom.vertexData);
-								sub.updateUVData(_firstSubGeom.UVData);
-								sub.updateIndexData(_indices);
-								
-								// Force name to be chosen by finalizeAsset()
-								_mesh.name = "";
-								finalizeAsset(_mesh);
-								
-								return PARSING_DONE;
-							}
-						}
-					}
+					createDefaultSubGeometry();
+					// Force name to be chosen by finalizeAsset()
+					_mesh.name = "";
+					finalizeAsset(_mesh);
+
+					return PARSING_DONE;
 				}
 			}
 			
 			return MORE_TO_PARSE;
 		}
-		
+
 		/**
 		 * Reads in all that MD2 Header data that is declared as private variables.
 		 * I know its a lot, and it looks ugly, but only way to do it in Flash
@@ -240,14 +228,13 @@ package away3d.loaders.parsers
 			_materialNames = new Vector.<String>();
 			_byteData.position = _offsetSkins;
 			
-			var regExp:RegExp = new RegExp("[^a-zA-Z0-9\\_\\.]", "g");
+			var regExp:RegExp = new RegExp("[^a-zA-Z0-9\\_\/.]", "g");
 			for (var i : uint = 0; i < _numSkins; ++i) {
 				name = _byteData.readUTFBytes(64);
 				name = name.replace(regExp, "");
 				extIndex = name.lastIndexOf(".");
 				if (_ignoreTexturePath) {
 					slashIndex = name.lastIndexOf("/");
-					if (slashIndex < 0) slashIndex = 0;
 				}
                 if(name.toLowerCase().indexOf(".jpg") == -1 && name.toLowerCase().indexOf(".png") == -1){
                     name = name.substring(slashIndex+1, extIndex);
@@ -257,7 +244,7 @@ package away3d.loaders.parsers
                 }
 
 				_materialNames[i] = name;
-				// only support 1 skin
+				// only support 1 skin TODO: really?
 				if (dependencies.length == 0)
 					addDependency(name, new URLRequest(url));
 			}
@@ -374,7 +361,8 @@ package away3d.loaders.parsers
 			var tvertices : Vector.<Number>;
 			var i : uint, j : int, k : uint, ch : uint;
 			var name : String = "";
-			var prevSeq : VertexAnimationSequence = null;
+			var prevClip : VertexClipNode = null;
+			var state : VertexAnimationState;
 			
 			_byteData.position = _offsetFrames;
 			
@@ -394,21 +382,8 @@ package away3d.loaders.parsers
 				ty = _byteData.readFloat();
 				tz = _byteData.readFloat();
 				
-				//read frame name
-				name = "";
-				k = 0;
-				for (j = 0; j < 16; j++) {
-					ch = _byteData.readUnsignedByte();
-					
-					if (uint(ch) >= 0x39 && uint(ch) <= 0x7A && k == 0) {
-						name += String.fromCharCode(ch);
-					}
-					
-					if (uint(ch) >= 0x30 && uint(ch) <= 0x39) {
-						k++;
-					}
-				}
-				
+				name = readFrameName();
+
 				// Note, the extra data.position++ in the for loop is there
 				// to skip over a byte that holds the "vertex normal index"
 				for (j = 0; j < _numVertices; j++,_byteData.position++) {
@@ -426,31 +401,67 @@ package away3d.loaders.parsers
 				subGeom.updateUVData(_finalUV);
 				subGeom.updateIndexData(_indices);
 				
-				var seq : VertexAnimationSequence = VertexAnimationSequence(_animator.getSequence(name));
-				if (!seq) {
-					seq = new VertexAnimationSequence(name);
-					_animator.addSequence(seq);
-					
+				var clip : VertexClipNode = _clipNodes[name];
+				
+				if (!clip) {
 					// If another sequence was parsed before this one, starting
-					// a new sequence measn the previuos one is complete and can
+					// a new state means the previous one is complete and can
 					// hence be finalized.
-					if (prevSeq)
-						finalizeAsset(prevSeq);
+					if (prevClip) {
+						finalizeAsset(prevClip);
+						finalizeAsset(state);
+					}
+						
+					clip = new VertexClipNode();
+					clip.stitchFinalFrame = true;
+					state = new VertexAnimationState(clip);
 					
-					prevSeq = seq;
+					_animationSet.addState(name, state);
+					_clipNodes[name] = clip;
+					
+					prevClip = clip;
 				}
-				seq.addFrame(geometry, 1000 / FPS);
+				clip.addFrame(geometry, 1000 / FPS);
 			}
 			
-			// Finalize the last sequence
-			if (prevSeq)
-				finalizeAsset(prevSeq);
+			// Finalize the last state
+			if (prevClip) {
+				finalizeAsset(prevClip);
+				finalizeAsset(state);
+			}
 			
 			// Force finalizeAsset() to decide name
-			_animator.name = "";
-			finalizeAsset(_animator);
+			//_animator.name = "";
+			finalizeAsset(_animationSet);
 			
 			_parsedFrames = true;
+		}
+
+		private function readFrameName() : String
+		{
+			var name : String = "";
+			var k : uint = 0;
+			for (var j : uint = 0; j < 16; j++) {
+				var ch : uint = _byteData.readUnsignedByte();
+
+				if (uint(ch) > 0x39 && uint(ch) <= 0x7A && k == 0) {
+					name += String.fromCharCode(ch);
+				}
+
+				if (uint(ch) >= 0x30 && uint(ch) <= 0x39) {
+					k++;
+				}
+			}
+			return name;
+		}
+
+		private function createDefaultSubGeometry() : void
+		{
+			var sub : SubGeometry = new SubGeometry();
+			sub.updateVertexData(_firstSubGeom.vertexData);
+			sub.updateUVData(_firstSubGeom.UVData);
+			sub.updateIndexData(_indices);
+			_geometry.addSubGeometry(sub);
 		}
 		
 	}

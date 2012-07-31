@@ -3,7 +3,7 @@
 	import flash.geom.Vector3D;
 
 	/**
-	 * Generates a wireframe sphere primitive.
+	 * A WireframeSphere primitive mesh
 	 */
 	public class WireframeSphere extends WireframePrimitiveBase
 	{
@@ -12,13 +12,13 @@
 		private var _radius : Number;
 
 		/**
-		 * Generated wireframe sphere
-		 * @param	radius	The radius of the sphere.
-		 * @param	segmentsW	Defines the number of horizontal segments that make up the sphere.
-		 * @param	segmentsH	Defines the number of vertical segments that make up the sphere.
-		 * @param	color		The color of the wireframe lines.
-		 * @param	thickness	The thickness of the wireframe lines
-		 */
+		 * Creates a new WireframeSphere object.
+		 * @param radius The radius of the sphere.
+		 * @param segmentsW Defines the number of horizontal segments that make up the sphere.
+		 * @param segmentsH Defines the number of vertical segments that make up the sphere.
+		 * @param color The colour of the wireframe lines
+		 * @param thickness The thickness of the wireframe lines
+		 */	
 		public function WireframeSphere(radius : Number = 50, segmentsW : uint = 16, segmentsH : uint = 12, color:uint = 0xFFFFFF, thickness:Number = 1) {
 			super(color, thickness);
 
@@ -27,6 +27,9 @@
 			_segmentsH = segmentsH;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
 		override protected function buildGeometry() : void
 		{
 			var vertices : Vector.<Number> = new Vector.<Number>();
@@ -96,6 +99,5 @@
 				}
 			}
 		}
-
 	}
 }

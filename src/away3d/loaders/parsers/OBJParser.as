@@ -1,5 +1,6 @@
 package away3d.loaders.parsers
 {
+	import away3d.materials.utils.DefaultMaterialManager;
 	import away3d.arcane;
 	import away3d.core.base.Geometry;
 	import away3d.core.base.SubGeometry;
@@ -143,7 +144,7 @@ package away3d.loaders.parsers
 			} else {
 				var lm:LoadedMaterial = new LoadedMaterial();
 				lm.materialID = resourceDependency.id;
-				lm.texture = new BitmapTexture(defaultBitmapData);
+				lm.texture = DefaultMaterialManager.getDefaultTexture();
 				_materialLoaded.push(lm);
 			}
 		
@@ -160,8 +161,13 @@ package away3d.loaders.parsers
 			var creturn:String = String.fromCharCode(10);
 			var trunk:Array;
 			
-			if(!_startedParsing)
+			if(!_startedParsing) {
 				_textData = getTextData();
+				
+				// Merge linebreaks that are immediately preceeded by
+				// the "escape" backward slash into single lines.
+				_textData = _textData.replace(/\\[\r\n]+\s*/gm, ' ');
+			}
 			
 			if(_textData.indexOf(creturn) == -1)
 				creturn = String.fromCharCode(13);
@@ -284,8 +290,7 @@ package away3d.loaders.parsers
 					// Finalize and force type-based name
 					finalizeAsset(geometry, "");
 					
-					// TODO: Re-use default material
-					bmMaterial = new TextureMaterial( new BitmapTexture(defaultBitmapData));
+					bmMaterial = DefaultMaterialManager.getDefaultMaterial();
 					mesh = new Mesh(geometry, bmMaterial);
 					
 					if (_objects[objIndex].name) {

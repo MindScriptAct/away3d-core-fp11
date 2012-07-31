@@ -3,7 +3,10 @@ package away3d.filters
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.managers.Stage3DProxy;
-	import away3d.filters.tasks.Filter3DDepthOfFFieldTask;
+	import away3d.filters.tasks.Filter3DHDepthOfFFieldTask;
+	import away3d.filters.tasks.Filter3DVDepthOfFFieldTask;
+
+	import flash.display3D.textures.Texture;
 
 	import flash.geom.Vector3D;
 
@@ -12,24 +15,29 @@ package away3d.filters
 	 */
 	public class DepthOfFieldFilter3D extends Filter3DBase
 	{
-		private var _dofTask : Filter3DDepthOfFFieldTask;
 		private var _focusTarget : ObjectContainer3D;
+		private var _hDofTask : Filter3DHDepthOfFFieldTask;
+		private var _vDofTask : Filter3DVDepthOfFFieldTask;
 
-		/**
-		 * COMMENT : todo
-		 * @param	maxBlurX	COMMENT : todo
-		 * @param	maxBlurY	COMMENT : todo
-		 */
-		public function DepthOfFieldFilter3D(maxBlurX : uint = 3, maxBlurY : uint = 3)
+		public function DepthOfFieldFilter3D(maxBlurX : uint = 3, maxBlurY : uint = 3, stepSize:int = -1)
 		{
 			super();
-			_dofTask = new Filter3DDepthOfFFieldTask(maxBlurX, maxBlurY);
-			addTask(_dofTask);
+			_hDofTask = new Filter3DHDepthOfFFieldTask(maxBlurX, stepSize);
+			_vDofTask = new Filter3DVDepthOfFFieldTask(maxBlurY, stepSize);
+			addTask(_hDofTask);
+			addTask(_vDofTask);
 		}
 
-		/**
-		 * COMMENT : todo 
-		 */
+		public function get stepSize() : int
+		{
+			return _hDofTask.stepSize;
+		}
+
+		public function set stepSize(value : int) : void
+		{
+			_vDofTask.stepSize = _hDofTask.stepSize = value;
+		}
+
 		public function get focusTarget() : ObjectContainer3D
 		{
 			return _focusTarget;
@@ -45,12 +53,12 @@ package away3d.filters
 		 */
 		public function get focusDistance() : Number
 		{
-			return _dofTask.focusDistance;
+			return _hDofTask.focusDistance;
 		}
 
 		public function set focusDistance(value : Number) : void
 		{
-			_dofTask.focusDistance = value;
+			_hDofTask.focusDistance = _vDofTask.focusDistance = value;
 		}
 
 		/**
@@ -58,12 +66,12 @@ package away3d.filters
 		 */
 		public function get range() : Number
 		{
-			return _dofTask.range;
+			return _hDofTask.range;
 		}
 
 		public function set range(value : Number) : void
 		{
-			_dofTask.range = value;
+			_vDofTask.range = _hDofTask.range = value;
 		}
 
 		/**
@@ -71,12 +79,12 @@ package away3d.filters
 		 */
 		public function get maxBlurX() : uint
 		{
-			return _dofTask.maxBlurX;
+			return _hDofTask.maxBlur;
 		}
 
 		public function set maxBlurX(value : uint) : void
 		{
-			_dofTask.maxBlurX = value;
+			_hDofTask.maxBlur = value;
 		}
 
 		/**
@@ -84,12 +92,12 @@ package away3d.filters
 		 */
 		public function get maxBlurY() : uint
 		{
-			return _dofTask.maxBlurY;
+			return _vDofTask.maxBlur;
 		}
 
 		public function set maxBlurY(value : uint) : void
 		{
-			_dofTask.maxBlurY = value;
+			_vDofTask.maxBlur = value;
 		}
 
 		/**
@@ -97,8 +105,6 @@ package away3d.filters
 		 */
 		override public function update(stage : Stage3DProxy, camera : Camera3D) : void
 		{
-			// TODO: not used
-			stage = stage;
 			if (_focusTarget)
 				updateFocus(camera);
 		}
@@ -106,7 +112,12 @@ package away3d.filters
 		private function updateFocus(camera : Camera3D) : void
 		{
 			var target : Vector3D = camera.inverseSceneTransform.transformVector(_focusTarget.scenePosition);
-			_dofTask.focusDistance = target.z;
+			_hDofTask.focusDistance = _vDofTask.focusDistance = target.z;
+		}
+
+		override public function setRenderTargets(mainTarget : Texture, stage3DProxy : Stage3DProxy) : void
+		{
+			_hDofTask.target = _vDofTask.getMainInputTexture(stage3DProxy);
 		}
 	}
 }

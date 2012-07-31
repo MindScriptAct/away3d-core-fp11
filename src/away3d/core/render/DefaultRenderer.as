@@ -49,7 +49,7 @@ package away3d.core.render
 			_distanceRenderer.stage3DProxy = _depthRenderer.stage3DProxy = value;
 		}
 
-		protected override function executeRender(entityCollector : EntityCollector, target : TextureBase = null, scissorRect : Rectangle = null, surfaceSelector : int = 0, additionalClearMask : int = 7) : void
+		protected override function executeRender(entityCollector : EntityCollector, target : TextureBase = null, scissorRect : Rectangle = null, surfaceSelector : int = 0) : void
 		{
 			updateLights(entityCollector);
 
@@ -59,7 +59,7 @@ package away3d.core.render
 				drawRenderables(entityCollector.blendedRenderableHead, entityCollector, RTT_PASSES);
 			}
 
-			super.executeRender(entityCollector, target, scissorRect, surfaceSelector, additionalClearMask);
+			super.executeRender(entityCollector, target, scissorRect, surfaceSelector);
 		}
 
 		private function updateLights(entityCollector : EntityCollector) : void
@@ -149,6 +149,7 @@ package away3d.core.render
 					var rttMask : int = _activeMaterial.passRendersToTexture(j)? 1 : 2;
 
 					if ((rttMask & which) != 0) {
+						_context.setDepthTest(true, Context3DCompareMode.LESS);
 						_activeMaterial.activatePass(j, _stage3DProxy, camera, _textureRatioX, _textureRatioY);
 						do {
 							_activeMaterial.renderPass(j, item2.renderable, _stage3DProxy, entityCollector);

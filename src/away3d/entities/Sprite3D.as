@@ -1,8 +1,6 @@
 package away3d.entities
 {
-	import away3d.animators.data.AnimationBase;
-	import away3d.animators.data.AnimationStateBase;
-	import away3d.animators.data.NullAnimation;
+	import away3d.animators.IAnimator;
 	import away3d.arcane;
 	import away3d.bounds.BoundingSphere;
 	import away3d.bounds.BoundingVolumeBase;
@@ -32,18 +30,16 @@ package away3d.entities
 	{
 		private static var _geometry:SubGeometry;
 
-		private static var _nullAnimation:NullAnimation;
 		private var _material:MaterialBase;
-		private var _animationState:AnimationStateBase;
 		private var _spriteMatrix:Matrix3D;
-
+		private var _animator : IAnimator;
+		
 		private var _width:Number;
 		private var _height:Number;
 		private var _shadowCaster:Boolean = false;
 
 		public function Sprite3D( material:MaterialBase, width:Number, height:Number ) {
 			super();
-			_nullAnimation ||= new NullAnimation();
 			this.material = material;
 			_width = width;
 			_height = height;
@@ -181,18 +177,13 @@ package away3d.entities
 			if( _material ) _material.addOwner( this );
 		}
 
+		
 		/**
-		 * COMMENT : todo 
+		 * Defines the animator of the mesh. Act on the mesh's geometry. Defaults to null
 		 */
-		public function get animation():AnimationBase {
-			return _nullAnimation;
-		}
-
-		/**
-		 * COMMENT : todo 
-		 */
-		public function get animationState():AnimationStateBase {
-			return _animationState;
+		public function get animator() : IAnimator
+		{
+			return _animator;
 		}
 
 		/**

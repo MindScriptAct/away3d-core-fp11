@@ -75,13 +75,34 @@ package away3d.loaders
 	 * @eventType away3d.events.AssetEvent
 	 */
 	[Event(name="containerComplete", type="away3d.events.AssetEvent")]
-	
+		
 	/**
-	 * Dispatched when a animation asset has been constructed from a resource.
+	 * Dispatched when an animation set has been constructed from a group of animation state resources.
 	 * 
 	 * @eventType away3d.events.AssetEvent
 	 */
-	[Event(name="animationComplete", type="away3d.events.AssetEvent")]
+	[Event(name="animationSetComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when an animation state has been constructed from a group of animation node resources.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="animationStateComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when an animation node has been constructed from a resource.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="animationNodeComplete", type="away3d.events.AssetEvent")]
+	
+	/**
+	 * Dispatched when an animation state transition has been constructed from a group of animation node resources.
+	 * 
+	 * @eventType away3d.events.AssetEvent
+	 */
+	[Event(name="stateTransitionComplete", type="away3d.events.AssetEvent")]
 	
 	/**
 	 * Dispatched when a texture asset has been constructed from a resource.
@@ -164,8 +185,10 @@ package away3d.loaders
 			
 			token.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 			token.addEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
-			token.addEventListener(AssetEvent.ANIMATION_COMPLETE, onAssetComplete);
-			token.addEventListener(AssetEvent.ANIMATOR_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.ANIMATION_SET_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.ANIMATION_STATE_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.ANIMATION_NODE_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.STATE_TRANSITION_COMPLETE, onAssetComplete);
 			token.addEventListener(AssetEvent.TEXTURE_COMPLETE, onAssetComplete);
 			token.addEventListener(AssetEvent.CONTAINER_COMPLETE, onAssetComplete);
 			token.addEventListener(AssetEvent.GEOMETRY_COMPLETE, onAssetComplete);
@@ -205,8 +228,10 @@ package away3d.loaders
 			
 			token.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 			token.addEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
-			token.addEventListener(AssetEvent.ANIMATION_COMPLETE, onAssetComplete);
-			token.addEventListener(AssetEvent.ANIMATOR_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.ANIMATION_SET_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.ANIMATION_STATE_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.ANIMATION_NODE_COMPLETE, onAssetComplete);
+			token.addEventListener(AssetEvent.STATE_TRANSITION_COMPLETE, onAssetComplete);
 			token.addEventListener(AssetEvent.TEXTURE_COMPLETE, onAssetComplete);
 			token.addEventListener(AssetEvent.CONTAINER_COMPLETE, onAssetComplete);
 			token.addEventListener(AssetEvent.GEOMETRY_COMPLETE, onAssetComplete);
@@ -241,8 +266,10 @@ package away3d.loaders
 			dispatcher.removeEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 			dispatcher.removeEventListener(LoaderEvent.LOAD_ERROR, onLoadError);
 			dispatcher.removeEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
-			dispatcher.removeEventListener(AssetEvent.ANIMATION_COMPLETE, onAssetComplete);
-			dispatcher.removeEventListener(AssetEvent.ANIMATOR_COMPLETE, onAssetComplete);
+			dispatcher.removeEventListener(AssetEvent.ANIMATION_SET_COMPLETE, onAssetComplete);
+			dispatcher.removeEventListener(AssetEvent.ANIMATION_STATE_COMPLETE, onAssetComplete);
+			dispatcher.removeEventListener(AssetEvent.ANIMATION_NODE_COMPLETE, onAssetComplete);
+			dispatcher.removeEventListener(AssetEvent.STATE_TRANSITION_COMPLETE, onAssetComplete);
 			dispatcher.removeEventListener(AssetEvent.TEXTURE_COMPLETE, onAssetComplete);
 			dispatcher.removeEventListener(AssetEvent.CONTAINER_COMPLETE, onAssetComplete);
 			dispatcher.removeEventListener(AssetEvent.GEOMETRY_COMPLETE, onAssetComplete);

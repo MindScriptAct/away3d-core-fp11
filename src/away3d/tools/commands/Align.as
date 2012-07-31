@@ -26,8 +26,8 @@ package away3d.tools.commands
 		* Aligns a series of meshes to their bounds along a given axis.
 		*
 		* @param	 meshes		A Vector of Mesh objects
-		* @param	 axis		String. Represent the axis to align on.
-		* @param	 condition	[optional]. String. Can be POSITIVE ('+') or NEGATIVE ('+'), Default is POSITIVE ('+')
+		* @param	 axis		Represent the axis to align on.
+		* @param	 condition	Can be POSITIVE ('+') or NEGATIVE ('-'), Default is POSITIVE ('+')
 		*/		
 		public static function alignMeshes(meshes:Vector.<Mesh>, axis:String, condition:String = POSITIVE):void
 		{

@@ -2,6 +2,7 @@ package away3d.materials.passes
 {
 	import away3d.arcane;
 	import away3d.cameras.Camera3D;
+	import away3d.core.base.Geometry;
 	import away3d.core.base.IRenderable;
 	import away3d.core.base.SubGeometry;
 	import away3d.core.base.SubMesh;
@@ -53,6 +54,10 @@ package away3d.materials.passes
 			_dedicatedMeshes = dedicatedMeshes;
 			if (dedicatedMeshes)
 				_outlineMeshes = new Dictionary();
+				
+			_animatableAttributes = ["va0", "va1"];
+			_animationTargetRegisters = ["vt0", "vt1"];
+			
 		}
 
 		/**
@@ -136,10 +141,8 @@ package away3d.materials.passes
 		/**
 		 * @inheritDoc
 		 */
-		arcane override function getVertexCode() : String
+		arcane override function getVertexCode(code:String) : String
 		{
-			var code : String = animation.getAGALVertexCode(this, ["va0", "va1"], ["vt0", "vt1"]);
-
 			// offset
 			code += "mul vt7, vt1, vc5.x\n" +
 					"add vt7, vt7, vt0\n" +
@@ -207,7 +210,7 @@ package away3d.materials.passes
 		// creates a new mesh in which all vertices are unique
 		private function createDedicatedMesh(source : SubGeometry) : Mesh
 		{
-			var mesh : Mesh = new Mesh();
+			var mesh : Mesh = new Mesh(new Geometry(), null);
 			var dest : SubGeometry = new SubGeometry();
 			var indexLookUp : Array = [];
 			var srcIndices : Vector.<uint> = source.indexData;

@@ -1,10 +1,10 @@
 package away3d.animators
 {
 	import away3d.core.base.Object3D;
+	import away3d.core.math.Vector3DUtils;
 	import away3d.events.PathEvent;
-	import away3d.extrusions.utils.IPath;
-	import away3d.extrusions.utils.IPathSegment;
-	import away3d.extrusions.utils.PathUtils;
+	import away3d.paths.IPath;
+	import away3d.paths.IPathSegment;
 
 	import flash.events.EventDispatcher;
 	import flash.geom.Vector3D;
@@ -12,6 +12,7 @@ package away3d.animators
 	/**
 	 * COMMENT : todo
 	 */
+	[Deprecated]
 	public class PathAnimator extends EventDispatcher
 	{
 		private var _path:IPath;
@@ -32,7 +33,7 @@ package away3d.animators
 		private var _bCycle:Boolean;
 		private var _lastSegment:uint = 0;
 		private var _rot:Vector3D;
-		private var _worldAxis:Vector3D;
+		private var _upAxis:Vector3D = new Vector3D(0, 1, 0);
 		private var _basePosition:Vector3D = new Vector3D(0, 0, 0);
 
 		/**
@@ -51,7 +52,6 @@ package away3d.animators
 			_time = _lastTime = 0;
 
 			_path = path;
-			if (_path) _worldAxis = _path.worldAxis;
 
 			_target = target;
 			_alignToPath = alignToPath;
@@ -62,7 +62,16 @@ package away3d.animators
 			this.rotations = rotations;
 
 			if (_lookAtTarget && _alignToPath) _alignToPath = false;
+		}
 
+		public function get upAxis() : Vector3D
+		{
+			return _upAxis;
+		}
+
+		public function set upAxis(value : Vector3D) : void
+		{
+			_upAxis = value;
 		}
 
 		/**
@@ -73,7 +82,7 @@ package away3d.animators
 		 */
 		public function setOffset(x:Number = 0, y:Number = 0, z:Number = 0):void
 		{
-			if (!_offset) _offset = new Vector3D();
+			_offset ||= new Vector3D();
 
 			_offset.x = x;
 			_offset.y = y;
@@ -96,18 +105,18 @@ package away3d.animators
 
 			} else if (t >= 1){
 				t = 1;
-				_lastSegment = _path.length - 1;
+				_lastSegment = _path.numSegments - 1;
 			}
 
-			if (_bCycle && t <= 0.1 && _lastSegment == _path.length - 1)
+			if (_bCycle && t <= 0.1 && _lastSegment == _path.numSegments - 1)
 				dispatchEvent(new PathEvent(PathEvent.CYCLE));
 
 			_lastTime = t;
 
-			var multi:Number = _path.length*t;
+			var multi:Number = _path.numSegments*t;
 			_index = multi;
 
-			if (_index == _path.length) index--;
+			if (_index == _path.numSegments) index--;
 
 			if (_offset != null)
 				_target.position = _basePosition;
@@ -143,12 +152,12 @@ package away3d.animators
 
 					}
 
-					_worldAxis.x = 0;
-					_worldAxis.y = 1;
-					_worldAxis.z = 0;
-					_worldAxis = PathUtils.rotatePoint(_worldAxis, _rot);
+					_upAxis.x = 0;
+					_upAxis.y = 1;
+					_upAxis.z = 0;
+					_upAxis = Vector3DUtils.rotatePoint(_upAxis, _rot);
 
-					_target.lookAt(_basePosition, _worldAxis);
+					_target.lookAt(_basePosition, _upAxis);
 
 					rotate = true;
 
@@ -183,11 +192,11 @@ package away3d.animators
 			if (!_path)  throw new Error("No Path object set for this class");
 
 			t = (t < 0) ? 0 : (t > 1) ? 1 : t;
-			var m:Number = _path.length*t;
+			var m:Number = _path.numSegments*t;
 			var i:uint = m;
 			var ps:IPathSegment = _path.segments[i];
 
-			return PathUtils.calcPosition(m - i, ps, out);
+			return ps.getPointOnSegment(m - i, out);
 		}
 
 		/**
@@ -209,11 +218,11 @@ package away3d.animators
 
 			var t:Number = Math.abs(ms)/duration;
 			t = (t < 0) ? 0 : (t > 1) ? 1 : t;
-			var m:Number = _path.length*t;
+			var m:Number = _path.numSegments*t;
 			var i:uint = m;
 			var ps:IPathSegment = _path.segments[i];
 
-			return PathUtils.calcPosition(m - i, ps, out);
+			return ps.getPointOnSegment(m - i, out);
 		}
 
 		/**
@@ -241,10 +250,9 @@ package away3d.animators
 		 * defines the path to follow
 		 * @see Path
 		 */
-		public function set path(p:IPath):void
+		public function set path(value:IPath):void
 		{
-			_path = p;
-			_worldAxis = _path.worldAxis;
+			_path = value;
 		}
 
 		public function get path():IPath
@@ -275,7 +283,7 @@ package away3d.animators
 		public function getTimeSegment(t:Number = NaN):Number
 		{
 			t = (isNaN(t)) ? _time : t;
-			return Math.floor(path.length*t);
+			return Math.floor(_path.numSegments*t);
 		}
 
 		/**
@@ -317,9 +325,9 @@ package away3d.animators
 		/**
 		 * sets an optional Vector.&lt;Vector3D&gt; of rotations. if the object3d is animated along a PathExtrude object, use the very same vector to follow the "curves".
 		 */
-		public function set rotations(vRot:Vector.<Vector3D>):void
+		public function set rotations(value:Vector.<Vector3D>):void
 		{
-			_rotations = vRot;
+			_rotations = value;
 
 			if (_rotations && !_rot){
 				_rot = new Vector3D();
@@ -332,7 +340,7 @@ package away3d.animators
 		 */
 		public function set index(val:uint):void
 		{
-			_index = (val > _path.length - 1) ? _path.length - 1 : (val > 0) ? val : 0;
+			_index = (val > _path.numSegments - 1) ? _path.numSegments - 1 : (val > 0) ? val : 0;
 		}
 
 		/**
@@ -419,7 +427,7 @@ package away3d.animators
 
 		private function updatePosition(t:Number, ps:IPathSegment):void
 		{
-			_basePosition = PathUtils.calcPosition(t, ps, _basePosition);
+			_basePosition = ps.getPointOnSegment(t, _basePosition);
 
 			_position.x = _basePosition.x;
 			_position.y = _basePosition.y;
@@ -434,7 +442,7 @@ package away3d.animators
 				_tmpOffset.x = _offset.x;
 				_tmpOffset.y = _offset.y;
 				_tmpOffset.z = _offset.z;
-				_tmpOffset = PathUtils.rotatePoint(_tmpOffset, _rot);
+				_tmpOffset = Vector3DUtils.rotatePoint(_tmpOffset, _rot);
 
 				_position.x += _tmpOffset.x;
 				_position.y += _tmpOffset.y;

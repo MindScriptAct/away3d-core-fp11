@@ -4,7 +4,6 @@ package away3d.materials.passes
 	import away3d.cameras.Camera3D;
 	import away3d.core.base.IRenderable;
 	import away3d.core.managers.Stage3DProxy;
-	import away3d.core.math.Matrix3DUtils;
 	import away3d.events.ShadingMethodEvent;
 	import away3d.lights.DirectionalLight;
 	import away3d.lights.LightProbe;
@@ -19,7 +18,6 @@ package away3d.materials.passes
 	import away3d.materials.methods.ColorTransformMethod;
 	import away3d.materials.methods.EffectMethodBase;
 	import away3d.materials.methods.MethodVO;
-	import away3d.materials.methods.ShadingMethodBase;
 	import away3d.materials.methods.ShadingMethodBase;
 	import away3d.materials.methods.ShadowMapMethodBase;
 	import away3d.materials.utils.ShaderRegisterCache;
@@ -139,9 +137,7 @@ package away3d.materials.passes
 		private var _ambientLightR : Number;
 		private var _ambientLightG : Number;
 		private var _ambientLightB : Number;
-
-		private var _animatableAttributes : Array = ["va0"];
-		private var _animationTargetRegisters : Array = ["vt0"];
+		
 		private var _projectedTargetRegister : String;
 
 
@@ -453,6 +449,8 @@ package away3d.materials.passes
 			invalidateShaderProgram();
 		}
 
+
+
 		/**
 		 * @private
 		 */
@@ -496,11 +494,11 @@ package away3d.materials.passes
 		/**
 		 * @inheritDoc
 		 */
-		arcane override function getVertexCode() : String
+		arcane override function getVertexCode(code : String) : String
 		{
 			var normal : String = _animationTargetRegisters.length > 1? _animationTargetRegisters[1] : null;
 			var projectionVertexCode : String = getProjectionCode(_animationTargetRegisters[0], _projectedTargetRegister, normal);
-			_vertexCode = animation.getAGALVertexCode(this, _animatableAttributes, _animationTargetRegisters) + projectionVertexCode + _vertexCode;
+			_vertexCode = code + projectionVertexCode + _vertexCode;
 			return _vertexCode;
 		}
 
@@ -747,9 +745,7 @@ package away3d.materials.passes
 			_vertexConstantData.length = (_numUsedVertexConstants-_vertexConstantIndex)*4;
 			_fragmentConstantData.length = _numUsedFragmentConstants*4;
 
-			// TODO: Just always use commons, send to methods
-			if (_commonsDataIndex >= 0)
-				initCommonsData();
+			initCommonsData();
 			if (_uvTransformIndex >= 0)
 				initUVTransformData();
 			if (_cameraPositionIndex >= 0)
@@ -790,7 +786,7 @@ package away3d.materials.passes
 		{
 			_fragmentConstantData[_commonsDataIndex] = .5;
 			_fragmentConstantData[_commonsDataIndex + 1] = 0;
-			_fragmentConstantData[_commonsDataIndex + 2] = 0;
+			_fragmentConstantData[_commonsDataIndex + 2] = .00001;
 			_fragmentConstantData[_commonsDataIndex + 3] = 1;
 		}
 
@@ -850,6 +846,7 @@ package away3d.materials.passes
 		 */
 		private function compile() : void
 		{
+			createCommons();
 			calculateDependencies();
 
 			if (_projectionDependencies > 0) compileProjCode();
@@ -1160,8 +1157,6 @@ package away3d.materials.passes
 			var b : ShaderRegisterElement;
 			var n : ShaderRegisterElement;
 
-			createCommons();
-
 			t = _registerCache.getFreeFragmentVectorTemp();
 			_registerCache.addFragmentTempUsages(t, 1);
 			b = _registerCache.getFreeFragmentVectorTemp();
@@ -1193,7 +1188,7 @@ package away3d.materials.passes
 
 		private function createCommons() : void
 		{
-			_commonsReg ||= _registerCache.getFreeFragmentConstant();
+			_commonsReg = _registerCache.getFreeFragmentConstant();
 			_commonsDataIndex = _commonsReg.index*4;
 		}
 
@@ -1220,11 +1215,11 @@ package away3d.materials.passes
 			initLightRegisters();
 
 			_vertexCode += _diffuseMethod.getVertexCode(_diffuseMethodVO, _registerCache);
-			_fragmentCode += _diffuseMethod.getFragmentAGALPreLightingCode(_diffuseMethodVO, _registerCache);
+			_fragmentCode += _diffuseMethod.getFragmentPreLightingCode(_diffuseMethodVO, _registerCache);
 
 			if (_usingSpecularMethod) {
 				_vertexCode += _specularMethod.getVertexCode(_specularMethodVO, _registerCache);
-				_fragmentCode += _specularMethod.getFragmentAGALPreLightingCode(_specularMethodVO, _registerCache);
+				_fragmentCode += _specularMethod.getFragmentPreLightingCode(_specularMethodVO, _registerCache);
 			}
 
 			_diffuseLightIndex = 0;
@@ -1258,6 +1253,11 @@ package away3d.materials.passes
 				_fragmentCode += _shadowMethod.getFragmentCode(_shadowMethodVO, _registerCache, shadowReg);
 			}
 			_fragmentCode += _diffuseMethod.getFragmentPostLightingCode(_diffuseMethodVO, _registerCache, _shadedTargetReg);
+
+			if (_alphaPremultiplied) {
+				_fragmentCode += "add " + _shadedTargetReg + ".w, " + _shadedTargetReg + ".w, " + _commonsReg + ".z\n" +
+								 "div " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".xyz, " + _shadedTargetReg + ".w\n";
+			}
 
 			// resolve other dependencies as well?
 			if (_diffuseMethodVO.needsNormals) _registerCache.removeFragmentTempUsage(_normalFragmentReg);

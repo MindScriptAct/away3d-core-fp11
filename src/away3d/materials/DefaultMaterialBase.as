@@ -8,7 +8,6 @@
 	import away3d.materials.methods.BasicNormalMethod;
 	import away3d.materials.methods.BasicSpecularMethod;
 	import away3d.materials.methods.EffectMethodBase;
-	import away3d.materials.methods.ShadingMethodBase;
 	import away3d.materials.methods.ShadowMapMethodBase;
 	import away3d.materials.passes.DefaultScreenPass;
 	import away3d.textures.Texture2DBase;
@@ -53,7 +52,7 @@
 			_distancePass.alphaThreshold = value;
 		}
 
-		arcane override function activateForDepth(stage3DProxy : Stage3DProxy, camera : Camera3D, distanceBased : Boolean = false) : void
+		arcane override function activateForDepth(stage3DProxy : Stage3DProxy, camera : Camera3D, distanceBased : Boolean = false, textureRatioX : Number = 1, textureRatioY : Number = 1) : void
 		{
 			if (distanceBased) {
 				_distancePass.alphaMask = _screenPass.diffuseMethod.texture;
@@ -61,7 +60,7 @@
 			else {
 				_depthPass.alphaMask = _screenPass.diffuseMethod.texture;
 			}
-			super.activateForDepth(stage3DProxy, camera, distanceBased);
+			super.activateForDepth(stage3DProxy, camera, distanceBased, textureRatioX, textureRatioY);
 		}
 
 		/**

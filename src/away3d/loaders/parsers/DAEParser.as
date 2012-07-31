@@ -1,17 +1,15 @@
 //original author Tim Knip
 package away3d.loaders.parsers
 {
+	import away3d.materials.utils.DefaultMaterialManager;
+	import away3d.animators.SkeletonAnimationSet;
+	import away3d.animators.SkeletonAnimationState;
+	import away3d.animators.data.JointPose;
+	import away3d.animators.data.Skeleton;
+	import away3d.animators.data.SkeletonJoint;
+	import away3d.animators.data.SkeletonPose;
+	import away3d.animators.nodes.SkeletonClipNode;
 	import away3d.arcane;
-	import away3d.animators.AnimatorBase;
-	import away3d.animators.SmoothSkeletonAnimator;
-	import away3d.animators.data.AnimationSequenceBase;
-	import away3d.animators.data.SkeletonAnimation;
-	import away3d.animators.data.SkeletonAnimationSequence;
-	import away3d.animators.data.SkeletonAnimationState;
-	import away3d.animators.skeleton.JointPose;
-	import away3d.animators.skeleton.Skeleton;
-	import away3d.animators.skeleton.SkeletonJoint;
-	import away3d.animators.skeleton.SkeletonPose;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.base.Geometry;
 	import away3d.core.base.SkinnedSubGeometry;
@@ -19,21 +17,21 @@ package away3d.loaders.parsers
 	import away3d.entities.Mesh;
 	import away3d.library.assets.BitmapDataAsset;
 	import away3d.loaders.misc.ResourceDependency;
-	import away3d.materials.TextureMaterial;
-	import away3d.textures.BitmapTexture;
-	import away3d.textures.Texture2DBase;
 	import away3d.materials.ColorMaterial;
 	import away3d.materials.MaterialBase;
+	import away3d.materials.TextureMaterial;
 	import away3d.materials.methods.BasicAmbientMethod;
 	import away3d.materials.methods.BasicDiffuseMethod;
 	import away3d.materials.methods.BasicSpecularMethod;
+	import away3d.textures.BitmapTexture;
+	import away3d.textures.Texture2DBase;
 	import away3d.tools.utils.TextureUtils;
-	
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
 	import flash.net.URLRequest;
+	
 	
 	use namespace arcane;
 	
@@ -70,9 +68,9 @@ package away3d.loaders.parsers
 		private var _rootContainer : ObjectContainer3D;
 		private var _geometries : Vector.<Geometry>;
 		private var _animationInfo : DAEAnimationInfo;
-		private var _animators : Vector.<AnimatorBase>;
-		private var _sequences : Vector.<AnimationSequenceBase>;
-		private var _defaultBitmapMaterial:TextureMaterial;
+		//private var _animators : Vector.<AnimatorBase>;
+		private var _states : Vector.<SkeletonAnimationState>;
+		private var _defaultBitmapMaterial:TextureMaterial = DefaultMaterialManager.getDefaultMaterial();
 		private var _defaultColorMaterial:ColorMaterial = new ColorMaterial(0xff0000);
 		private static var _numInstances:uint = 0;
 		
@@ -210,8 +208,8 @@ package away3d.loaders.parsers
 					_scene = null;
 					_root = null;
 					_libAnimations = parseLibrary(_doc._ns::library_animations._ns::animation, DAEAnimation);
-					_animators = new Vector.<AnimatorBase>();
-					_sequences = new Vector.<AnimationSequenceBase>();
+					//_animators = new Vector.<AnimatorBase>();
+					_states = new Vector.<SkeletonAnimationState>();
 					
 					if (_doc.._ns::scene && _doc.._ns::scene.length()) {
 						_scene = new DAEScene(_doc.._ns::scene[0]);
@@ -244,8 +242,11 @@ package away3d.loaders.parsers
 		
 		private function buildDefaultMaterial(map:BitmapData = null):TextureMaterial
 		{
-			var bmt:BitmapTexture = new BitmapTexture(map || defaultBitmapData);
-			_defaultBitmapMaterial = new TextureMaterial(bmt);
+			//TODO:fix this duplication mess
+			if (map)
+				_defaultBitmapMaterial = new TextureMaterial(new BitmapTexture(map));
+			else
+				_defaultBitmapMaterial = DefaultMaterialManager.getDefaultMaterial();
 			
 			return _defaultBitmapMaterial;
 		}
@@ -444,9 +445,9 @@ package away3d.loaders.parsers
 			var geometry : Geometry;
 			var mesh : Mesh;
 			var skeleton : Skeleton;
-			var sequence : AnimationSequenceBase;
-			var anim:SkeletonAnimation;
-			var animator : AnimatorBase;
+			var state : SkeletonAnimationState;
+			//var anim:SkeletonAnimation;
+			var animationSet : SkeletonAnimationSet;
 			var i : uint, j : uint;
 			var hasMaterial:Boolean;
 			var weights:uint;
@@ -481,35 +482,43 @@ package away3d.loaders.parsers
 				container.addChild(mesh);
 				
 				if (controller.skin && controller.skin.userData is Skeleton) {
+					
+					if (!animationSet)
+						animationSet = new SkeletonAnimationSet(controller.skin.maxBones);
+					
 					skeleton = controller.skin.userData as Skeleton;
 					
-					sequence = processSkinAnimation(controller.skin, mesh, skeleton);
-					sequence.looping = true;
+					state = processSkinAnimation(controller.skin, mesh, skeleton);
+					state.looping = true;
 					
 					weights = SkinnedSubGeometry(mesh.geometry.subGeometries[0]).jointIndexData.length;
 					jpv = weights / (mesh.geometry.subGeometries[0].vertexData.length/3);
-					anim = new SkeletonAnimation(skeleton, jpv);
+					//anim = new SkeletonAnimation(skeleton, jpv);
 					
-					var state:SkeletonAnimationState = SkeletonAnimationState(mesh.animationState);
-					animator = new SmoothSkeletonAnimator(state);
-					SmoothSkeletonAnimator(animator).addSequence(SkeletonAnimationSequence(sequence));
+					//var state:SkeletonAnimationState = SkeletonAnimationState(mesh.animationState);
+					//animator = new SmoothSkeletonAnimator(state);
+					//SmoothSkeletonAnimator(animator).addSequence(SkeletonAnimationSequence(sequence));
+					animationSet.addState("state_" + _states.length, state);
 					
-					_animators.push(animator);
-					_sequences.push(sequence);
-
-					finalizeAsset(animator, sequence.name);
+					//_animators.push(animator);
+					_states.push(state);
+					finalizeAsset(state, state.name);
 				}
 				
 				finalizeAsset(mesh);
 				
+				
 				break;
 			}
+			
+			if (animationSet)
+				finalizeAsset(animationSet);
 		}
 		
-		private function processSkinAnimation(skin : DAESkin, mesh : Mesh, skeleton : Skeleton) : SkeletonAnimationSequence
+		private function processSkinAnimation(skin : DAESkin, mesh : Mesh, skeleton : Skeleton) : SkeletonAnimationState
 		{
-			var useGPU : Boolean = _configFlags & CONFIG_USE_GPU ? true : false;
-			var animation : SkeletonAnimation = new SkeletonAnimation(skeleton, skin.maxBones, useGPU);
+			//var useGPU : Boolean = _configFlags & CONFIG_USE_GPU ? true : false;
+			//var animation : SkeletonAnimation = new SkeletonAnimation(skeleton, skin.maxBones, useGPU);
 			var animated : Boolean = isAnimatedSkeleton(skeleton);
 			var duration : Number = _animationInfo.numFrames == 0 ? 1.0 :  _animationInfo.maxTime - _animationInfo.minTime;
 			var numFrames : int = Math.max(_animationInfo.numFrames, (animated ? 50 : 2));
@@ -517,8 +526,9 @@ package away3d.loaders.parsers
 			 
 			var t : Number = 0;
 			var i : uint, j : uint;
-			var sequence : SkeletonAnimationSequence = new SkeletonAnimationSequence("seq_" + _sequences.length);
-			mesh.geometry.animation = animation;
+			var clip : SkeletonClipNode = new SkeletonClipNode();
+			var state : SkeletonAnimationState = new SkeletonAnimationState(clip);
+			//mesh.geometry.animation = animation;
 			var skeletonPose : SkeletonPose;
 			var identity:Matrix3D;
 			var matrix : Matrix3D;
@@ -545,10 +555,12 @@ package away3d.loaders.parsers
 				}
 				
 				t += frameDuration;
-				sequence.addFrame(skeletonPose, frameDuration * 1000);
+				clip.addFrame(skeletonPose, frameDuration * 1000);
 			}
 			
-			return sequence;
+			finalizeAsset(clip);
+			
+			return state;
 		}
 		
 		private function isAnimatedSkeleton(skeleton : Skeleton) : Boolean
@@ -586,7 +598,7 @@ package away3d.loaders.parsers
 					effects = getMeshEffects(instance.bind_material, daeGeometry.mesh);
 					 
 					if (geometry) {
-						mesh = new Mesh(geometry, (effects.length == 0)? _defaultBitmapMaterial : null);
+						mesh = new Mesh(geometry);
 						
 						if(daeGeometry.meshName && daeGeometry.meshName != "")
 							mesh.name = daeGeometry.meshName;
@@ -653,8 +665,14 @@ package away3d.loaders.parsers
 			
 			var joint : SkeletonJoint = new SkeletonJoint();
 			joint.parentIndex = parent;
-			if(skin.joints[jointIndex]) joint.name = skin.joints[jointIndex];
-			
+
+			if(!isNaN(jointIndex) && jointIndex<skin.joints.length){
+				if(skin.joints[jointIndex]) joint.name = skin.joints[jointIndex];
+			} else {
+				trace("Error: skin.joints index out of range");
+				return;
+			}
+
 			var ibm:Matrix3D = skin.inv_bind_matrix[jointIndex];
 			
 			joint.inverseBindPose = ibm.rawData;
@@ -689,8 +707,7 @@ package away3d.loaders.parsers
 					mat = textureMaterial = buildDefaultMaterial(image.resource.bitmapData);
 				
 			} else if (diffuse && diffuse.color) {
-				var bmd:BitmapData = new BitmapData(256, 256, true, 0xff << 24 | diffuse.color.rgb);
-				mat = textureMaterial = buildDefaultMaterial(bmd);
+				mat = textureMaterial = buildDefaultMaterial();
 			}
 			
 			if (textureMaterial) {

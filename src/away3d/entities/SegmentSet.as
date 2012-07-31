@@ -1,9 +1,7 @@
 ﻿package away3d.entities
 {
 
-	import away3d.animators.data.AnimationBase;
-	import away3d.animators.data.AnimationStateBase;
-	import away3d.animators.data.NullAnimation;
+	import away3d.animators.IAnimator;
 	import away3d.arcane;
 	import away3d.bounds.BoundingSphere;
 	import away3d.bounds.BoundingVolumeBase;
@@ -32,10 +30,9 @@
 		protected var _segments:Vector.<Segment>;
 
 		private var _material:MaterialBase;
-		private var _nullAnimation:NullAnimation;
-		private var _animationState:AnimationStateBase;
 		private var _vertices:Vector.<Number>;
-
+		private var _animator : IAnimator;
+		
 		private var _numVertices:uint;
 		private var _indices:Vector.<uint>;
 		private var _numIndices:uint;
@@ -55,8 +52,7 @@
 		public function SegmentSet()
 		{
 			super();
-
-			_nullAnimation ||= new NullAnimation();
+			
 			_vertices = new Vector.<Number>();
 			_segments = new Vector.<Segment>();
 			_numVertices = 0;
@@ -174,6 +170,7 @@
 			var index:uint;
 			for( var i:uint = 0; i < _segments.length; ++i ) {
 				if( _segments[i] == segment ) {
+					segment.segmentsBase = null;
 					_segments.splice( i, 1 );
 					removeSegmentByIndex( segment.index );
 					segment = null;
@@ -312,18 +309,8 @@
 			return _material;
 		}
 
-		/**
-		 * COMMENT : todo 
-		 */
-		public function get animation():AnimationBase {
-			return _nullAnimation;
-		}
-
-		/**
-		 * COMMENT : todo 
-		 */
-		public function get animationState():AnimationStateBase {
-			return _animationState;
+		public function get animator():IAnimator {
+			return _animator;
 		}
 
 		/**

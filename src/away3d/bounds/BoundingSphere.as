@@ -20,7 +20,7 @@ package away3d.bounds
 		private var _centerX : Number = 0;
 		private var _centerY : Number = 0;
 		private var _centerZ : Number = 0;
-		
+
 		/**
 		 * The radius of the bounding sphere, calculated from the contents of the entity.
 		 */
@@ -28,14 +28,14 @@ package away3d.bounds
 		{
 			return _radius;
 		}
-		
+
 		/**
 		 * Creates a new <code>BoundingSphere</code> object
 		 */
 		public function BoundingSphere()
 		{
 		}
-		
+
 		/**
 		 * @inheritDoc
 		 */
@@ -45,7 +45,7 @@ package away3d.bounds
 			_centerX = _centerY = _centerZ = 0;
 			_radius = 0;
 		}
-		
+
 		/**
 		 * todo: pass planes?
 		 * @inheritDoc
@@ -132,7 +132,7 @@ package away3d.bounds
 
 			return true;
 		}
-		
+
 		/**
 		 * @inheritDoc
 		 */
@@ -154,7 +154,7 @@ package away3d.bounds
 
 		// TODO: fromGeometry can probably be updated a lot
 		// find center from extremes, but radius from actual furthest distance from center
-		
+
 		/**
 		 * @inheritDoc
 		 */
@@ -173,7 +173,7 @@ package away3d.bounds
 			_radius = d * Math.sqrt(.5);
 			super.fromExtremes(minX, minY, minZ, maxX, maxY, maxZ);
 		}
-		
+
 		/**
 		 * @inheritDoc
 		 */
@@ -183,52 +183,36 @@ package away3d.bounds
 			clone.fromSphere(new Vector3D(_centerX, _centerY, _centerZ), _radius);
 			return clone;
 		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		override public function intersectsRay(position : Vector3D, direction : Vector3D, pickingCollisionVO:PickingCollisionVO) : Boolean
-		{
+
+		override public function rayIntersection(position:Vector3D, direction:Vector3D, targetNormal:Vector3D):Number {
+			if (containsPoint(position)) return 0;
 
 			var px : Number = position.x - _centerX, py : Number = position.y - _centerY, pz : Number = position.z - _centerZ;
 			var vx : Number = direction.x, vy : Number = direction.y, vz : Number = direction.z;
 			var rayEntryDistance:Number;
-			var rayOriginIsInsideBounds:Boolean;
-			
+
 			var a : Number = vx * vx + vy * vy + vz * vz;
 			var b : Number = 2 * ( px * vx + py * vy + pz * vz );
 			var c : Number = px * px + py * py + pz * pz - _radius * _radius;
 			var det : Number = b * b - 4 * a * c;
-			
+
 			if (det >= 0) { // ray goes through sphere
 				var sqrtDet : Number = Math.sqrt(det);
 				rayEntryDistance = ( -b - sqrtDet ) / ( 2 * a );
-				
-				// accept cases on which the ray starts inside the bounds
-				if( rayEntryDistance < 0 && (rayOriginIsInsideBounds = containsPoint(position)) )
-					rayEntryDistance = 0;
-				
 				if (rayEntryDistance >= 0) {
-					pickingCollisionVO.localPosition = new Vector3D(px + rayEntryDistance * vx, py + rayEntryDistance * vy, pz + rayEntryDistance * vz);
-					pickingCollisionVO.localNormal = pickingCollisionVO.localPosition.clone();
-					pickingCollisionVO.localNormal.normalize();
-					pickingCollisionVO.rayEntryDistance = rayEntryDistance;
-					pickingCollisionVO.rayOriginIsInsideBounds = rayOriginIsInsideBounds;
-					
-					return true;
+					targetNormal.x = px + rayEntryDistance * vx;
+					targetNormal.y = py + rayEntryDistance * vy;
+					targetNormal.z = pz + rayEntryDistance * vz;
+					targetNormal.normalize();
+
+					return rayEntryDistance;
 				}
 			}
-			/*else if( det == 0 ) { // ray touches the sphere at a tangent ( very rare )
-			 t = -b / ( 2 * a );
-			 if( t > 0 ) {
-			 return t;
-			 }
-			 }*/
 
 			// ray misses sphere
-			return false;
+			return -1;
 		}
-		
+
 		/**
 		 * @inheritDoc
 		 */
@@ -238,7 +222,7 @@ package away3d.bounds
 			var distance : Number = Math.sqrt(px * px + py * py + pz * pz);
 			return distance <= _radius;
 		}
-		
+
 		override protected function updateBoundingRenderable() : void
 		{
 			var sc : Number = _radius;
@@ -250,7 +234,7 @@ package away3d.bounds
 			_boundingRenderable.y = _centerY;
 			_boundingRenderable.z = _centerZ;
 		}
-		
+
 		override protected function createBoundingRenderable() : WireframePrimitiveBase
 		{
 			return new WireframeSphere(1);

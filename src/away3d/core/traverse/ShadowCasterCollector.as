@@ -22,7 +22,6 @@ package away3d.core.traverse
 		 */
 		public function ShadowCasterCollector()
 		{
-			_entities = new Vector.<Entity>();
 		}
 
 		/**

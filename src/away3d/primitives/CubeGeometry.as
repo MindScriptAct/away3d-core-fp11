@@ -21,13 +21,12 @@ package away3d.primitives
 
 		/**
 		 * Creates a new Cube object.
-		 * @param material The material with which to render the object.
 		 * @param width The size of the cube along its X-axis.
 		 * @param height The size of the cube along its Y-axis.
 		 * @param depth The size of the cube along its Z-axis.
-		 * @param segmentsW The number of segments that make up the cube along the X-axis. Defaults to 1.
-		 * @param segmentsH The number of segments that make up the cube along the Y-axis. Defaults to 1.
-		 * @param segmentsD The number of segments that make up the cube along the Z-axis. Defaults to 1.
+		 * @param segmentsW The number of segments that make up the cube along the X-axis.
+		 * @param segmentsH The number of segments that make up the cube along the Y-axis.
+		 * @param segmentsD The number of segments that make up the cube along the Z-axis.
 		 * @param tile6 The type of uv mapping to use. When true, a texture will be subdivided in a 2x3 grid, each used for a single face. When false, the entire image is mapped on each face.
 		 */
 		public function CubeGeometry(width : Number = 100, height : Number = 100, depth : Number = 100,
@@ -87,8 +86,12 @@ package away3d.primitives
 		}
 
 		/**
-		 * The type of uv mapping to use. When true, a texture will be subdivided in a 2x3 grid, each used for a single
-		 * face. When false, the entire image is mapped on each face.
+		 * The type of uv mapping to use. When false, the entire image is mapped on each face. 
+		 * When true, a texture will be subdivided in a 3x2 grid, each used for a single face.
+		 * Reading the tiles from left to right, top to bottom they represent the faces of the
+		 * cube in the following order: bottom, top, back, left, front, right. This creates
+		 * several shared edges (between the top, front, left and right faces) which simplifies
+		 * texture painting.
 		 */
 		public function get tile6() : Boolean
 		{
@@ -296,20 +299,20 @@ package away3d.primitives
 			
 			inc += 2*(_segmentsW + 1)*(_segmentsD + 1);
 			
-			for (i = 0; i <= _segmentsH; i++) {
-				outer_pos = -hh + i*dh;
+			for (i = 0; i <= _segmentsD; i++) {
+				outer_pos = hd - i*dd;
 
-				for (j = 0; j <= _segmentsD; j++) {
+				for (j = 0; j <= _segmentsH; j++) {
 					// left
 					vertexNormals[vidx] = -1;
 					vertexTangents[vidx] = 0;
 					vertices[vidx++] = -hw;
 					vertexNormals[vidx] = 0;
 					vertexTangents[vidx] = 0;
-					vertices[vidx++] = outer_pos;
+					vertices[vidx++] = -hh + j*dh;
 					vertexNormals[vidx] = 0;
 					vertexTangents[vidx] = -1;
-					vertices[vidx++] = -hd + j*dd;
+					vertices[vidx++] = outer_pos;
 					
 					// right
 					vertexNormals[vidx] = 1;
@@ -317,14 +320,14 @@ package away3d.primitives
 					vertices[vidx++] = hw;
 					vertexNormals[vidx] = 0;
 					vertexTangents[vidx] = 0;
-					vertices[vidx++] = outer_pos;
+					vertices[vidx++] = -hh + j*dh;
 					vertexNormals[vidx] = 0;
 					vertexTangents[vidx] = 1;
-					vertices[vidx++] = -hd + j*dd;
+					vertices[vidx++] = outer_pos;
 
 					if (i && j) {
-						tl = inc + 2 * ((i-1) * (_segmentsD + 1) + (j-1));
-						tr = inc + 2 * (i * (_segmentsD + 1) + (j-1));
+						tl = inc + 2 * ((i-1) * (_segmentsH + 1) + (j-1));
+						tr = inc + 2 * (i * (_segmentsH + 1) + (j-1));
 						bl = tl + 2;
 						br = tr + 2;
 						
@@ -355,14 +358,14 @@ package away3d.primitives
 		 */
 		override protected function buildUVs(target : SubGeometry) : void
 		{
+			var i : uint, j : uint, uidx : uint = 0;
 			var uvData : Vector.<Number>;
-			var i : uint, j : uint, uidx  :  uint; // indices
-			var hw : Number, hh : Number, hd : Number; // halves
-			var dw : Number, dh : Number, dd : Number; // deltas
 
 			var u_tile_dim : Number, v_tile_dim : Number;
 			var u_tile_step : Number, v_tile_step : Number;
-			var outer_uv : Number;
+			var tl0u : Number, tl0v : Number;
+			var tl1u : Number, tl1v : Number;
+			var du : Number, dv : Number;
 
 			var numUvs : uint = ((_segmentsW + 1) * (_segmentsH + 1) +
 								(_segmentsW + 1) * (_segmentsD + 1) +
@@ -373,17 +376,6 @@ package away3d.primitives
 			else
 				uvData = new Vector.<Number>(numUvs, true);
 
-
-			// half cube dimensions
-			hw = _width/2;
-			hh = _height/2;
-			hd = _height/2;
-
-			// Segment dimensions
-			dw = _width/_segmentsW;
-			dh = _height/_segmentsH;
-			dd = _depth/_segmentsD;
-
 			if (_tile6) {
 				u_tile_dim = u_tile_step = 1/3;
 				v_tile_dim = v_tile_step = 1/2;
@@ -392,37 +384,64 @@ package away3d.primitives
 				u_tile_dim = v_tile_dim = 1;
 				u_tile_step = v_tile_step = 0;
 			}
-
-			for (i = 0; i <= _segmentsW; i++) {
-				outer_uv = u_tile_dim * (i/_segmentsW);
-
-				for (j = 0; j <= _segmentsH; j++) {
-					uvData[uidx++] = outer_uv;
-					uvData[uidx++] = 1-v_tile_dim * (j/_segmentsH);
-					uvData[uidx++] = 1-outer_uv;
-					uvData[uidx++] = 1-(v_tile_step + v_tile_dim * (j/_segmentsH));
+			
+			// Create planes two and two, the same way that they were
+			// constructed in the buildGeometry() function. First calculate
+			// the top-left UV coordinate for both planes, and then loop
+			// over the points, calculating the UVs from these numbers.
+			
+			// When tile6 is true, the layout is as follows:
+			//       .-----.-----.-----. (1,1)
+			//       | Bot |  T  | Bak |
+			//       |-----+-----+-----|
+			//       |  L  |  F  |  R  |
+			// (0,0)'-----'-----'-----'
+			
+			// FRONT / BACK
+			tl0u = 1 * u_tile_step;
+			tl0v = 1 * v_tile_step;
+			tl1u = 2 * u_tile_step;
+			tl1v = 0 * v_tile_step;
+			du = u_tile_dim / _segmentsW;
+			dv = v_tile_dim / _segmentsH;
+			for (i=0; i<=_segmentsW; i++) {
+				for (j=0; j<=_segmentsH; j++) {
+					uvData[uidx++] = tl0u + i * du;
+					uvData[uidx++] = tl0v + (v_tile_dim - j * dv);
+					uvData[uidx++] = tl1u + (u_tile_dim - i * du);
+					uvData[uidx++] = tl1v + (v_tile_dim - j * dv);
 				}
 			}
-
-			for (i = 0; i <= _segmentsW; i++) {
-				outer_uv = u_tile_step + u_tile_dim * (i/_segmentsW);
-
-				for (j = 0; j <= _segmentsD; j++) {
-					uvData[uidx++] = outer_uv;
-					uvData[uidx++] = 1-v_tile_dim * (j/_segmentsD);
-					uvData[uidx++] = outer_uv;
-					uvData[uidx++] = v_tile_step + v_tile_dim * (j/_segmentsD);
+			
+			// TOP / BOTTOM
+			tl0u = 1 * u_tile_step;
+			tl0v = 0 * v_tile_step;
+			tl1u = 0 * u_tile_step;
+			tl1v = 0 * v_tile_step;
+			du = u_tile_dim / _segmentsW;
+			dv = v_tile_dim / _segmentsD;
+			for (i=0; i<=_segmentsW; i++) {
+				for (j=0; j<=_segmentsD; j++) {
+					uvData[uidx++] = tl0u + i * du;
+					uvData[uidx++] = tl0v + (v_tile_dim - j * dv);
+					uvData[uidx++] = tl1u + i * du;
+					uvData[uidx++] = tl1v + j * dv;
 				}
 			}
-
-			for (i = 0; i <= _segmentsH; i++) {
-				outer_uv = 2*u_tile_step + u_tile_dim * (i/_segmentsH);
-
-				for (j = 0; j <= _segmentsD; j++) {
-					uvData[uidx++] = 1-v_tile_dim * (j/_segmentsD);
-					uvData[uidx++] = 1-outer_uv;
-					uvData[uidx++] = v_tile_step + v_tile_dim * (j/_segmentsD);
-					uvData[uidx++] = 1-outer_uv;
+			
+			// LEFT / RIGHT
+			tl0u = 0 * u_tile_step;
+			tl0v = 1 * v_tile_step;
+			tl1u = 2 * u_tile_step;
+			tl1v = 1 * v_tile_step;
+			du = u_tile_dim / _segmentsD;
+			dv = v_tile_dim / _segmentsH;
+			for (i=0; i<=_segmentsD; i++) {
+				for (j=0; j<=_segmentsH; j++) {
+					uvData[uidx++] = tl0u + i * du;
+					uvData[uidx++] = tl0v + (v_tile_dim - j * dv);
+					uvData[uidx++] = tl1u + (u_tile_dim - i * du);
+					uvData[uidx++] = tl1v + (v_tile_dim - j * dv);
 				}
 			}
 

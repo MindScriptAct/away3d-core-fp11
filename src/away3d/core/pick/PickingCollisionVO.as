@@ -14,7 +14,10 @@ package away3d.core.pick
 	 */
 	public class PickingCollisionVO
 	{
-		private var _entity:Entity;
+		/**
+		 * The entity to which this collision object belongs.
+		 */
+		public var entity:Entity;
 		
 		/**
 		 * The local position of the collision on the entity's surface.
@@ -59,21 +62,13 @@ package away3d.core.pick
 		public var renderable:IRenderable;
 
 		/**
-		 * The entity to which this collision object belongs.
-		 */
-		public function get entity():Entity
-		{
-			return _entity;
-		}
-		
-		/**
 		 * Creates a new <code>PickingCollisionVO</code> object.
 		 * 
 		 * @param entity The entity to which this collision object belongs.
 		 */
 		function PickingCollisionVO(entity:Entity)
 		{
-			_entity = entity;
+			this.entity = entity;
 		}
 	}
 }

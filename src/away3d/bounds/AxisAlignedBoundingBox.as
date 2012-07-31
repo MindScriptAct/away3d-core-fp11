@@ -124,128 +124,98 @@ package away3d.bounds
 
 			return true;
 		}
-		
-		/**
-		 * @inheritDoc
-		 */
-		override public function intersectsRay( position:Vector3D, direction:Vector3D, pickingCollisionVO:PickingCollisionVO ):Boolean
-		{
+
+		override public function rayIntersection(position:Vector3D, direction:Vector3D, targetNormal:Vector3D):Number {
+			if (containsPoint(position)) return 0;
+
 			var px:Number = position.x - _centerX, py:Number = position.y - _centerY, pz:Number = position.z - _centerZ;
 			var vx:Number = direction.x, vy:Number = direction.y, vz:Number = direction.z;
 			var ix:Number, iy:Number, iz:Number;
 			var rayEntryDistance:Number;
-			var localNormal:Vector3D;
-			var rayOriginIsInsideBounds:Boolean;
-			
-			// possible tests
-			var testPosX:Boolean = true, testNegX:Boolean = true, testPosY:Boolean = true;
-			var testNegY:Boolean = true, testPosZ:Boolean = true, testNegZ:Boolean = true;
-
-			// discard tests 1: ray is parallel to some sides?
-			if( vx == 0 ) testNegX = testPosX = false;
-			if( vy == 0 ) testPosY = testNegY = false;
-			if( vz == 0 ) testPosZ = testNegZ = false;
-
-			// discard tests 2: ray hits sides from the back?
-			if( vx < 0 ) testNegX = false;
-			else if( vx > 0 ) testPosX = false;
-			if( vy < 0 ) testNegY = false;
-			else if( vy > 0 ) testPosY = false;
-			if( vz < 0 ) testNegZ = false;
-			else if( vz > 0 ) testPosZ = false;
 
 			// ray-plane tests
 			var intersects:Boolean;
-
-			// X
-			if( testPosX ) {
+			if( vx < 0 ) {
 				rayEntryDistance = ( _halfExtentsX - px ) / vx;
 				if( rayEntryDistance > 0 ) {
 					iy = py + rayEntryDistance * vy;
 					iz = pz + rayEntryDistance * vz;
 					if( iy > -_halfExtentsY && iy < _halfExtentsY && iz > -_halfExtentsZ && iz < _halfExtentsZ ) {
-						localNormal = new Vector3D( 1, 0, 0 );
+						targetNormal.x = 1;
+						targetNormal.y = 0;
+						targetNormal.z = 0;
+
 						intersects = true;
 					}
 				}
 			}
-			if( !intersects && testNegX ) {
+			if( !intersects && vx > 0 ) {
 				rayEntryDistance = ( -_halfExtentsX - px ) / vx;
 				if( rayEntryDistance > 0 ) {
 					iy = py + rayEntryDistance * vy;
 					iz = pz + rayEntryDistance * vz;
-					if( iy > -_halfExtentsY && iy < _halfExtentsY && iz > -_halfExtentsZ && iz < _halfExtentsZ ) {
-						localNormal = new Vector3D( -1, 0, 0 );
+					if( iy > -_halfExtentsY && iy < _halfExtentsY && iz > -_halfExtentsZ && iz < _halfExtentsZ) {
+						targetNormal.x = -1;
+						targetNormal.y = 0;
+						targetNormal.z = 0;
 						intersects = true;
 					}
 				}
 			}
-
-			// Y
-			if( !intersects && testPosY ) {
+			if( !intersects && vy < 0 ) {
 				rayEntryDistance = ( _halfExtentsY - py ) / vy;
 				if( rayEntryDistance > 0 ) {
 					ix = px + rayEntryDistance * vx;
 					iz = pz + rayEntryDistance * vz;
 					if( ix > -_halfExtentsX && ix < _halfExtentsX && iz > -_halfExtentsZ && iz < _halfExtentsZ ) {
-						localNormal = new Vector3D( 0, 1, 0 );
+						targetNormal.x = 0;
+						targetNormal.y = 1;
+						targetNormal.z = 0;
 						intersects = true;
 					}
 				}
 			}
-			if( !intersects && testNegY ) {
+			if( !intersects && vy > 0 ) {
 				rayEntryDistance = ( -_halfExtentsY - py ) / vy;
 				if( rayEntryDistance > 0 ) {
 					ix = px + rayEntryDistance * vx;
 					iz = pz + rayEntryDistance * vz;
 					if( ix > -_halfExtentsX && ix < _halfExtentsX && iz > -_halfExtentsZ && iz < _halfExtentsZ ) {
-						localNormal = new Vector3D( 0, -1, 0 );
+						targetNormal.x = 0;
+						targetNormal.y = -1;
+						targetNormal.z = 0;
 						intersects = true;
 					}
 				}
 			}
-
-			// Z
-			if( !intersects && testPosZ ) {
+			if( !intersects && vz < 0 ) {
 				rayEntryDistance = ( _halfExtentsZ - pz ) / vz;
 				if( rayEntryDistance > 0 ) {
 					ix = px + rayEntryDistance * vx;
 					iy = py + rayEntryDistance * vy;
-					if( iy > -_halfExtentsY && iy < _halfExtentsY && ix > -_halfExtentsX && ix < _halfExtentsX ) {
-						localNormal = new Vector3D( 0, 0, 1);
+					if( iy > -_halfExtentsY && iy < _halfExtentsY && ix > -_halfExtentsX && ix < _halfExtentsX) {
+						targetNormal.x = 0;
+						targetNormal.y = 0;
+						targetNormal.z = 1;
 						intersects = true;
 					}
 				}
 			}
-			if( !intersects && testNegZ ) {
+			if( !intersects && vz > 0 ) {
 				rayEntryDistance = ( -_halfExtentsZ - pz ) / vz;
 				if( rayEntryDistance > 0 ) {
 					ix = px + rayEntryDistance * vx;
 					iy = py + rayEntryDistance * vy;
 					if( iy > -_halfExtentsY && iy < _halfExtentsY && ix > -_halfExtentsX && ix < _halfExtentsX ) {
-						localNormal = new Vector3D( 0, 0, -1 );
+						targetNormal.x = 0;
+						targetNormal.y = 0;
+						targetNormal.z = -1;
 						intersects = true;
 					}
 				}
 			}
-			
-			// accept cases on which the ray starts inside the bounds
-			if( rayEntryDistance < 0 && (rayOriginIsInsideBounds = containsPoint(position)) ) {
-				rayEntryDistance = 0;
-				intersects = true;
-			}
-			
-			if (intersects) {
-				pickingCollisionVO.localNormal = localNormal;
-				pickingCollisionVO.localPosition = new Vector3D(position.x + rayEntryDistance*direction.x, position.y + rayEntryDistance*direction.y, position.z + rayEntryDistance*direction.z);
-				pickingCollisionVO.rayEntryDistance = rayEntryDistance;
-				pickingCollisionVO.rayOriginIsInsideBounds = rayOriginIsInsideBounds;
-				
-				return true;
-			}
-			
-			
-			return false;
+
+			return intersects ? rayEntryDistance : -1;
 		}
 		
 		/**

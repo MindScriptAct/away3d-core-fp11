@@ -1,16 +1,17 @@
 package away3d.loaders.parsers
 {
-	import away3d.animators.data.SkeletonAnimation;
-	import away3d.animators.skeleton.Skeleton;
-	import away3d.animators.skeleton.SkeletonJoint;
+	import away3d.animators.SkeletonAnimationSet;
+	import away3d.animators.SkeletonAnimator;
+	import away3d.animators.data.Skeleton;
+	import away3d.animators.data.SkeletonJoint;
 	import away3d.arcane;
 	import away3d.core.base.Geometry;
 	import away3d.core.base.SkinnedSubGeometry;
 	import away3d.core.math.Quaternion;
 	import away3d.entities.Mesh;
-
 	import flash.geom.Matrix3D;
 	import flash.geom.Vector3D;
+
 
 	use namespace arcane;
 
@@ -58,7 +59,7 @@ package away3d.loaders.parsers
 		private var _geometry : Geometry;
 
 		private var _skeleton : Skeleton;
-		private var _animation : SkeletonAnimation;
+		private var _animationSet : SkeletonAnimationSet;
 
 		private var _rotationQuat : Quaternion;
 
@@ -69,20 +70,13 @@ package away3d.loaders.parsers
 		{
 			super(ParserDataFormat.PLAIN_TEXT);
 			_rotationQuat = new Quaternion();
-			var t1 : Quaternion = new Quaternion();
-			var t2 : Quaternion = new Quaternion();
 
-			t1.fromAxisAngle(Vector3D.X_AXIS, -Math.PI * .5);
-			t2.fromAxisAngle(Vector3D.Y_AXIS, Math.PI * .5);
+			_rotationQuat.fromAxisAngle(Vector3D.X_AXIS, -Math.PI * .5);
 
 			if (additionalRotationAxis) {
-				var t3 : Quaternion = new Quaternion();
-				t3.multiply(t2, t1);
-				t1.fromAxisAngle(additionalRotationAxis, additionalRotationRadians);
-				_rotationQuat.multiply(t1, t3);
-			}
-			else {
-				_rotationQuat.multiply(t2, t1);
+				var quat : Quaternion = new Quaternion();
+				quat.fromAxisAngle(additionalRotationAxis, additionalRotationRadians);
+				_rotationQuat.multiply(_rotationQuat, quat);
 			}
 		}
 
@@ -108,14 +102,6 @@ package away3d.loaders.parsers
 			data = null;
 			// todo: implement
 			return false;
-		}
-
-		/**
-		 * COMMENT : todo
-		 */
-		public function get animation() : SkeletonAnimation
-		{
-			return SkeletonAnimation(_geometry.animation);
 		}
 
 
@@ -164,21 +150,21 @@ package away3d.loaders.parsers
 
 				if (_reachedEOF) {
 					calculateMaxJointCount();
-					_animation = new SkeletonAnimation(_skeleton, _maxJointCount);
+					_animationSet = new SkeletonAnimationSet(_maxJointCount);
 
-					_mesh = new Mesh();
+					_mesh = new Mesh(new Geometry(), null);
 					_geometry = _mesh.geometry;
 
 					for (var i : int = 0; i < _meshData.length; ++i) {
 						_geometry.addSubGeometry(translateGeom(_meshData[i].vertexData, _meshData[i].weightData, _meshData[i].indices));
 					}
 
-					_geometry.animation = _animation;
+					//_geometry.animation = _animation;
 //					_mesh.animationController = _animationController;
 
 					finalizeAsset(_mesh);
 					finalizeAsset(_skeleton);
-
+					finalizeAsset(_animationSet);
 					return ParserBase.PARSING_DONE;
 				}
 			}
@@ -243,9 +229,11 @@ package away3d.loaders.parsers
 				pos = parseVector3D();
 				pos = _rotationQuat.rotatePoint(pos);
 				quat = parseQuaternion();
+
 				// todo: check if this is correct, or maybe we want to actually store it as quats?
 				_bindPoses[i] = quat.toMatrix3D();
 				_bindPoses[i].appendTranslation(pos.x, pos.y, pos.z);
+
 				var inv : Matrix3D = _bindPoses[i].clone();
 				inv.invert();
 				joint.inverseBindPose = inv.rawData;

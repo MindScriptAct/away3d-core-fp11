@@ -93,11 +93,9 @@ package away3d.filters
 		 * @param	target			COMMENT : todo
 		 * @param	stage3DProxy	COMMENT : todo
 		 */
-		public function setRenderTargets(target : Texture, stage3DProxy : Stage3DProxy) : void
+		public function setRenderTargets(mainTarget : Texture, stage3DProxy : Stage3DProxy) : void
 		{
-			// TODO: not used
-			stage3DProxy = stage3DProxy; 
-			_tasks[_tasks.length-1].target = target;
+			_tasks[_tasks.length-1].target = mainTarget;
 		}
 
 		/**

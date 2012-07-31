@@ -29,22 +29,15 @@ package away3d.entities
 		private var _boundsIsShown : Boolean = false;
 		private var _shaderPickingDetails:Boolean;
 		
-		protected var _pickingCollision:PickingCollisionVO;
+		arcane var _pickingCollisionVO:PickingCollisionVO;
+		arcane var _pickingCollider:IPickingCollider;
+
 		protected var _mvpTransformStack : Vector.<Matrix3D> = new Vector.<Matrix3D>();
 		protected var _zIndices : Vector.<Number> = new Vector.<Number>();
 		protected var _mvpIndex : int = -1;
 		protected var _stackLen : uint;
 		protected var _bounds : BoundingVolumeBase;
 		protected var _boundsInvalid : Boolean = true;
-		
-		/**
-		 * Used by the raycast-based picking system to determine how the geometric contents of an entity are processed
-		 * in order to offer more details for the picking collision object, including local position, normal vector and uv value.
-		 * Defaults to null.
-		 * 
-		 * @see away3d.core.pick.RaycastPicker
-		 */
-		public var pickingCollider:IPickingCollider;
 		
 		/**
 		 * Used by the shader-based picking system to determine whether a separate render pass is made in order
@@ -68,22 +61,30 @@ package away3d.entities
 		 */
 		public function get pickingCollisionVO():PickingCollisionVO
 		{
-			if (!_pickingCollision)
-				_pickingCollision = new PickingCollisionVO(this);
-			
-			return _pickingCollision;
+			if (!_pickingCollisionVO)
+				_pickingCollisionVO = new PickingCollisionVO(this);
+
+			return _pickingCollisionVO;
 		}
 
 		/**
-		 * Determines if the bounds object is visible in the view.
+		 * Tests if a collision occurs before shortestCollisionDistance, using the data stored in PickingCollisionVO.
+		 * @param shortestCollisionDistance
+		 * @return
+		 */
+		arcane function collidesBefore(shortestCollisionDistance : Number, findClosest : Boolean) : Boolean
+		{
+			return true;
+		}
+
+		/**
 		 * 
-		 * @see away3d.bounds
 		 */
 		public function get showBounds() : Boolean
 		{
 			return _showBounds;
 		}
-		
+
 		public function set showBounds(value : Boolean) : void
 		{
 			if (value == _showBounds)
@@ -241,6 +242,23 @@ package away3d.entities
 		{
 			return _zIndices[_mvpIndex];
 		}
+
+		/**
+		 * Used by the raycast-based picking system to determine how the geometric contents of an entity are processed
+		 * in order to offer more details for the picking collision object, including local position, normal vector and uv value.
+		 * Defaults to null.
+		 *
+		 * @see away3d.core.pick.RaycastPicker
+		 */
+		public function get pickingCollider() : IPickingCollider
+		{
+			return _pickingCollider;
+		}
+
+		public function set pickingCollider(value : IPickingCollider) : void
+		{
+			_pickingCollider = value;
+		}
 		
 		/**
 		 * Creates a new Entity object.
@@ -394,7 +412,7 @@ package away3d.entities
 				addChild(_bounds.boundingRenderable);
 			}
 		}
-		
+
 		private function removeBounds():void
 		{
 			if (_boundsIsShown) 

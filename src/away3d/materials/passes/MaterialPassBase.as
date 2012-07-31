@@ -1,12 +1,12 @@
 package away3d.materials.passes
 {
-	import away3d.animators.data.AnimationBase;
+	import away3d.animators.IAnimationSet;
+	import away3d.animators.IAnimator;
 	import away3d.arcane;
 	import away3d.cameras.Camera3D;
 	import away3d.core.base.IRenderable;
 	import away3d.core.managers.AGALProgram3DCache;
 	import away3d.core.managers.Stage3DProxy;
-	import away3d.core.math.Matrix3DUtils;
 	import away3d.debug.Debug;
 	import away3d.errors.AbstractMethodError;
 	import away3d.materials.MaterialBase;
@@ -31,8 +31,8 @@ package away3d.materials.passes
 	public class MaterialPassBase extends EventDispatcher
 	{
 		protected var _material : MaterialBase;
-		private var _animation : AnimationBase;
-
+		protected var _animationSet : IAnimationSet;
+		
 		arcane var _program3Ds : Vector.<Program3D> = new Vector.<Program3D>(8);
 		arcane var _program3Dids : Vector.<int> = Vector.<int>([-1, -1, -1, -1, -1, -1, -1, -1]);
 		private var _context3Ds:Vector.<Context3D> = new Vector.<Context3D>(8);
@@ -48,13 +48,15 @@ package away3d.materials.passes
 		protected var _repeat : Boolean = false;
 		protected var _mipmap : Boolean = true;
 		protected var _depthCompareMode:String = Context3DCompareMode.LESS;
-		
+
 		private var _bothSides : Boolean;
 
 		protected var _numPointLights : uint;
 		protected var _numDirectionalLights : uint;
 		protected var _numLightProbes : uint;
-
+		protected var _animatableAttributes : Array = ["va0"];
+		protected var _animationTargetRegisters : Array = ["vt0"];
+		
 		// keep track of previously rendered usage for faster cleanup of old vertex buffer streams and textures
 		private static var _previousUsedStreams : Vector.<int> = Vector.<int>([0, 0, 0, 0, 0, 0, 0, 0]);
 		private static var _previousUsedTexs : Vector.<int> = Vector.<int>([0, 0, 0, 0, 0, 0, 0, 0]);
@@ -66,6 +68,8 @@ package away3d.materials.passes
 		private var _oldDepthStencil : Boolean;
 		private var _oldRect : Rectangle;
 		private static var _rttData : Vector.<Number>;
+
+		protected var _alphaPremultiplied : Boolean;
 
 		/**
 		 * Creates a new MaterialPassBase object.
@@ -158,7 +162,7 @@ package away3d.materials.passes
 		{
 			return _depthCompareMode;
 		}
-		
+
 		public function set depthCompareMode(value : String) : void
 		{
 			_depthCompareMode = value;
@@ -167,15 +171,18 @@ package away3d.materials.passes
 		/**
 		 * The animation used to add vertex code to the shader code.
 		 */
-		public function get animation() : AnimationBase
+		public function get animationSet() : IAnimationSet
 		{
-			return _animation;
+			return _animationSet;
 		}
 
-		public function set animation(value : AnimationBase) : void
+		public function set animationSet(value : IAnimationSet) : void
 		{
-			if (_animation == value) return;
-			_animation = value;
+			if (_animationSet == value)
+				return;
+			
+			_animationSet = value;
+			
 			invalidateShaderProgram();
 		}
 
@@ -217,6 +224,16 @@ package away3d.materials.passes
 		}
 
 		/**
+		 * Sets up the animation state. This needs to be called before render()
+		 *
+		 * @private
+		 */
+		arcane function updateAnimationState(renderable : IRenderable, stage3DProxy : Stage3DProxy) : void
+		{
+			renderable.animator.setRenderState(stage3DProxy, renderable, _numUsedVertexConstants, _numUsedStreams);
+		}
+
+		/**
 		 * Renders an object to the current render target5.
 		 *
 		 * @private
@@ -224,18 +241,12 @@ package away3d.materials.passes
 		arcane function render(renderable : IRenderable, stage3DProxy : Stage3DProxy, camera : Camera3D, lightPicker : LightPickerBase) : void
 		{
 			var context : Context3D = stage3DProxy._context3D;
-
 			context.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, 0, renderable.getModelViewProjectionUnsafe(), true);
-
-			if (renderable.animationState)
-				renderable.animationState.setRenderState(stage3DProxy, renderable, _numUsedVertexConstants, _numUsedStreams);
-
 			stage3DProxy.setSimpleVertexBuffer(0, renderable.getVertexBuffer(stage3DProxy), Context3DVertexBufferFormat.FLOAT_3, renderable.vertexBufferOffset);
-
 			context.drawTriangles(renderable.getIndexBuffer(stage3DProxy), 0, renderable.numTriangles);
 		}
 
-		arcane function getVertexCode() : String
+		arcane function getVertexCode(code:String) : String
 		{
 			throw new AbstractMethodError();
 		}
@@ -267,8 +278,10 @@ package away3d.materials.passes
 			for (i = _numUsedTextures; i < prevUsed; ++i) {
 				stage3DProxy.setTextureAt(i, null);
 			}
-
-			_animation.activate(stage3DProxy, this);
+			
+			if (_animationSet && !_animationSet.usesCPU)
+				_animationSet.activate(stage3DProxy, this);
+			
 			stage3DProxy.setProgram(_program3Ds[contextIndex]);
 
 			context.setCulling(_bothSides? Context3DTriangleFace.NONE : _defaultCulling);
@@ -301,7 +314,8 @@ package away3d.materials.passes
 			_previousUsedStreams[index] = _numUsedStreams;
 			_previousUsedTexs[index] = _numUsedTextures;
 
-			if (_animation) _animation.deactivate(stage3DProxy, this);
+			if (_animationSet && !_animationSet.usesCPU)
+				_animationSet.deactivate(stage3DProxy, this);
 
 			if (_renderToTexture) {
 				// kindly restore state
@@ -332,7 +346,20 @@ package away3d.materials.passes
 		 */
 		arcane function updateProgram(stage3DProxy : Stage3DProxy) : void
 		{
-			var vertexCode : String = getVertexCode();
+			var animatorCode : String = "";
+			
+			if (_animationSet && !_animationSet.usesCPU) {
+				animatorCode = _animationSet.getAGALVertexCode(this, _animatableAttributes, _animationTargetRegisters);
+			} else {
+				var len : uint = _animatableAttributes.length;
+	
+				// simply write attributes to targets, do not animate them
+				// projection will pick up on targets[0] to do the projection
+				for (var i : uint = 0; i < len; ++i)
+					animatorCode += "mov " + _animationTargetRegisters[i] + ", " + _animatableAttributes[i] + "\n";
+			}
+			
+			var vertexCode : String = getVertexCode(animatorCode);
 			var fragmentCode : String = getFragmentCode();
 			if (Debug.active) {
 				trace ("Compiling AGAL Code:");
@@ -368,6 +395,16 @@ package away3d.materials.passes
 		arcane function set numLightProbes(value : uint) : void
 		{
 			_numLightProbes = value;
+		}
+
+		public function get alphaPremultiplied() : Boolean
+		{
+			return _alphaPremultiplied;
+		}
+
+		public function set alphaPremultiplied(value : Boolean) : void
+		{
+			_alphaPremultiplied = value;
 		}
 	}
 }
